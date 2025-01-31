@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class LogicJyanken
 {
-    public static int Judge(int player1, int player2)
+    public static string Judge(string myself, string enemy)
     {
-        return 0;
+        return "draw";
     } 
 }
