@@ -9,7 +9,7 @@ public class LogicJyankenTest
 
     // あいこのテスト
     [TestCase(GameManager.Sign.Stone, GameManager.Sign.Stone)]
-    public void LogicJyankenTestDraw(string myself, string enemy)
+    public void LogicJyankenTestDraw(GameManager.Sign myself, GameManager.Sign enemy)
     {
         
         var result = LogicJyanken.Judge(myself, enemy);
@@ -19,7 +19,7 @@ public class LogicJyankenTest
 
     // 自分が勝つときのテスト
     [TestCase(GameManager.Sign.Stone, GameManager.Sign.Scissors)]
-    public void LogicJyankenTestWin(string myself, string enemy)
+    public void LogicJyankenTestWin(GameManager.Sign myself, GameManager.Sign enemy)
     {
         var result = LogicJyanken.Judge(myself, enemy);
         // あいこの時は0
@@ -28,7 +28,7 @@ public class LogicJyankenTest
 
     // 自分が負けるときのテスト
     [TestCase(GameManager.Sign.Stone, GameManager.Sign.Paper)]
-    public void LogicJyankenTestLose(string myself, string enemy)
+    public void LogicJyankenTestLose(GameManager.Sign myself, GameManager.Sign enemy)
     {
         var result = LogicJyanken.Judge(myself, enemy);
         // あいこの時は0
