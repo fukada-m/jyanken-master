@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Moq;
+using System.Linq;
 
 public class JyankenTest
 {
@@ -33,9 +34,12 @@ public class JyankenTest
         SceneManager.LoadScene("JyankenScene");
         yield return null;
 
-        //ゲームオブジェクトとコンポーネントが揃っているか確認する
-        handButtons = GameObject.Find("HandButtons");
+        //ゲームオブジェクトが揃っているか確認する
+        GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
+        handButtons = objects.FirstOrDefault(o => o.name == "HandButtons");
         Assert.IsNotNull(handButtons, "ハンドオブジェクトを作ろう");
+        // HandButtonsは最初非表示になっている
+        handButtons.SetActive(true);
         hand = handButtons.GetComponent<Hand>();
         Assert.IsNotNull(hand, "Handスクリプトを追加しよう");
         gameManagerObj = GameObject.Find("GameManager");
@@ -46,8 +50,13 @@ public class JyankenTest
         Assert.IsNotNull(scissorsButtonObj, "Handの子オブジェクトにScissorsButtonを作ろう");
         paperButtonObj = handButtons.transform.Find("PaperButton");
         Assert.IsNotNull(paperButtonObj, "Handの子オブジェクトにPaperButtonを作ろう");
+        observerText = GameObject.Find("ObserverText");
+        Assert.IsNotNull(observerText, "ハンドオブザーバーがない。");
+        textObject = GameObject.Find("Message");
+        Assert.IsNotNull(textObject, "テキストオブジェクトがない");
 
-        gameManager = gameManagerObj.GetComponent<GameManager>();
+        //コンポーネントが揃っているか確認する
+       gameManager = gameManagerObj.GetComponent<GameManager>();
         Assert.IsNotNull(gameManager, "GameManagerコンポーネントをアタッチしよう");
         stoneButtonComp = stoneButtonObj.GetComponent<Button>();
         Assert.IsNotNull(stoneButtonComp, "StoneButonにButtonコンポーネントをつけよう");
@@ -55,7 +64,13 @@ public class JyankenTest
         Assert.IsNotNull(paperButtonComp, "PaperButonにButtonコンポーネントをつけよう");
         scissorsButtonComp = scissorsButtonObj.GetComponent<Button>();
         Assert.IsNotNull(scissorsButtonComp, "ScissorsButonにButtonコンポーネントをつけよう");
+        text = textObject.GetComponent<TMP_Text>();
+        Assert.IsNotNull(text, "TMPコンポーネントがアタッチされてない");
+        Assert.AreEqual("出す手を決めてください", text.text);
+        ot = observerText.GetComponent<ObserverText>();
+        Assert.IsNotNull(ot, "ハンドオブザーバースクリプトがない。");
 
+        // ボタンにメソッドがアタッチしているか確認する
         Assert.IsTrue(stoneButtonComp.onClick.GetPersistentMethodName(0) == "onClickStoneButton",
             "StoneボタンにOnClickStoneButton()を設定しよう"
         );
@@ -66,15 +81,6 @@ public class JyankenTest
             "paperボタンにOnClickPaperButton()を設定しよう"
         );
 
-        observerText = GameObject.Find("ObserverText");
-        Assert.IsNotNull(observerText, "ハンドオブザーバーがない。");
-        textObject = GameObject.Find("Message");
-        Assert.IsNotNull(textObject, "テキストオブジェクトがない");
-        text = textObject.GetComponent<TMP_Text>();
-        Assert.IsNotNull(text, "TMPコンポーネントがアタッチされてない");
-        Assert.AreEqual("出す手を決めてください", text.text);
-        ot = observerText.GetComponent<ObserverText>();
-        Assert.IsNotNull(ot, "ハンドオブザーバースクリプトがない。");
     }
 
     // ボタンを押したらオブザーバーに通知が行くかテスト
