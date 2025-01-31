@@ -5,8 +5,10 @@ using UnityEngine.TestTools;
 
 public class LogicJyankenTest
 {
+ 
+
     // あいこのテスト
-    [TestCase("グー", "グー")]
+    [TestCase(GameManager.Sign.Stone, GameManager.Sign.Stone)]
     public void LogicJyankenTestDraw(string myself, string enemy)
     {
         
@@ -16,7 +18,7 @@ public class LogicJyankenTest
     }
 
     // 自分が勝つときのテスト
-    [TestCase("グー", "チョキ")]
+    [TestCase(GameManager.Sign.Stone, GameManager.Sign.Scissors)]
     public void LogicJyankenTestWin(string myself, string enemy)
     {
         var result = LogicJyanken.Judge(myself, enemy);
@@ -25,7 +27,7 @@ public class LogicJyankenTest
     }
 
     // 自分が負けるときのテスト
-    [TestCase("グー", "パー")]
+    [TestCase(GameManager.Sign.Stone, GameManager.Sign.Paper)]
     public void LogicJyankenTestLose(string myself, string enemy)
     {
         var result = LogicJyanken.Judge(myself, enemy);
