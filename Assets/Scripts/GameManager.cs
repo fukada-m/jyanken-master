@@ -5,6 +5,13 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     Hand hand;
+    enum HandSign
+    {
+        Stone,
+        Scissors,
+        Paper
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
