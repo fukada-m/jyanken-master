@@ -6,22 +6,31 @@ using UnityEngine.TestTools;
 public class LogicJyankenTest
 {
     // あいこのテスト
-    [TestCase(0, 0)]
-    public void LogicJyankenTestSimplePasses(int player1, int player2)
+    [TestCase("グー", "グー")]
+    public void LogicJyankenTestDraw(string myself, string enemy)
     {
-        // Use the Assert class to test conditions
-        var result = LogicJyanken.Judge(player1, player2);
+        
+        var result = LogicJyanken.Judge(myself, enemy);
         // あいこの時は0
-        Assert.AreEqual(result, 0);
+        Assert.AreEqual(result, "draw");
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator LogicJyankenTestWithEnumeratorPasses()
+    // 自分が勝つときのテスト
+    [TestCase("グー", "チョキ")]
+    public void LogicJyankenTestWin(string myself, string enemy)
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        var result = LogicJyanken.Judge(myself, enemy);
+        // あいこの時は0
+        Assert.AreEqual(result, "win");
     }
+
+    // 自分が負けるときのテスト
+    [TestCase("グー", "パー")]
+    public void LogicJyankenTestLose(string myself, string enemy)
+    {
+        var result = LogicJyanken.Judge(myself, enemy);
+        // あいこの時は0
+        Assert.AreEqual(result, "lose");
+    }
+
 }
