@@ -12,8 +12,9 @@ public class ObserverText : MonoBehaviour, IObserver
         text.text = "o‚·è‚ğŒˆ‚ß‚Ä‚­‚¾‚³‚¢";
     }
 
-    void TextUpdate(string s)
+    void TextUpdate(GameManager.Sign sign)
     {
+        var s = sign.ToString();
         text.text = $"chose {s}";
     }
 

@@ -265,6 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 312027803}
   - component: {fileID: 312027802}
+  - component: {fileID: 312027804}
   m_Layer: 0
   m_Name: HandButtons
   m_TagString: Untagged
@@ -302,6 +303,19 @@ Transform:
   - {fileID: 1425748715}
   m_Father: {fileID: 1496002592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &312027804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312027801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ef4170f6944d7459d1a2c22ad3b3b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 312027802}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,8 +1047,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 312027802}
-        m_TargetAssemblyTypeName: Hand, SctriptAssembly
+      - m_Target: {fileID: 312027804}
+        m_TargetAssemblyTypeName: HandButtons, SctriptAssembly
         m_MethodName: onClickPaperButton
         m_Mode: 1
         m_Arguments:
@@ -1165,8 +1179,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 312027802}
-        m_TargetAssemblyTypeName: Hand, SctriptAssembly
+      - m_Target: {fileID: 312027804}
+        m_TargetAssemblyTypeName: HandButtons, SctriptAssembly
         m_MethodName: onClickStoneButton
         m_Mode: 1
         m_Arguments:
@@ -1554,8 +1568,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 312027802}
-        m_TargetAssemblyTypeName: Hand, SctriptAssembly
+      - m_Target: {fileID: 312027804}
+        m_TargetAssemblyTypeName: HandButtons, SctriptAssembly
         m_MethodName: onClickScissorsButton
         m_Mode: 1
         m_Arguments:

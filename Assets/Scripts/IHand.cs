@@ -2,10 +2,7 @@ using UnityEngine;
 
 public interface IHand
 {
-    string Current { get; }
-    void onClickStoneButton();
-    void onClickPaperButton();
-    void onClickScissorsButton();
+    GameManager.Sign Current { get; }
     void AddObserver(IObserver observer);
     IObserver GetObserver(int index);
 }

@@ -26,6 +26,10 @@ public class JyankenTest
     Button scissorsButtonComp;
     TMP_Text text;
 
+    GameManager.Sign Stone = GameManager.Sign.Stone;
+    GameManager.Sign Paper = GameManager.Sign.Paper;
+    GameManager.Sign Scissors = GameManager.Sign.Scissors;
+
 
 
     [UnitySetUp]
@@ -97,13 +101,13 @@ public class JyankenTest
 
         //グーボタンをシミュレート
         stoneButtonComp.onClick.Invoke();
-        Assert.AreEqual(hand.Current, "stone");
+        Assert.AreEqual(hand.Current, Stone);
         //パーボタンをシミュレート
         paperButtonComp.onClick.Invoke();
-        Assert.AreEqual(hand.Current, "paper");
+        Assert.AreEqual(hand.Current, Paper);
         //チョキボタンをシミュレート
         scissorsButtonComp.onClick.Invoke();
-        Assert.AreEqual(hand.Current, "scissors");
+        Assert.AreEqual(hand.Current, Scissors);
 
         // オブザーバーに通知が送れているかテスト。ボタンを3回押したから3回呼ばれている。
         mock.Verify(service => service.Up(hand), Times.Exactly(3));
@@ -119,22 +123,22 @@ public class JyankenTest
         var mock = new Mock<IHand>();
 
         // グーを選んだ場合
-        mock.Setup(p => p.Current).Returns("stone");
+        mock.Setup(p => p.Current).Returns(Stone);
         //　テキストの表示が変えられるかテスト
         ot.Up(mock.Object);
-        Assert.AreEqual("chose stone", text.text);
+        Assert.AreEqual("chose Stone", text.text);
 
         // パーを選んだ場合
-        mock.Setup(p => p.Current).Returns("paper");
+        mock.Setup(p => p.Current).Returns(Paper);
         //　テキストの表示が変えられるかテスト
         ot.Up(mock.Object);
-        Assert.AreEqual("chose paper", text.text);
+        Assert.AreEqual("chose Paper", text.text);
 
         // チョキを選んだ場合
-        mock.Setup(p => p.Current).Returns("scissors");
+        mock.Setup(p => p.Current).Returns(Scissors);
         //　テキストの表示が変えられるかテスト
         ot.Up(mock.Object);
-        Assert.AreEqual("chose scissors", text.text);
+        Assert.AreEqual("chose Scissors", text.text);
 
         yield return null;
     }
@@ -146,15 +150,15 @@ public class JyankenTest
 
         //グーボタンをシミュレート
         stoneButtonComp.onClick.Invoke();
-        Assert.AreEqual("chose stone", text.text);
+        Assert.AreEqual("chose Stone", text.text);
 
         //パーボタンをシミュレート
         paperButtonComp.onClick.Invoke();
-        Assert.AreEqual("chose paper", text.text);
+        Assert.AreEqual("chose Paper", text.text);
 
         //チョキボタンをシミュレート
         scissorsButtonComp.onClick.Invoke();
-        Assert.AreEqual("chose scissors", text.text);
+        Assert.AreEqual("chose Scissors", text.text);
 
         yield return null;
     }
