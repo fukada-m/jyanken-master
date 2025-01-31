@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     Hand hand;
-    enum HandSign
+    enum Sign
     {
         Stone,
         Scissors,
