@@ -14,8 +14,15 @@ public class ObserverText : MonoBehaviour, IObserver
 
     void TextUpdate(GameManager.Sign sign)
     {
-        var s = sign.ToString();
-        text.text = $"chose {s}";
+        string s = sign switch
+        {
+            GameManager.Sign.Stone => "グー",
+            GameManager.Sign.Scissors => "チョキ",
+            GameManager.Sign.Paper => "パー",
+            _ => "エラー" // デフォルトケース
+        };
+
+        text.text = $"{s}を選んでいます";
     }
 
     // オブザーバーパターンのUpdate()のこと名前が衝突してしまう。

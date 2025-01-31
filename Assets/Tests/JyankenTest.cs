@@ -122,23 +122,26 @@ public class JyankenTest
         // モックを作成
         var mock = new Mock<IHand>();
 
+        //　初期表示
+        Assert.AreEqual("出す手を決めてください", text.text);
+
         // グーを選んだ場合
         mock.Setup(p => p.Current).Returns(Stone);
         //　テキストの表示が変えられるかテスト
         ot.Up(mock.Object);
-        Assert.AreEqual("chose Stone", text.text);
+        Assert.AreEqual("グーを選んでいます", text.text);
 
         // パーを選んだ場合
         mock.Setup(p => p.Current).Returns(Paper);
         //　テキストの表示が変えられるかテスト
         ot.Up(mock.Object);
-        Assert.AreEqual("chose Paper", text.text);
+        Assert.AreEqual("パーを選んでいます", text.text);
 
         // チョキを選んだ場合
         mock.Setup(p => p.Current).Returns(Scissors);
         //　テキストの表示が変えられるかテスト
         ot.Up(mock.Object);
-        Assert.AreEqual("chose Scissors", text.text);
+        Assert.AreEqual("チョキを選んでいます", text.text);
 
         yield return null;
     }
@@ -150,15 +153,15 @@ public class JyankenTest
 
         //グーボタンをシミュレート
         stoneButtonComp.onClick.Invoke();
-        Assert.AreEqual("chose Stone", text.text);
+        Assert.AreEqual("グーを選んでいます", text.text);
 
         //パーボタンをシミュレート
         paperButtonComp.onClick.Invoke();
-        Assert.AreEqual("chose Paper", text.text);
+        Assert.AreEqual("パーを選んでいます", text.text);
 
         //チョキボタンをシミュレート
         scissorsButtonComp.onClick.Invoke();
-        Assert.AreEqual("chose Scissors", text.text);
+        Assert.AreEqual("チョキを選んでいます", text.text);
 
         yield return null;
     }
