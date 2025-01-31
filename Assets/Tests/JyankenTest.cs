@@ -40,8 +40,6 @@ public class JyankenTest
         Assert.IsNotNull(handButtons, "ハンドオブジェクトを作ろう");
         // HandButtonsは最初非表示になっている
         handButtons.SetActive(true);
-        hand = handButtons.GetComponent<Hand>();
-        Assert.IsNotNull(hand, "Handスクリプトを追加しよう");
         gameManagerObj = GameObject.Find("GameManager");
         Assert.IsNotNull(gameManagerObj, "GameManagerをオブジェクトを作成しよう");
         stoneButtonObj = handButtons.transform.Find("StoneButton");
@@ -55,9 +53,12 @@ public class JyankenTest
         textObject = GameObject.Find("Message");
         Assert.IsNotNull(textObject, "テキストオブジェクトがない");
 
+
         //コンポーネントが揃っているか確認する
        gameManager = gameManagerObj.GetComponent<GameManager>();
         Assert.IsNotNull(gameManager, "GameManagerコンポーネントをアタッチしよう");
+        hand = handButtons.GetComponent<Hand>();
+        Assert.IsNotNull(hand, "Handスクリプトを追加しよう");
         stoneButtonComp = stoneButtonObj.GetComponent<Button>();
         Assert.IsNotNull(stoneButtonComp, "StoneButonにButtonコンポーネントをつけよう");
         paperButtonComp = paperButtonObj.GetComponent<Button>();
