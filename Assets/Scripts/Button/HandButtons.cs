@@ -1,26 +1,35 @@
+using System.Linq;
 using UnityEngine;
 
 public class HandButtons : MonoBehaviour
 {
-    [SerializeField]
-    Hand hand;
+    IHand hand;
+
+    void Start()
+    {
+        GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
+        var handButtons = objects.FirstOrDefault(o => o.name == "HandButtons");
+        hand = handButtons.GetComponent<Hand>();
+    }
+
+
     // プレイヤーがグーを選んだ
     public void onClickStoneButton()
     {
-        hand.SetCrurrent(GameManager.Sign.Stone);
+        hand.SetCurrent(GameManager.Sign.Stone);
     }
 
     // プレイヤーがパーを選んだ
     public void onClickPaperButton()
     {
-        hand.SetCrurrent(GameManager.Sign.Paper);
+        hand.SetCurrent(GameManager.Sign.Paper);
 
     }
 
     // プレイヤーがチョキを選んだ
     public void onClickScissorsButton()
     {
-        hand.SetCrurrent(GameManager.Sign.Scissors);
+        hand.SetCurrent(GameManager.Sign.Scissors);
 
     }
 }

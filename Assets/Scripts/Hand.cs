@@ -18,7 +18,7 @@ public class Hand : MonoBehaviour, IHand
         return observers[i];
     }
 
-    public void SetCrurrent(GameManager.Sign sign)
+    public void SetCurrent(GameManager.Sign sign)
     {
         Current = sign;
         NotifyObservers();
