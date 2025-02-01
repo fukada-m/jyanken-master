@@ -32,4 +32,16 @@ public class GameManager : MonoBehaviour
         var ot = observerTextObj.GetComponent<IObserver>();
         hand.AddObserver( ot );
     }
+
+    public static string ConvertSignToJapanese(Sign sign)
+    {
+        return sign switch
+        {
+            GameManager.Sign.Stone => "グー",
+            GameManager.Sign.Scissors => "チョキ",
+            GameManager.Sign.Paper => "パー",
+            _ => "エラー" // デフォルトケース
+        };
+    }
+    
 }

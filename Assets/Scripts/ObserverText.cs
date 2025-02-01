@@ -14,13 +14,8 @@ public class ObserverText : MonoBehaviour, IObserver
 
     void TextUpdate(GameManager.Sign sign)
     {
-        string s = sign switch
-        {
-            GameManager.Sign.Stone => "グー",
-            GameManager.Sign.Scissors => "チョキ",
-            GameManager.Sign.Paper => "パー",
-            _ => "エラー" // デフォルトケース
-        };
+        
+        var s = GameManager.ConvertSignToJapanese(sign);
 
         text.text = $"{s}を選んでいます";
     }
