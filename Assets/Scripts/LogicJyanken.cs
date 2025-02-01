@@ -11,12 +11,16 @@ public class LogicJyanken
         // あいこのロジック
         if (myself == enemy) return "draw";
 
-        //勝つときのロジック
+        // 勝つときのロジック
         if (myself == paper && enemy == stone) return "win";
         if (myself == stone && enemy == scissors) return "win";
         if (myself == scissors && enemy == paper) return "win";
 
-        //残りのパターンは負け
-        return "lose";
+        // 負けるときのロジック
+        if (myself == scissors && enemy == stone) return "lose";
+        if (myself == paper && enemy == scissors) return "lose";
+        if (myself == stone && enemy == paper) return "lose";
+
+        return "エラー";
     } 
 }
