@@ -1,10 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    Hand hand;
+    IHand hand;
     public enum Sign
     {
         Stone,
@@ -15,9 +15,12 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-        var hoObj = GameObject.Find("ObserverText");
-        var ho = hoObj.GetComponent<IObserver>();
-        hand.AddObserver( ho );
+        GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
+        var handButtons = objects.FirstOrDefault(o => o.name == "HandButtons");
+        hand = handButtons.GetComponent<Hand>();
+
+        var observerTextObj = GameObject.Find("ObserverText");
+        var ot = observerTextObj.GetComponent<IObserver>();
+        hand.AddObserver( ot );
     }
 }
