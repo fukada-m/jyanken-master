@@ -16,8 +16,7 @@ public class LogicJyankenTest
     {
         
         var result = LogicJyanken.Judge(myself, enemy);
-        // あいこの時は0
-        Assert.AreEqual(result, "draw");
+        Assert.AreEqual(GameManager.Result.Draw, result);
     }
 
     // 自分が勝つときのテスト
@@ -28,8 +27,7 @@ public class LogicJyankenTest
     public void LogicJyankenTestWin(GameManager.Sign myself, GameManager.Sign enemy)
     {
         var result = LogicJyanken.Judge(myself, enemy);
-        // あいこの時は0
-        Assert.AreEqual(result, "win");
+        Assert.AreEqual(GameManager.Result.WIn, result);
     }
 
     // 自分が負けるときのテスト
@@ -39,8 +37,7 @@ public class LogicJyankenTest
     public void LogicJyankenTestLose(GameManager.Sign myself, GameManager.Sign enemy)
     {
         var result = LogicJyanken.Judge(myself, enemy);
-        // あいこの時は0
-        Assert.AreEqual(result, "lose");
+        Assert.AreEqual(GameManager.Result.Lose, result);
     }
 
 }

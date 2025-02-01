@@ -9,7 +9,16 @@ public class GameManager : MonoBehaviour
     {
         Stone,
         Scissors,
-        Paper
+        Paper,
+        Error
+    }
+
+    public enum Result
+    {
+        Draw,
+        WIn,
+        Lose,
+        Error
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
