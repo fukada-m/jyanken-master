@@ -5,8 +5,6 @@ using UnityEngine.TestTools;
 
 public class LogicJyankenTest
 {
- 
-
     // ‚ ‚¢‚±‚ÌƒeƒXƒg
     [TestCase(GameManager.Sign.Stone, GameManager.Sign.Stone)]
     [TestCase(GameManager.Sign.Paper, GameManager.Sign.Paper)]
@@ -14,7 +12,6 @@ public class LogicJyankenTest
 
     public void LogicJyankenTestDraw(GameManager.Sign myself, GameManager.Sign enemy)
     {
-        
         var result = LogicJyanken.Judge(myself, enemy);
         Assert.AreEqual(GameManager.Result.Draw, result);
     }
