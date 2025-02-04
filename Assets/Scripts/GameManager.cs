@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         hand.AddObserver( ot );
     }
 
-    public static string ConvertSignToJapanese(Sign sign)
+    public string ConvertSignToJapanese(Sign sign)
     {
         return sign switch
         {
