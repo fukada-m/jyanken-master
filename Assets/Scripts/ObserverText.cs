@@ -4,7 +4,10 @@ using TMPro;
 //　プレイヤーの出した手を観察して表示を変えるクラス
 public class ObserverText : MonoBehaviour, IObserver
 {
-    [SerializeField] TMP_Text text;
+    [SerializeField]
+    TMP_Text text;
+    [SerializeField]
+    GameManager gameManager;
 
     //Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,7 +18,7 @@ public class ObserverText : MonoBehaviour, IObserver
     void TextUpdate(GameManager.Sign sign)
     {
         
-        var s = GameManager.ConvertSignToJapanese(sign);
+        var s = gameManager.ConvertSignToJapanese(sign);
 
         text.text = $"{s}を選んでいます";
     }
