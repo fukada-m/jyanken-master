@@ -12,8 +12,7 @@ public class HandButtonsTest
     [SetUp]
     public void HandButtonsTestSetUp()
     {
-        var handButtonsObject = new GameObject("HandButtons");
-        handButtons = handButtonsObject.AddComponent<HandButtons>();
+        handButtons = new GameObject("HandButtons").AddComponent<HandButtons>();
         mockHand = new Mock<IHand>();
         // Hand ‚ÌˆË‘¶ŠÖŒW‚ğİ’è
         typeof(HandButtons)
