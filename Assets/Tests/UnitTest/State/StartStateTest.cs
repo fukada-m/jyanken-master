@@ -13,12 +13,14 @@ public class StartStateTest
     {
         menuButtons = new GameObject("MenuButtons");
         startState = menuButtons.AddComponent<StartState>();
+        // ƒeƒXƒg‚·‚é‚½‚ß‚Éfalse‚Éİ’è
+        menuButtons.SetActive(false);
     }
     // A Test behaves as an ordinary method
     [Test]
     public void DispButton_StartAndOption()
     {
-        startState.DispButton();
+        startState.ChangeState();
         Assert.IsTrue(menuButtons.activeSelf);
     }
 
