@@ -10,7 +10,7 @@ public class HandButtonsTest
     Mock<IHand> mockHand;
 
     [SetUp]
-    public void HandButtonsTestSimplePasses()
+    public void HandButtonsTestSetUp()
     {
         var handButtonsObject = new GameObject("HandButtons");
         handButtons = handButtonsObject.AddComponent<HandButtons>();
