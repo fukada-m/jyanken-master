@@ -24,9 +24,8 @@ public class GameManager : MonoBehaviour, IGameManager
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
-        var handButtons = objects.FirstOrDefault(o => o.name == "HandButtons");
-        hand = handButtons.GetComponent<Hand>();
+        var handButtons = GameObject.Find("HandButtons");
+        hand = handButtons.GetComponent<IHand>();
 
         var observerTextObj = GameObject.Find("ObserverText");
         var ot = observerTextObj.GetComponent<IObserver>();
