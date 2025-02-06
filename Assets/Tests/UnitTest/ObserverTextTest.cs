@@ -54,7 +54,7 @@ public class ObserverTextTest
     {
         var expectedText = "o‚·è‚ğŒˆ‚ß‚Ä‚­‚¾‚³‚¢";
         observerText.Up("o‚·è‚ğŒˆ‚ß‚Ä‚­‚¾‚³‚¢");
-        Assert.AreEqual(expectedText, text.text);
+        Assert.AreEqual(expectedText, observerText.GetText());
     }
 
 }

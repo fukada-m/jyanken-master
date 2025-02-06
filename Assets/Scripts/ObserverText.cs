@@ -34,4 +34,9 @@ public class ObserverText : MonoBehaviour, IObserver
     {
         text.text = s;
     }
+
+    public string GetText()
+    {
+        return text.text;
+    }
 }

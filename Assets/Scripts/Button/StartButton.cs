@@ -17,7 +17,7 @@ public class StartButton : MonoBehaviour
         handButtons.SetActive(true);
         menuButtons.SetActive(false);
         NotifyObservers();
-        
+
     }
     public void AddObserver(IObserver observer)
     {
