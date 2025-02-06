@@ -7,9 +7,10 @@ public class HandButtons : MonoBehaviour
 
     void Start()
     {
-        GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
-        var handButtons = objects.FirstOrDefault(o => o.name == "HandButtons");
-        hand = handButtons.GetComponent<Hand>();
+        //GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
+        //var handButtons = objects.FirstOrDefault(o => o.name == "HandButtons");
+        //hand = handButtons.GetComponent<Hand>();
+        hand = new GameObject("HandButtons").GetComponent<Hand>();
     }
 
 
