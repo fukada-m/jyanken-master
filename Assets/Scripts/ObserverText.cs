@@ -29,4 +29,9 @@ public class ObserverText : MonoBehaviour, IObserver
     {
         TextUpdate(h.Current);
     }
+
+    public void Up(string s)
+    {
+        text.text = s;
+    }
 }
