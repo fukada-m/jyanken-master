@@ -13,8 +13,7 @@ public class HandTest
     public void SetUp()
     {
         // Hand のインスタンスを作成
-        var gameObject = new GameObject();
-        hand = gameObject.AddComponent<Hand>();
+        hand= new GameObject("Hand").AddComponent<Hand>();
     }
 
     // オブザーバーが追加できるか
