@@ -12,7 +12,7 @@ public class ObserverText : MonoBehaviour, IObserver
     //Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        text.text = "出す手を決めてください";
+        text.text = "じゃんけんマスターへようこそ";
     }
 
     void TextUpdate(GameManager.Sign sign)
