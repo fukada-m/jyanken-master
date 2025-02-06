@@ -29,7 +29,7 @@ public class ObserverTextTest
     }
 
     [Test]
-    public void Up_UpdatesTextCorrectly()
+    public void Up_UpdatesTextHand()
     {
         // Ihand型のMockを作成してCurrentにグーをセット
         var mockHand = new Mock<IHand>();
@@ -46,6 +46,14 @@ public class ObserverTextTest
         observerText.Up(mockHand.Object);
 
         // Assert
+        Assert.AreEqual(expectedText, text.text);
+    }
+
+    [Test]
+    public void Up_UpdatesTextString()
+    {
+        var expectedText = "出す手を決めてください";
+        observerText.Up("出す手を決めてください");
         Assert.AreEqual(expectedText, text.text);
     }
 
