@@ -46,10 +46,18 @@ public class ButtonsTest
 
     // A Test behaves as an ordinary method
     [Test]
-    public void onClickStartButton()
+    public void onClickStartButton_JyankenStart()
     {
         startButton.onClick();
         Assert.AreEqual(observerText.GetText(), "‰½‚Ìè‚ğo‚·‚©Œˆ‚ß‚Ä‚­‚¾‚³‚¢");
+
+    }
+    public void onClickOptionButton_ShowSetting()
+    {
+
+    }
+    public void onClickOptionReturnButton_CloseSetting()
+    {
 
     }
 }
