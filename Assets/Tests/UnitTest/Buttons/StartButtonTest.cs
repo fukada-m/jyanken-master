@@ -30,11 +30,16 @@ public class StartButtonTest
     }
     // A Test behaves as an ordinary method
     [Test]
-    public void DispButton_StartAndOption()
+    public void onClick_StartJyanken()
     {
+        var mockObserver = new Mock<IObserver>();
+        startButton.AddObserver(mockObserver.Object);
+        
         startButton.onClick();
+        // Assert
         Assert.IsTrue(handButtons.activeSelf);
         Assert.IsFalse(menuButtons.activeSelf);
+        mockObserver.Verify(o => o.Up("何の手を出すか決めてください"), Times.Once);
     }
 
     // オブザーバーが追加できるか
