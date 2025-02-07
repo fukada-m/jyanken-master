@@ -5,20 +5,36 @@ using UnityEngine.TestTools;
 
 public class ReturnButtonTest
 {
-    // A Test behaves as an ordinary method
-    [Test]
-    public void ReturnButtonTestSimplePasses()
+    ReturnButton returnButton;
+    GameObject setting;
+    GameObject menuButtons;
+
+    [SetUp]
+    public void ReturnButtonSetUp()
     {
-        // Use the Assert class to test conditions
+        returnButton = new GameObject("ReturnButton").AddComponent<ReturnButton>();
+        setting = new GameObject("Setting");
+        menuButtons = new GameObject("MenuButtons");
+        // ボタンクリックで有効化できるかテストするためfalseにする
+        menuButtons.SetActive(false);
+
+        // コンポジションを設定
+        typeof(ReturnButton)
+            .GetField("menuButtons", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(returnButton, menuButtons);
+        typeof(ReturnButton)
+            .GetField("setting", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(returnButton, setting);
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator ReturnButtonTestWithEnumeratorPasses()
+    // A Test behaves as an ordinary method
+    [Test]
+    public void onClickButton_ReturnToStart()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        returnButton.onClickButton();
+        Assert.IsTrue(menuButtons.activeSelf);
+        Assert.IsFalse(setting.activeSelf);
     }
+
+    
 }
