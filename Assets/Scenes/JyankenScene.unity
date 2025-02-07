@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08ef4170f6944d7459d1a2c22ad3b3b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handButtons: {fileID: 312027801}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,7 +1871,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 91}
-  m_SizeDelta: {x: 400, y: 100}
+  m_SizeDelta: {x: 600, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1378448935
 MonoBehaviour:
