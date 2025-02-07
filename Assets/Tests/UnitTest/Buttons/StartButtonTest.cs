@@ -12,7 +12,7 @@ public class StartButtonTest
     StartButton startButton;
 
     [SetUp]
-    public void StartStateSetUp()
+    public void StartButtonSetUp()
     {
         handButtons = new GameObject("HandButtons");
         startButton = new GameObject("Startbutton").AddComponent<StartButton>();
