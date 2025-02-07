@@ -24,12 +24,19 @@ public class GameManager : MonoBehaviour, IGameManager
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // TODO 初期処理用のオブジェクトを作る
         var handButtons = GameObject.Find("HandButtons");
         hand = handButtons.GetComponent<IHand>();
 
         var observerTextObj = GameObject.Find("ObserverText");
         var ot = observerTextObj.GetComponent<IObserver>();
         hand.AddObserver( ot );
+
+        var setting = GameObject.Find("Setting");
+
+        // ゲーム開始時は非アクティブ
+        handButtons.SetActive( false );
+        setting.SetActive( false );
     }
 
     public string ConvertSignToJapanese(Sign sign)
