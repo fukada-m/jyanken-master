@@ -1774,7 +1774,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1359692868}
         m_TargetAssemblyTypeName: StartButton, SctriptAssembly
-        m_MethodName: onClick
+        m_MethodName: onClickButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

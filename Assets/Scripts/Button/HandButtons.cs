@@ -10,7 +10,7 @@ public class HandButtons : MonoBehaviour
 
     void Start()
     {
-        hand = handButtons.GetComponent<Hand>();
+        hand = handButtons.GetComponent<IHand>();
     }
 
 
