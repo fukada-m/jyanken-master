@@ -27,10 +27,13 @@ public class GameManager : MonoBehaviour, IGameManager
         // TODO 初期処理用のオブジェクトを作る
         var handButtons = GameObject.Find("HandButtons");
         hand = handButtons.GetComponent<IHand>();
+        var startButton = GameObject.Find("StartButton").GetComponent<StartButton>();
+
 
         var observerTextObj = GameObject.Find("ObserverText");
         var ot = observerTextObj.GetComponent<IObserver>();
         hand.AddObserver( ot );
+        startButton.AddObserver( ot );
 
         var setting = GameObject.Find("Setting");
 
