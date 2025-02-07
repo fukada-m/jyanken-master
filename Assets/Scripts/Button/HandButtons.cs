@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class HandButtons : MonoBehaviour
 {
+    [SerializeField]
+    GameObject handButtons;
     IHand hand;
+
 
     void Start()
     {
-        hand = new GameObject("HandButtons").GetComponent<Hand>();
+        hand = handButtons.GetComponent<Hand>();
     }
 
 
