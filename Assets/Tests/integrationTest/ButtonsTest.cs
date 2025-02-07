@@ -80,7 +80,7 @@ public class ButtonsTest
         returnButton.onClickButton();
         Assert.IsTrue(menuButtons.activeSelf);
         Assert.IsFalse(setting.activeSelf);
-        startButton.onClick();
+        startButton.onClickButton();
         Assert.AreEqual(observerText.GetText(), "‰½‚Ìè‚ğo‚·‚©Œˆ‚ß‚Ä‚­‚¾‚³‚¢");
 
     }
