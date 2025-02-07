@@ -8,7 +8,6 @@ public class ButtonsTest
 {
     GameManager gameManager;
     StartButton startButton;
-    HandButtons handButton;
     Hand hand;
     ObserverText observerText;
 
@@ -23,7 +22,6 @@ public class ButtonsTest
         var mb = new GameObject("MenuButtons");
         gameManager = gm.AddComponent<GameManager>();
         startButton = sb.AddComponent<StartButton>();
-        handButton = hb.AddComponent<HandButtons>();
         hand = hb.AddComponent<Hand>();
         observerText = ot.AddComponent<ObserverText>();
         hand.AddObserver(observerText);
