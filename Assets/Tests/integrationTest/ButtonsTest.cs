@@ -28,9 +28,6 @@ public class ButtonsTest
         startButton.AddObserver(observerText);
         var text = ot.AddComponent<TextMeshProUGUI>();
 
-        typeof(ObserverText)
-            .GetField("text", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(observerText, text);
         typeof(GameManager)
             .GetField("hand", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(gameManager, hand);
@@ -40,6 +37,12 @@ public class ButtonsTest
         typeof(StartButton)
             .GetField("handButtons", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(startButton, hb);
+        typeof(ObserverText)
+            .GetField("text", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(observerText, text);
+        typeof(ObserverText)
+            .GetField("gameManager", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(observerText, gameManager);
     }
 
     // A Test behaves as an ordinary method

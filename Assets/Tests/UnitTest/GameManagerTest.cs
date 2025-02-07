@@ -11,10 +11,13 @@ public class GameManagerTest
     public void GameManagerTestSetUp()
     {
         gameManager = new GameObject().AddComponent<GameManager>();
+        var hand = new GameObject().AddComponent<Hand>();
+        typeof(GameManager)
+            .GetField("hand", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(gameManager, hand);
     }
 
     [Test]
-
     public void ConvertSignToJapanese_Convert()
     {
         var result = gameManager.ConvertSignToJapanese(GameManager.Sign.Stone);
