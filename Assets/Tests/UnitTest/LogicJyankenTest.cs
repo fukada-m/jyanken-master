@@ -5,6 +5,12 @@ using UnityEngine.TestTools;
 
 public class LogicJyankenTest
 {
+    LogicJyanken logicJyanken;
+    [SetUp]
+    public void LogicJyankenSetup()
+    {
+        logicJyanken = new LogicJyanken();
+    }
     // ‚ ‚¢‚±‚ÌƒeƒXƒg
     [TestCase(GameManager.Sign.Stone, GameManager.Sign.Stone)]
     [TestCase(GameManager.Sign.Paper, GameManager.Sign.Paper)]
@@ -12,7 +18,7 @@ public class LogicJyankenTest
 
     public void LogicJyankenTestDraw(GameManager.Sign myself, GameManager.Sign enemy)
     {
-        var result = LogicJyanken.Judge(myself, enemy);
+        var result = logicJyanken.Judge(myself, enemy);
         Assert.AreEqual(GameManager.Result.Draw, result);
     }
 
@@ -23,7 +29,7 @@ public class LogicJyankenTest
 
     public void LogicJyankenTestWin(GameManager.Sign myself, GameManager.Sign enemy)
     {
-        var result = LogicJyanken.Judge(myself, enemy);
+        var result = logicJyanken.Judge(myself, enemy);
         Assert.AreEqual(GameManager.Result.WIn, result);
     }
 
@@ -33,7 +39,7 @@ public class LogicJyankenTest
     [TestCase(GameManager.Sign.Paper, GameManager.Sign.Scissors)]
     public void LogicJyankenTestLose(GameManager.Sign myself, GameManager.Sign enemy)
     {
-        var result = LogicJyanken.Judge(myself, enemy);
+        var result = logicJyanken.Judge(myself, enemy);
         Assert.AreEqual(GameManager.Result.Lose, result);
     }
 

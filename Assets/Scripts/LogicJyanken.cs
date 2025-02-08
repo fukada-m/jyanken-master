@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class LogicJyanken
+public class LogicJyanken : ILogicJyanken
 {
-    public static GameManager.Result Judge(GameManager.Sign myself, GameManager.Sign enemy)
+    public GameManager.Result Judge(GameManager.Sign myself, GameManager.Sign enemy)
     {
         var stone = GameManager.Sign.Stone;
         var paper = GameManager.Sign.Paper;
