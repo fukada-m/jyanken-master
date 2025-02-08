@@ -16,11 +16,15 @@ public class PonButtonTest
         handButtons = new GameObject("handButtons");
         ponButton = new GameObject().AddComponent<PonButton>();
         moqLogicJyanken = new Mock<ILogicJyanken>();
+        var jyankenResult = new JyankenResult();
 
 
         typeof(PonButton)
            .GetField("handButtons", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
            .SetValue(ponButton, handButtons);
+        typeof(PonButton)
+           .GetField("jyankenResult", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+           .SetValue(ponButton, jyankenResult);
         typeof(PonButton)
            .GetField("logicJyanken", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
            .SetValue(ponButton, moqLogicJyanken.Object);
@@ -34,8 +38,6 @@ public class PonButtonTest
         Assert.IsFalse(handButtons.activeSelf);
         // じゃんけんの判定処理が呼ばれたか確認
          moqLogicJyanken.Verify(l => l.Judge(GameManager.Sign.Scissors, GameManager.Sign.Scissors), Times.Once);
-        // messageをアップデートする
-        
     }
 
 }
