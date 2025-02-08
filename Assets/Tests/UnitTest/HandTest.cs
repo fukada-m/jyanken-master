@@ -30,6 +30,7 @@ public class HandTest
         Assert.AreEqual(mockObserver.Object, hand.GetObserver(0));
     }
 
+    // オブザーバーが取得できるか
     [Test]
     public void GetObserver_ReturnsCorrectObserver()
     {
