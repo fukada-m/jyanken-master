@@ -6,6 +6,7 @@ public class PonButton : MonoBehaviour
     GameObject handButtons;
     JyankenResult jyankenResult;
     ILogicJyanken logicJyanken;
+    IEnemyHand enemyHand;
 
     string result;
 
