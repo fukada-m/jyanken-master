@@ -8,16 +8,18 @@ public class PonButtonTest
 {
     GameObject handButtons;
     PonButton ponButton;
-    Mock<ILogicJyanken> moqLogicJyanken;
+    Mock<ILogicJyanken> mockLogicJyanken;
+    Mock<IEnemyHand> mockEnemyHand;
 
     [SetUp]
     public void PonButtonSetUp()
     {
         handButtons = new GameObject("handButtons");
         ponButton = new GameObject().AddComponent<PonButton>();
-        moqLogicJyanken = new Mock<ILogicJyanken>();
+        mockLogicJyanken = new Mock<ILogicJyanken>();
+        mockEnemyHand = new Mock<IEnemyHand>();
         var jyankenResult = new JyankenResult();
-
+        mockEnemyHand.Setup(s => s.ChoseHand()).Returns(GameManager.Sign.Stone);
 
         typeof(PonButton)
            .GetField("handButtons", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
@@ -26,8 +28,11 @@ public class PonButtonTest
            .GetField("jyankenResult", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
            .SetValue(ponButton, jyankenResult);
         typeof(PonButton)
-           .GetField("logicJyanken", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-           .SetValue(ponButton, moqLogicJyanken.Object);
+            .GetField("logicJyanken", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(ponButton, mockLogicJyanken.Object);
+        typeof(PonButton)
+           .GetField("enemyHand", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+           .SetValue(ponButton, mockEnemyHand.Object);
     }
     // A Test behaves as an ordinary method
     [Test]
@@ -36,8 +41,9 @@ public class PonButtonTest
         ponButton.onClickButton();
         // ハンドボタンズは非表示になる
         Assert.IsFalse(handButtons.activeSelf);
+        mockEnemyHand.Verify(e => e.ChoseHand(), Times.Once);
         // じゃんけんの判定処理が呼ばれたか確認
-         moqLogicJyanken.Verify(l => l.Judge(GameManager.Sign.Scissors, GameManager.Sign.Scissors), Times.Once);
+         mockLogicJyanken.Verify(l => l.Judge(GameManager.Sign.Scissors, GameManager.Sign.Stone), Times.Once);
     }
 
 }

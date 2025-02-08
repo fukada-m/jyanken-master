@@ -14,12 +14,14 @@ public class PonButton : MonoBehaviour
     {
         logicJyanken = new LogicJyanken(); 
         jyankenResult = new JyankenResult();
+        enemyHand = new EnemyHand();
 
     }
     public void onClickButton()
     {
         handButtons.SetActive(false);
-        var result = logicJyanken.Judge(GameManager.Sign.Scissors, GameManager.Sign.Scissors);
+        var enemyChoseHand = enemyHand.ChoseHand();
+        var result = logicJyanken.Judge(GameManager.Sign.Scissors, enemyChoseHand);
         jyankenResult.Result = result;
     }
 
