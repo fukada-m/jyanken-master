@@ -5,20 +5,20 @@ using UnityEngine.TestTools;
 
 public class EnemyHandTest
 {
+    EnemyHand enemyHand;
+
+    [SetUp]
+    public void EnemyHandSetup()
+    {
+        enemyHand = new EnemyHand();
+    }
     // A Test behaves as an ordinary method
     [Test]
-    public void EnemyHandTestSimplePasses()
+    public void ChoseHand_enemyChoseHand()
     {
-        // Use the Assert class to test conditions
+        var result = enemyHand.ChoseHand();
+        Assert.AreEqual(GameManager.Sign.Stone, result);
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator EnemyHandTestWithEnumeratorPasses()
-    {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
-    }
+    
 }
