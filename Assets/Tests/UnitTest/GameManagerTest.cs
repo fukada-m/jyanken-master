@@ -7,14 +7,32 @@ using UnityEngine.TestTools;
 public class GameManagerTest
 {
     GameManager gameManager;
+    StartButton startButton;
+    Hand hand;
+    ObserverText observerText;
+    GameObject handButtons;
+    GameObject setting;
+    GameObject ponBottun;
+
     [SetUp]
     public void GameManagerTestSetUp()
     {
+        startButton = new GameObject("StartButton").AddComponent<StartButton>();
+        handButtons = new GameObject("HandButtons");
+        hand = handButtons.AddComponent<Hand>();
+        observerText = new GameObject("ObserverText").AddComponent<ObserverText>();
+        setting = new GameObject("Setting");
+        ponBottun = new GameObject("PonButton");
         gameManager = new GameObject().AddComponent<GameManager>();
-        var hand = new GameObject().AddComponent<Hand>();
-        typeof(GameManager)
-            .GetField("hand", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(gameManager, hand);
+    }
+
+    [UnityTest]
+    public IEnumerator Start_HideObject()
+    {
+        yield return null;
+        Assert.IsFalse(handButtons.activeSelf);
+        Assert.IsFalse(setting.activeSelf);
+        Assert.IsFalse(ponBottun.activeSelf);
     }
 
     [Test]
@@ -29,5 +47,14 @@ public class GameManagerTest
         result = gameManager.ConvertSignToJapanese(GameManager.Sign.Paper);
         Assert.AreEqual("ÉpÅ[", result);
     }
-
+    [TearDown]
+    public void TearDown()
+    {
+        Object.DestroyImmediate(startButton);
+        Object.DestroyImmediate(handButtons);
+        Object.DestroyImmediate(observerText);
+        Object.DestroyImmediate(setting);
+        Object.DestroyImmediate(ponBottun);
+        Object.DestroyImmediate(gameManager);
+    }
 }
