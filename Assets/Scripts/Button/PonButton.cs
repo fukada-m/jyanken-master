@@ -17,7 +17,7 @@ public class PonButton : MonoBehaviour
         enemyHand = new EnemyHand();
 
     }
-    public void onClickButton()
+    public void OnClickButton()
     {
         handButtons.SetActive(false);
         var enemyChoseHand = enemyHand.ChoseHand();

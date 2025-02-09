@@ -7,7 +7,7 @@ public class OptionButton : MonoBehaviour
     [SerializeField]
     GameObject menuButtons;
 
-    public void onClickButton()
+    public void OnClickButton()
     {
         setting.SetActive(true);
         menuButtons.SetActive(false);

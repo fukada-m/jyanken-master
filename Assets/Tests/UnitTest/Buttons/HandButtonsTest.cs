@@ -23,21 +23,21 @@ public class HandButtonsTest
     [Test]
     public void OnClickStoneButton_SetsHandToStone()
     {
-        handButtons.onClickStoneButton();
+        handButtons.OnClickStoneButton();
         mockHand.Verify(h => h.SetCurrent(GameManager.Sign.Stone), Times.Once);
     }
 
     [Test]
     public void OnClickPaperButton_SetsHandToPaper()
     {
-        handButtons.onClickPaperButton();
+        handButtons.OnClickPaperButton();
         mockHand.Verify(h => h.SetCurrent(GameManager.Sign.Paper), Times.Once);
     }
 
     [Test]
     public void OnClickScissorsButton_SetsHandToScissors()
     {
-        handButtons.onClickScissorsButton();
+        handButtons.OnClickScissorsButton();
         mockHand.Verify(h => h.SetCurrent(GameManager.Sign.Scissors), Times.Once);
     }
 

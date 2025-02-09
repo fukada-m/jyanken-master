@@ -15,20 +15,20 @@ public class HandButtons : MonoBehaviour
 
 
     // プレイヤーがグーを選んだ
-    public void onClickStoneButton()
+    public void OnClickStoneButton()
     {
         hand.SetCurrent(GameManager.Sign.Stone);
     }
 
     // プレイヤーがパーを選んだ
-    public void onClickPaperButton()
+    public void OnClickPaperButton()
     {
         hand.SetCurrent(GameManager.Sign.Paper);
 
     }
 
     // プレイヤーがチョキを選んだ
-    public void onClickScissorsButton()
+    public void OnClickScissorsButton()
     {
         hand.SetCurrent(GameManager.Sign.Scissors);
 

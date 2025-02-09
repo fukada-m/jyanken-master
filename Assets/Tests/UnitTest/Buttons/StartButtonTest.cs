@@ -35,7 +35,7 @@ public class StartButtonTest
         var mockObserver = new Mock<IObserver>();
         startButton.AddObserver(mockObserver.Object);
         
-        startButton.onClickButton();
+        startButton.OnClickButton();
         // Assert
         Assert.IsTrue(handButtons.activeSelf);
         Assert.IsFalse(menuButtons.activeSelf);

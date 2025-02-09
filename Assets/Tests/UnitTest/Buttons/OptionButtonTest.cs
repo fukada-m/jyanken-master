@@ -30,7 +30,7 @@ public class OptionButtonTest
     [Test]
     public void OptionButton_ShowSetting()
     {
-        optionButton.onClickButton();
+        optionButton.OnClickButton();
         Assert.IsTrue(setting.activeSelf);
         Assert.IsFalse(menuButtons.activeSelf);
     }

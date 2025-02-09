@@ -74,13 +74,13 @@ public class ButtonsTest
     [Test]
     public void onClickStartButtons()
     {
-        optionButton.onClickButton();
+        optionButton.OnClickButton();
         Assert.IsTrue(setting.activeSelf);
         Assert.IsFalse(menuButtons.activeSelf);
-        returnButton.onClickButton();
+        returnButton.OnClickButton();
         Assert.IsTrue(menuButtons.activeSelf);
         Assert.IsFalse(setting.activeSelf);
-        startButton.onClickButton();
+        startButton.OnClickButton();
         Assert.AreEqual(observerText.GetText(), "‰½‚Ìè‚ğo‚·‚©Œˆ‚ß‚Ä‚­‚¾‚³‚¢");
 
     }

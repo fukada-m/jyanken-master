@@ -36,9 +36,9 @@ public class PonButtonTest
     }
     // A Test behaves as an ordinary method
     [Test]
-    public void onClickButton_JyankenJudge()
+    public void OnClickButton_JyankenJudge()
     {
-        ponButton.onClickButton();
+        ponButton.OnClickButton();
         // ハンドボタンズは非表示になる
         Assert.IsFalse(handButtons.activeSelf);
         mockEnemyHand.Verify(e => e.ChoseHand(), Times.Once);

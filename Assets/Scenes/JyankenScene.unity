@@ -934,7 +934,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 726107264}
         m_TargetAssemblyTypeName: PonButton, SctriptAssembly
-        m_MethodName: onClickButton
+        m_MethodName: OnClickButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1655,7 +1655,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 312027804}
         m_TargetAssemblyTypeName: HandButtons, SctriptAssembly
-        m_MethodName: onClickPaperButton
+        m_MethodName: OnClickPaperButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1923,7 +1923,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 312027804}
         m_TargetAssemblyTypeName: HandButtons, SctriptAssembly
-        m_MethodName: onClickStoneButton
+        m_MethodName: OnClickStoneButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2057,7 +2057,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1359692868}
         m_TargetAssemblyTypeName: StartButton, SctriptAssembly
-        m_MethodName: onClickButton
+        m_MethodName: OnClickButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2339,7 +2339,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 312027804}
         m_TargetAssemblyTypeName: HandButtons, SctriptAssembly
-        m_MethodName: onClickScissorsButton
+        m_MethodName: OnClickScissorsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2715,7 +2715,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1735484014}
         m_TargetAssemblyTypeName: OptionButton, SctriptAssembly
-        m_MethodName: onClickButton
+        m_MethodName: OnClickButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

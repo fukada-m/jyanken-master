@@ -6,7 +6,7 @@ public class ReturnButton : MonoBehaviour
     GameObject setting;
     [SerializeField]
     GameObject menuButtons;
-    public void onClickButton()
+    public void OnClickButton()
     {
         setting.SetActive(false);
         menuButtons.SetActive(true);

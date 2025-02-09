@@ -29,9 +29,9 @@ public class ReturnButtonTest
 
     // A Test behaves as an ordinary method
     [Test]
-    public void onClickButton_ReturnToStart()
+    public void OnClickButton_ReturnToStart()
     {
-        returnButton.onClickButton();
+        returnButton.OnClickButton();
         Assert.IsTrue(menuButtons.activeSelf);
         Assert.IsFalse(setting.activeSelf);
     }

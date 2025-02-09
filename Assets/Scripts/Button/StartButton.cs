@@ -12,7 +12,7 @@ public class StartButton : MonoBehaviour
     List<IObserver> observers = new List<IObserver>();
     readonly string updateText = "‰½‚Ìè‚ğo‚·‚©Œˆ‚ß‚Ä‚­‚¾‚³‚¢";
 
-    public void onClickButton()
+    public void OnClickButton()
     {
         handButtons.SetActive(true);
         menuButtons.SetActive(false);
