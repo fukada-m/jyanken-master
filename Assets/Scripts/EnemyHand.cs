@@ -6,7 +6,7 @@ public class EnemyHand : IEnemyHand
     GameManager.Sign scissors = GameManager.Sign.Scissors;
     GameManager.Sign paper = GameManager.Sign.Paper;
 
-    public GameManager.Sign ChoseHand()
+    public GameManager.Sign PickHand()
     {
         return stone;
     }

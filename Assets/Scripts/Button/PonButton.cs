@@ -20,7 +20,7 @@ public class PonButton : MonoBehaviour
     public void OnClickButton()
     {
         handButtons.SetActive(false);
-        var enemyChoseHand = enemyHand.ChoseHand();
+        var enemyChoseHand = enemyHand.PickHand();
         var result = logicJyanken.Judge(GameManager.Sign.Scissors, enemyChoseHand);
         jyankenResult.SetResult(result);
     }

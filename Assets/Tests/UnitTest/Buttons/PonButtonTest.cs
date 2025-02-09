@@ -19,7 +19,7 @@ public class PonButtonTest
         mockLogicJyanken = new Mock<ILogicJyanken>();
         mockEnemyHand = new Mock<IEnemyHand>();
         var jyankenResult = new JyankenResult();
-        mockEnemyHand.Setup(s => s.ChoseHand()).Returns(GameManager.Sign.Stone);
+        mockEnemyHand.Setup(s => s.PickHand()).Returns(GameManager.Sign.Stone);
 
         typeof(PonButton)
            .GetField("handButtons", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
@@ -41,7 +41,7 @@ public class PonButtonTest
         ponButton.OnClickButton();
         // ハンドボタンズは非表示になる
         Assert.IsFalse(handButtons.activeSelf);
-        mockEnemyHand.Verify(e => e.ChoseHand(), Times.Once);
+        mockEnemyHand.Verify(e => e.PickHand(), Times.Once);
         // じゃんけんの判定処理が呼ばれたか確認
          mockLogicJyanken.Verify(l => l.Judge(GameManager.Sign.Scissors, GameManager.Sign.Stone), Times.Once);
     }
