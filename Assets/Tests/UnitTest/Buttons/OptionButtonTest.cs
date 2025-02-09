@@ -6,32 +6,32 @@ using UnityEngine.TestTools;
 public class OptionButtonTest
 {
     OptionButton optionButton;
-    GameObject setting;
+    GameObject settingModal;
     GameObject menuButtons;
 
     [SetUp]
     public void OptionButtonSetUp()
     {
         optionButton = new GameObject("OptionButton").AddComponent<OptionButton>();
-        setting = new GameObject("Setting");
+        settingModal = new GameObject("SettingModal");
         menuButtons = new GameObject("MenuButtons");
         // ボタンクリックで有効化できるかテストするためにfalseにする
-        setting.SetActive(false);
+        settingModal.SetActive(false);
 
         // コンポジションを設定
         typeof(OptionButton)
             .GetField("menuButtons", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(optionButton, menuButtons);
         typeof(OptionButton)
-            .GetField("setting", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(optionButton, setting);
+            .GetField("settingModal", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(optionButton, settingModal);
     } 
     // A Test behaves as an ordinary method
     [Test]
     public void OptionButton_ShowSetting()
     {
         optionButton.OnClickButton();
-        Assert.IsTrue(setting.activeSelf);
+        Assert.IsTrue(settingModal.activeSelf);
         Assert.IsFalse(menuButtons.activeSelf);
     }
 }

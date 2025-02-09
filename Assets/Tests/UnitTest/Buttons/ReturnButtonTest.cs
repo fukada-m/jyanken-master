@@ -6,14 +6,14 @@ using UnityEngine.TestTools;
 public class ReturnButtonTest
 {
     ReturnButton returnButton;
-    GameObject setting;
+    GameObject settingModal;
     GameObject menuButtons;
 
     [SetUp]
     public void ReturnButtonSetUp()
     {
         returnButton = new GameObject("ReturnButton").AddComponent<ReturnButton>();
-        setting = new GameObject("Setting");
+        settingModal = new GameObject("SettingModal");
         menuButtons = new GameObject("MenuButtons");
         // ボタンクリックで有効化できるかテストするためfalseにする
         menuButtons.SetActive(false);
@@ -23,8 +23,8 @@ public class ReturnButtonTest
             .GetField("menuButtons", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(returnButton, menuButtons);
         typeof(ReturnButton)
-            .GetField("setting", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(returnButton, setting);
+            .GetField("settingModal", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(returnButton, settingModal);
     }
 
     // A Test behaves as an ordinary method
@@ -33,7 +33,7 @@ public class ReturnButtonTest
     {
         returnButton.OnClickButton();
         Assert.IsTrue(menuButtons.activeSelf);
-        Assert.IsFalse(setting.activeSelf);
+        Assert.IsFalse(settingModal.activeSelf);
     }
 
     

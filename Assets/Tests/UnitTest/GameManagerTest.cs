@@ -11,7 +11,7 @@ public class GameManagerTest
     Hand hand;
     ObserverText observerText;
     GameObject handButtons;
-    GameObject setting;
+    GameObject settingModal;
     GameObject ponBottun;
 
     [SetUp]
@@ -21,7 +21,7 @@ public class GameManagerTest
         handButtons = new GameObject("HandButtons");
         hand = handButtons.AddComponent<Hand>();
         observerText = new GameObject("ObserverText").AddComponent<ObserverText>();
-        setting = new GameObject("Setting");
+        settingModal = new GameObject("SettingModal");
         ponBottun = new GameObject("PonButton");
         gameManager = new GameObject().AddComponent<GameManager>();
     }
@@ -31,7 +31,7 @@ public class GameManagerTest
     {
         yield return null;
         Assert.IsFalse(handButtons.activeSelf);
-        Assert.IsFalse(setting.activeSelf);
+        Assert.IsFalse(settingModal.activeSelf);
         Assert.IsFalse(ponBottun.activeSelf);
     }
 
@@ -53,7 +53,7 @@ public class GameManagerTest
         Object.DestroyImmediate(startButton);
         Object.DestroyImmediate(handButtons);
         Object.DestroyImmediate(observerText);
-        Object.DestroyImmediate(setting);
+        Object.DestroyImmediate(settingModal);
         Object.DestroyImmediate(ponBottun);
         Object.DestroyImmediate(gameManager);
     }

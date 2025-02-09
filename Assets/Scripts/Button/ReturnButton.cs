@@ -3,12 +3,12 @@ using UnityEngine;
 public class ReturnButton : MonoBehaviour
 {
     [SerializeField]
-    GameObject setting;
+    GameObject settingModal;
     [SerializeField]
     GameObject menuButtons;
     public void OnClickButton()
     {
-        setting.SetActive(false);
+        settingModal.SetActive(false);
         menuButtons.SetActive(true);
     }
 }

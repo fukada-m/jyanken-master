@@ -33,12 +33,12 @@ public class GameManager : MonoBehaviour, IGameManager
         hand.AddObserver( observerText );
         startButton.AddObserver( observerText );
 
-        var setting = GameObject.Find("Setting");
+        var settingModal = GameObject.Find("Setting");
         var ponButton = GameObject.Find("PonButton");
 
         // ゲーム開始時は非アクティブ
         handButtons.SetActive( false );
-        setting.SetActive( false );
+        settingModal.SetActive( false );
         ponButton.SetActive( false );
     }
 

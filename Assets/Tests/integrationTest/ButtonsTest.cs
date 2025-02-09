@@ -13,7 +13,7 @@ public class ButtonsTest
     Hand hand;
     ObserverText observerText;
     GameObject menuButtons;
-    GameObject setting;
+    GameObject settingModal;
 
 
 
@@ -27,7 +27,7 @@ public class ButtonsTest
         var ob = new GameObject("OptionButton");
         var rb = new GameObject("ReturnButton");
         var ot = new GameObject("ObserverText");
-        setting = new GameObject("Setting");
+        settingModal = new GameObject("SettingModal");
 
         gameManager = gm.AddComponent<GameManager>();
         startButton = sb.AddComponent<StartButton>();
@@ -58,13 +58,13 @@ public class ButtonsTest
             .SetValue(observerText, gameManager);
         typeof(OptionButton)
             .GetField("setting", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(optionButton, setting);
+            .SetValue(optionButton, settingModal);
         typeof(OptionButton)
             .GetField("menuButtons", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(optionButton, menuButtons);
         typeof(ReturnButton)
             .GetField("setting", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(returnButton, setting);
+            .SetValue(returnButton, settingModal);
         typeof(ReturnButton)
             .GetField("menuButtons", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .SetValue(returnButton, menuButtons);
@@ -75,11 +75,11 @@ public class ButtonsTest
     public void onClickStartButtons()
     {
         optionButton.OnClickButton();
-        Assert.IsTrue(setting.activeSelf);
+        Assert.IsTrue(settingModal.activeSelf);
         Assert.IsFalse(menuButtons.activeSelf);
         returnButton.OnClickButton();
         Assert.IsTrue(menuButtons.activeSelf);
-        Assert.IsFalse(setting.activeSelf);
+        Assert.IsFalse(settingModal.activeSelf);
         startButton.OnClickButton();
         Assert.AreEqual(observerText.GetText(), "âΩÇÃéËÇèoÇ∑Ç©åàÇﬂÇƒÇ≠ÇæÇ≥Ç¢");
 

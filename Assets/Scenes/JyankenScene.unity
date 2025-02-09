@@ -1214,7 +1214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5e9bf3c36934b43b98f9d63df5011e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setting: {fileID: 1156275332}
+  settingModal: {fileID: 1156275332}
   menuButtons: {fileID: 789022081}
 --- !u!1 &925001316
 GameObject:
@@ -1498,7 +1498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1156275333}
   m_Layer: 5
-  m_Name: Setting
+  m_Name: SettingModal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2775,7 +2775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967fd5d187e0b95439457983a72cfde8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setting: {fileID: 1156275332}
+  settingModal: {fileID: 1156275332}
   menuButtons: {fileID: 789022081}
 --- !u!1 &2071010842
 GameObject:
