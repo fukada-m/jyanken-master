@@ -1559,6 +1559,8 @@ MonoBehaviour:
   handButtons: {fileID: 312027801}
   settingModal: {fileID: 1156275332}
   ponButton: {fileID: 726107262}
+  startButton: {fileID: 1359692868}
+  observerTextObject: {fileID: 488572690}
 --- !u!4 &1233275869
 Transform:
   m_ObjectHideFlags: 0
