@@ -17,12 +17,12 @@ public class GameManagerTest
     [SetUp]
     public void GameManagerTestSetUp()
     {
-        startButton = new GameObject("StartButton").AddComponent<StartButton>();
         handButtons = new GameObject("HandButtons");
-        hand = handButtons.AddComponent<Hand>();
-        observerText = new GameObject("ObserverText").AddComponent<ObserverText>();
         settingModal = new GameObject("SettingModal");
         ponBottun = new GameObject("PonButton");
+            startButton = new GameObject("StartButton").AddComponent<StartButton>();
+        hand = handButtons.AddComponent<Hand>();
+        observerText = new GameObject("ObserverText").AddComponent<ObserverText>();
         gameManager = new GameObject().AddComponent<GameManager>();
     }
 
