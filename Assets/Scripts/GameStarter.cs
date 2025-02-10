@@ -26,7 +26,7 @@ public class GameStarter : MonoBehaviour
         GameObject handButtons,
         GameObject settingModal,
         GameObject ponButton,
-        GameObject startButton,
+        //GameObject startButton,
         GameObject observerTextObject,
         IHand hand,
         IObserver observerText

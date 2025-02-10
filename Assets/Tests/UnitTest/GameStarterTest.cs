@@ -32,7 +32,7 @@ public class GameStarterTest
             settingModal, 
             ponBottun,
             observerTextObject,
-            mockStartButton.Object,
+            //mockStartButton.Object,
             mockHand.Object,
             mockObserverText.Object
          );
