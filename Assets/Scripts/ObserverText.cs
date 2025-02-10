@@ -15,24 +15,16 @@ public class ObserverText : MonoBehaviour, IObserver
         text.text = "じゃんけんマスターへようこそ";
     }
 
-    void TextUpdate(GameManager.Sign sign)
+    void TextUpdate(string t)
     {
-        
-        var s = gameManager.ConvertSignToJapanese(sign);
-
-        text.text = $"{s}を選んでいます";
+        text.text = t;
     }
 
     // オブザーバーパターンのUpdate()のこと名前が衝突してしまう。
     // TODO: 名前衝突を解決する
-     public void Up(IHand h)
+     public void Up(Notify n)
     {
-        TextUpdate(h.Current);
-    }
-
-    public void Up(string s)
-    {
-        text.text = s;
+        TextUpdate(n.Text);
     }
 
     public string GetText()
