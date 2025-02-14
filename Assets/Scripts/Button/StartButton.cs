@@ -6,34 +6,27 @@ using System;
 public class StartButton : MonoBehaviour
 {
     [SerializeField]
-    GameObject menuButtons;
+    GameObject _menuButtons;
     [SerializeField]
-    GameObject handButtons;
-    List<IObserver> observers = new List<IObserver>();
-    readonly string updateText = "何の手を出すか決めてください";
+    GameObject _handButtons;
+    Notify _start;
+
+    public void Initialize(GameObject m, GameObject h, Notify s)
+    {
+        _menuButtons = m;
+        _handButtons = h;
+        _start = s;
+    }
 
     public void OnClickButton()
     {
-        handButtons.SetActive(true);
-        menuButtons.SetActive(false);
-        NotifyObservers();
+        _handButtons.SetActive(true);
+        _menuButtons.SetActive(false);
+        _start.GenerateText();
 
     }
-    public void AddObserver(IObserver observer)
+    void Start()
     {
-        observers.Add(observer);
-    }
-
-    public IObserver GetObserver(int i)
-    {
-        return observers[i];
-    }
-    // 全てのobserverをアップデートする
-    void NotifyObservers()
-    {
-        foreach (var o in observers)
-        {
-            o.Up(updateText);
-        }
+        _start = new Start();
     }
 }

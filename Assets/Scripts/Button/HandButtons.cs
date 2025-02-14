@@ -3,34 +3,36 @@ using UnityEngine;
 
 public class HandButtons : MonoBehaviour
 {
-    [SerializeField]
-    GameObject handButtons;
-    IHand hand;
-
-
+    // TODO Notify型を使えるように直す
+    Hand _hand;
     void Start()
     {
-        hand = handButtons.GetComponent<IHand>();
+        _hand = new Hand(new Sign());
     }
 
+    public void Initialize(Hand h)
+    {
+        _hand = h;
+    }
 
     // プレイヤーがグーを選んだ
     public void OnClickStoneButton()
     {
-        hand.SetCurrent(GameManager.Sign.Stone);
+        _hand.SetCurrent(Sign.Hand.Stone);
+        _hand.GenerateText();
     }
 
     // プレイヤーがパーを選んだ
     public void OnClickPaperButton()
     {
-        hand.SetCurrent(GameManager.Sign.Paper);
-
+        _hand.SetCurrent(Sign.Hand.Paper);
+        _hand.GenerateText();
     }
 
     // プレイヤーがチョキを選んだ
     public void OnClickScissorsButton()
     {
-        hand.SetCurrent(GameManager.Sign.Scissors);
-
+        _hand.SetCurrent(Sign.Hand.Scissors);
+        _hand.GenerateText();
     }
 }

@@ -28,7 +28,7 @@ public class JyankenResult : IJyankenResult
     {
         foreach (var o in observers)
         {
-            o.Up($"‚ ‚È‚½‚Ì{Result}‚Å‚·");
+            //o.Up($"‚ ‚È‚½‚Ì{Result}‚Å‚·");
         }
     }
 }

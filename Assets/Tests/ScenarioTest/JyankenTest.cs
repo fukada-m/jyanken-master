@@ -27,9 +27,9 @@ public class JyankenTest
     Button scissorsButtonComp;
     TMP_Text text;
 
-    GameManager.Sign Stone = GameManager.Sign.Stone;
-    GameManager.Sign Paper = GameManager.Sign.Paper;
-    GameManager.Sign Scissors = GameManager.Sign.Scissors;
+    Sign.Hand Stone = Sign.Hand.Stone;
+    Sign.Hand Paper = Sign.Hand.Paper;
+    Sign.Hand Scissors = Sign.Hand.Scissors;
 
     [SetUp]
     public void JyankenTestSetUp()
@@ -37,7 +37,7 @@ public class JyankenTest
         gameManager = new GameObject().AddComponent<GameManager>();
         handButtons = new GameObject().AddComponent<HandButtons>();
         observerText = new GameObject().AddComponent<ObserverText>();
-        hand = new GameObject().AddComponent<Hand>();
+        //hand = new GameObject().AddComponent<Hand>();
         hand.AddObserver(observerText);
     }
 
@@ -68,7 +68,7 @@ public class JyankenTest
 
 
     //    //コンポーネントが揃っているか確認する
-    //   gameManager = gameManagerObj.GetComponent<GameManager>();
+    //    gameManager = gameManagerObj.GetComponent<GameManager>();
     //    Assert.IsNotNull(gameManager, "GameManagerコンポーネントをアタッチしよう");
     //    hand = handButtons.GetComponent<Hand>();
     //    Assert.IsNotNull(hand, "Handスクリプトを追加しよう");

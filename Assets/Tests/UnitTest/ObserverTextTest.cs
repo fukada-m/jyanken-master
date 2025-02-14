@@ -8,53 +8,43 @@ using Moq;
 public class ObserverTextTest
 {
     ObserverText observerText;
-    TMP_Text text;
-    GameManager gameManager;
 
     [SetUp]
     public void SetUp()
     {
         var observerTextObject = new GameObject("ObserverText");
         observerText = observerTextObject.AddComponent<ObserverText>();
-        text = observerTextObject.AddComponent<TextMeshProUGUI>();
-        gameManager = observerTextObject.AddComponent<GameManager>();
-
-        // textとgameManager を observerText にセット
-        typeof(ObserverText)
-            .GetField("text", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(observerText, text);
-        typeof(ObserverText)
-            .GetField("gameManager", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(observerText, gameManager);
+        var text = observerTextObject.AddComponent<TextMeshProUGUI>();
+        observerText.Initialize(text);
     }
-
+   
     [Test]
-    public void Up_UpdatesTextHand()
+    public void Up_UpdatesTextHandStone()
     {
-        // Ihand型のMockを作成してCurrentにグーをセット
-        var mockHand = new Mock<IHand>();
-        mockHand.Setup(h => h.Current).Returns(GameManager.Sign.Stone);
-
-        // GameManager型のMockを作成
-        var mockGameManager = new Mock<IGameManager>();
-        mockGameManager.Setup(g => g.ConvertSignToJapanese(GameManager.Sign.Stone)).Returns("グー");
-
-        // `GameManager.ConvertSignToJapanese()` を使って期待する文字列を取得
-        string expectedText = $"{mockGameManager.Object.ConvertSignToJapanese(GameManager.Sign.Stone)}を選んでいます";
+        // Notify型のMockを作成
+        var mockSign = new Mock<ISign>();
+        var mockHand = new Mock<Hand>(mockSign.Object);
+        mockHand.Setup(m => m.Text).Returns("あなたはグーを選んでいます");
 
         // Act
         observerText.Up(mockHand.Object);
 
         // Assert
-        Assert.AreEqual(expectedText, text.text);
+        Assert.AreEqual("あなたはグーを選んでいます", observerText.GetText());
     }
-
     [Test]
-    public void Up_UpdatesTextString()
+    public void Up_UpdatesTextHandPaper()
     {
-        var expectedText = "出す手を決めてください";
-        observerText.Up("出す手を決めてください");
-        Assert.AreEqual(expectedText, observerText.GetText());
+        // Notify型のMockを作成
+        var mockSign = new Mock<ISign>();
+        var mockHand = new Mock<Hand>(mockSign.Object);
+        mockHand.Setup(m => m.Text).Returns("あなたはパーを選んでいます");
+
+        // Act
+        observerText.Up(mockHand.Object);
+
+        // Assert
+        Assert.AreEqual("あなたはパーを選んでいます", observerText.GetText());
     }
 
 }

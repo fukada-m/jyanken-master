@@ -3,17 +3,18 @@ using Moq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using UnityEngine.XR;
 
 public class HandTest
 {
-    Hand hand;
+    Hand _hand;
+    Mock<ISign> _mockSign;
 
     [SetUp]
     public void SetUp()
     {
+        _mockSign = new Mock<ISign>();
         // Hand のインスタンスを作成
-        hand= new GameObject("Hand").AddComponent<Hand>();
+        _hand = new Hand(_mockSign.Object);
     }
 
     // オブザーバーが追加できるか
@@ -24,10 +25,10 @@ public class HandTest
         var mockObserver = new Mock<IObserver>();
 
         // Act
-        hand.AddObserver(mockObserver.Object);
+        _hand.AddObserver(mockObserver.Object);
 
         // Assert
-        Assert.AreEqual(mockObserver.Object, hand.GetObserver(0));
+        Assert.AreEqual(mockObserver.Object, _hand.GetObserver(0));
     }
 
     // オブザーバーが取得できるか
@@ -38,38 +39,41 @@ public class HandTest
         var mockObserver1 = new Mock<IObserver>();
         var mockObserver2 = new Mock<IObserver>();
 
-        hand.AddObserver(mockObserver1.Object);
-        hand.AddObserver(mockObserver2.Object);
+        _hand.AddObserver(mockObserver1.Object);
+        _hand.AddObserver(mockObserver2.Object);
 
         // Act & Assert
-        Assert.AreEqual(mockObserver1.Object, hand.GetObserver(0));
-        Assert.AreEqual(mockObserver2.Object, hand.GetObserver(1));
+        Assert.AreEqual(mockObserver1.Object, _hand.GetObserver(0));
+        Assert.AreEqual(mockObserver2.Object, _hand.GetObserver(1));
     }
 
     [Test]
     public void SetCurrent_UpdatesCurrentSign()
     {
         // Arrange
-        var expectedSign = GameManager.Sign.Paper;
+        var expectedSign = Sign.Hand.Paper;
 
         // Act
-        hand.SetCurrent(expectedSign);
+        _hand.SetCurrent(Sign.Hand.Paper);
 
         // Assert
-        Assert.AreEqual(expectedSign, hand.Current);
+        Assert.AreEqual(expectedSign, _hand.Current);
     }
 
     [Test]
-    public void NotifyObservers_CallsObserverUpMethod()
+    public void GenerateText_CallsObserverUpMethod()
     {
         // Arrange
         var mockObserver = new Mock<IObserver>();
-        hand.AddObserver(mockObserver.Object);
+        _hand.AddObserver(mockObserver.Object);
 
         // Act
-        hand.SetCurrent(GameManager.Sign.Stone);
+        _hand.SetCurrent(Sign.Hand.Paper);
+        _hand.GenerateText();
 
         // Assert
-        mockObserver.Verify(o => o.Up(hand), Times.Once);
+        mockObserver.Verify(m => m.Up(_hand), Times.Once);
+        _mockSign.Verify(m => m.ConvertHandToJapanese(_hand.Current));
     }
+
 }

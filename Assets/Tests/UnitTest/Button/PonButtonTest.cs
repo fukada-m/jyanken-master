@@ -19,7 +19,7 @@ public class PonButtonTest
         mockLogicJyanken = new Mock<ILogicJyanken>();
         mockEnemyHand = new Mock<IEnemyHand>();
         var jyankenResult = new JyankenResult();
-        mockEnemyHand.Setup(s => s.PickHand()).Returns(GameManager.Sign.Stone);
+        mockEnemyHand.Setup(s => s.PickHand()).Returns(Sign.Hand.Stone);
 
         typeof(PonButton)
            .GetField("handButtons", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
@@ -43,7 +43,7 @@ public class PonButtonTest
         Assert.IsFalse(handButtons.activeSelf);
         mockEnemyHand.Verify(e => e.PickHand(), Times.Once);
         // ‚¶‚á‚ñ‚¯‚ñ‚Ì”»’èˆ—‚ªŒÄ‚Î‚ê‚½‚©Šm”F
-         mockLogicJyanken.Verify(l => l.Judge(GameManager.Sign.Scissors, GameManager.Sign.Stone), Times.Once);
+         mockLogicJyanken.Verify(l => l.Judge(Sign.Hand.Scissors, Sign.Hand.Stone), Times.Once);
     }
 
 }

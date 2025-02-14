@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class LogicJyanken : ILogicJyanken
 {
-    public GameManager.Result Judge(GameManager.Sign myself, GameManager.Sign enemy)
+    public GameManager.Result Judge(Sign.Hand myself, Sign.Hand enemy)
     {
-        var stone = GameManager.Sign.Stone;
-        var paper = GameManager.Sign.Paper;
-        var scissors = GameManager.Sign.Scissors;
+        var stone = Sign.Hand.Stone;
+        var paper = Sign.Hand.Paper;
+        var scissors = Sign.Hand.Scissors;
 
         // ‚ ‚¢‚±‚ÌƒƒWƒbƒN
         if (myself == enemy) return GameManager.Result.Draw;

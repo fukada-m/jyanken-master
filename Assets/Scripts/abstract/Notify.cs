@@ -4,17 +4,19 @@ using UnityEngine;
 public abstract class Notify
 {
     protected List<IObserver> observers = new List<IObserver>();
-    public string Text { get; protected set; }
+    public virtual string Text { get; protected set; }
 
     public void AddObserver(IObserver o)
     {
         observers.Add(o);
     }
+
     // 主にテストで使う
     public IObserver GetObserver(int i)
     {
         return observers[i];
     }
+    public abstract void GenerateText();
 
     // 全てのobserverをアップデートする
     protected void NotifyObservers()

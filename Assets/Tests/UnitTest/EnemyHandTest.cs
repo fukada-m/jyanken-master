@@ -17,7 +17,7 @@ public class EnemyHandTest
     public void ChoseHand_enemyChoseHand()
     {
         var result = enemyHand.PickHand();
-        Assert.AreEqual(GameManager.Sign.Stone, result);
+        Assert.AreEqual(Sign.Hand.Stone, result);
     }
 
     
