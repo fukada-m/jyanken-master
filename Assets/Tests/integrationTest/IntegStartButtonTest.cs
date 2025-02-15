@@ -26,7 +26,7 @@ public class IntegStartButtonTest
         _handButtons.SetActive(false);
         _observerText.Initialize(_text);
         _notify.AddObserver(_observerText);
-        _startButton.Initialize(_menuButtons, _handButtons, _notify);
+        _startButton.Initialize(_menuButtons, _handButtons, _observerText, _notify);
     }
     // A Test behaves as an ordinary method
     [Test]

@@ -22,7 +22,7 @@ public class IntegHandButtonTest
         _notify = new Notify();
         _observerText.Initialize(_text);
         _notify.AddObserver(_observerText);
-        _handButtons.Initialize(_notify, _sign);
+        _handButtons.Initialize(_observerText, _notify, _sign);
     }
 
     [Test]

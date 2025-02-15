@@ -7,6 +7,7 @@ using Moq;
 public class HandButtonsTest
 {
     HandButtons _handButtons;
+    Mock<IObserver> _mockObserver;
     Mock<Notify> _mockNotify;
     Mock<ISign> _mockSign;
 
@@ -14,9 +15,10 @@ public class HandButtonsTest
     public void HandButtonsTestSetUp()
     {
         _handButtons = new GameObject().AddComponent<HandButtons>();
+        _mockObserver = new Mock<IObserver>();
         _mockSign = new Mock<ISign>();
         _mockNotify = new Mock<Notify>();
-        _handButtons.Initialize(_mockNotify.Object, _mockSign.Object);
+        _handButtons.Initialize(_mockObserver.Object, _mockNotify.Object, _mockSign.Object);
     }
 
     [Test]

@@ -9,6 +9,7 @@ public class StartButtonTest
     GameObject _menuButtons;
     GameObject _handButtons;
     StartButton _startButton;
+    Mock<IObserver> _mockObserver;
     Mock<Notify> _mockNotify;
 
     [SetUp]
@@ -18,9 +19,10 @@ public class StartButtonTest
         _handButtons = new GameObject("HandButtons");
         _startButton = new GameObject().AddComponent<StartButton>();
         _mockNotify = new Mock<Notify>();
+        _mockObserver = new Mock<IObserver>();
         // ƒeƒXƒg‚·‚é‚½‚ß‚Éfalse‚ÉÝ’è
         _handButtons.SetActive(false);
-        _startButton.Initialize(_menuButtons, _handButtons, _mockNotify.Object);
+        _startButton.Initialize(_menuButtons, _handButtons, _mockObserver.Object,  _mockNotify.Object);
     }
     // A Test behaves as an ordinary method
     [Test]
@@ -30,6 +32,5 @@ public class StartButtonTest
         // Assert
         Assert.IsTrue(_handButtons.activeSelf);
         Assert.IsFalse(_menuButtons.activeSelf);
-        //_mockNotify.Verify(m => m.GenerateText(), Times.Once);
     }
 }
