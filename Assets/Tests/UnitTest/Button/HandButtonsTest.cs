@@ -7,7 +7,7 @@ using Moq;
 public class HandButtonsTest
 {
     HandButtons _handButtons;
-    Mock<Hand> _mockHand;
+    Mock<Notify> _mockNotify;
     Mock<ISign> _mockSign;
 
     [SetUp]
@@ -15,32 +15,38 @@ public class HandButtonsTest
     {
         _handButtons = new GameObject().AddComponent<HandButtons>();
         _mockSign = new Mock<ISign>();
-        _mockHand = new Mock<Hand>(_mockSign.Object);
-        _handButtons.Initialize(_mockHand.Object);
+        _mockNotify = new Mock<Notify>();
+        _handButtons.Initialize(_mockNotify.Object, _mockSign.Object);
     }
 
     [Test]
     public void OnClickStoneButton_SetsHandToStone()
     {
+        _mockSign.Setup(m => m.ConvertHandToJapanese(_mockSign.Object.Current)).Returns("グー");
+        var text = "あなたはグーを選んでいます";
         _handButtons.OnClickStoneButton();
-        _mockHand.Verify(m => m.SetCurrent(Sign.Hand.Stone), Times.Once);
-        _mockHand.Verify(m => m.GenerateText(), Times.Once);
+        _mockSign.VerifySet(m => m.Current = Sign.Hand.Stone, Times.Once);
+        _mockNotify.Verify(m => m.SetTextNotify(text), Times.Once);
     }
 
     [Test]
     public void OnClickPaperButton_SetsHandToPaper()
     {
+        _mockSign.Setup(m => m.ConvertHandToJapanese(_mockSign.Object.Current)).Returns("パー");
+        var text = "あなたはパーを選んでいます";
         _handButtons.OnClickPaperButton();
-        _mockHand.Verify(m => m.SetCurrent(Sign.Hand.Paper), Times.Once);
-        _mockHand.Verify(m => m.GenerateText(), Times.Once);
+        _mockSign.VerifySet(m => m.Current = Sign.Hand.Paper, Times.Once);
+        _mockNotify.Verify(m => m.SetTextNotify(text), Times.Once);
     }
 
     [Test]
     public void OnClickScissorsButton_SetsHandToScissors()
     {
+        _mockSign.Setup(m => m.ConvertHandToJapanese(_mockSign.Object.Current)).Returns("チョキ");
+        var text = "あなたはチョキを選んでいます";
         _handButtons.OnClickScissorsButton();
-        _mockHand.Verify(m => m.SetCurrent(Sign.Hand.Scissors), Times.Once);
-        _mockHand.Verify(m => m.GenerateText(), Times.Once);
+        _mockSign.VerifySet(m => m.Current = Sign.Hand.Scissors, Times.Once);
+        _mockNotify.Verify(m => m.SetTextNotify(text), Times.Once);
     }
 
 }

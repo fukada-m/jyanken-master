@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Sign : ISign
 {
+    public Hand Current { get; set; }
     public enum Hand
     {
         Stone,

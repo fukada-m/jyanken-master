@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Notify
+public class Notify : INotify
 {
     protected List<IObserver> observers = new List<IObserver>();
-    public virtual string Text { get; protected set; }
+    public virtual string Text { get;　private set; }
 
     public void AddObserver(IObserver o)
     {
@@ -16,7 +16,13 @@ public abstract class Notify
     {
         return observers[i];
     }
-    public abstract void GenerateText();
+
+    // テキストがセットされるとオブザーバーが更新される
+    public virtual void SetTextNotify(string s)
+    {
+        Text = s;
+        NotifyObservers();
+    }
 
     // 全てのobserverをアップデートする
     protected void NotifyObservers()

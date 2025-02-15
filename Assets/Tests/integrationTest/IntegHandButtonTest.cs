@@ -7,7 +7,7 @@ using UnityEngine.TestTools;
 public class IntegHandButtonTest
 {
     HandButtons _handButtons;
-    Hand _hand;
+    Notify _notify;
     ISign _sign;
     IObserver _observerText;
     TMP_Text _text;
@@ -19,10 +19,10 @@ public class IntegHandButtonTest
         _observerText = new GameObject().AddComponent<ObserverText>();
         _text = new GameObject().AddComponent<TextMeshProUGUI>();
         _sign = new Sign();
-        _hand = new Hand(_sign);
+        _notify = new Notify();
         _observerText.Initialize(_text);
-        _hand.AddObserver(_observerText);
-        _handButtons.Initialize(_hand);
+        _notify.AddObserver(_observerText);
+        _handButtons.Initialize(_notify, _sign);
     }
 
     [Test]
@@ -45,6 +45,5 @@ public class IntegHandButtonTest
         _handButtons.OnClickScissorsButton();
         Assert.AreEqual("‚ ‚È‚½‚Íƒ`ƒ‡ƒL‚ð‘I‚ñ‚Å‚¢‚Ü‚·", _observerText.GetText());
     }
-
 
 }

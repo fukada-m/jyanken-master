@@ -25,7 +25,6 @@ public class ButtonsTest
     PonButton _ponButton;
     GameObject _observerTextObj;
     ObserverText _observerText;
-    Hand hand;
     Notify _start;
     ISign Sign;
 

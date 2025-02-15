@@ -14,7 +14,6 @@ public class JyankenTest
     GameManager gameManager;
     HandButtons handButtons;
     ObserverText observerText;
-    Hand hand;
 
     GameObject textObject;
     GameObject gameManagerObj;
@@ -38,7 +37,7 @@ public class JyankenTest
         handButtons = new GameObject().AddComponent<HandButtons>();
         observerText = new GameObject().AddComponent<ObserverText>();
         //hand = new GameObject().AddComponent<Hand>();
-        hand.AddObserver(observerText);
+        //hand.AddObserver(observerText);
     }
 
     //[UnitySetUp]

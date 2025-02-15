@@ -9,7 +9,7 @@ public class IntegStartButtonTest
     GameObject _menuButtons;
     GameObject _handButtons;
     StartButton _startButton;
-    Notify _start;
+    Notify _notify;
     IObserver _observerText;
     TMP_Text _text;
 
@@ -19,14 +19,14 @@ public class IntegStartButtonTest
         _menuButtons = new GameObject("MenuButtons");
         _handButtons = new GameObject("HandButtons");
         _startButton = new GameObject().AddComponent<StartButton>();
-        _start = new Start();
+        _notify = new Notify();
         _observerText = new GameObject().AddComponent<ObserverText>();
         _text = new GameObject().AddComponent<TextMeshProUGUI>();
         // ÉeÉXÉgÇ∑ÇÈÇΩÇﬂÇ…falseÇ…ê›íË
         _handButtons.SetActive(false);
         _observerText.Initialize(_text);
-        _start.AddObserver(_observerText);
-        _startButton.Initialize(_menuButtons, _handButtons, _start);
+        _notify.AddObserver(_observerText);
+        _startButton.Initialize(_menuButtons, _handButtons, _notify);
     }
     // A Test behaves as an ordinary method
     [Test]

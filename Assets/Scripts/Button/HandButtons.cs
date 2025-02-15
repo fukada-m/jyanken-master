@@ -3,36 +3,46 @@ using UnityEngine;
 
 public class HandButtons : MonoBehaviour
 {
-    // TODO Notify型を使えるように直す
-    Hand _hand;
+    Notify _notify;
+    ISign _sign;
+
     void Start()
     {
-        _hand = new Hand(new Sign());
+        _sign = new Sign();
+        _notify = new Notify();
     }
 
-    public void Initialize(Hand h)
+    // テストの依存関係を注入するメソッド
+    public void Initialize(Notify n, ISign s)
     {
-        _hand = h;
+        _notify = n;
+        _sign = s;
     }
 
     // プレイヤーがグーを選んだ
     public void OnClickStoneButton()
     {
-        _hand.SetCurrent(Sign.Hand.Stone);
-        _hand.GenerateText();
+        _sign.Current = Sign.Hand.Stone;
+        SetHand(_sign);
     }
 
     // プレイヤーがパーを選んだ
     public void OnClickPaperButton()
     {
-        _hand.SetCurrent(Sign.Hand.Paper);
-        _hand.GenerateText();
+        _sign.Current = Sign.Hand.Paper;
+        SetHand(_sign);
     }
 
     // プレイヤーがチョキを選んだ
     public void OnClickScissorsButton()
     {
-        _hand.SetCurrent(Sign.Hand.Scissors);
-        _hand.GenerateText();
+        _sign.Current = Sign.Hand.Scissors;
+        SetHand(_sign);
+    }
+
+    void SetHand(ISign sign)
+    {
+        var text = $"あなたは{_sign.ConvertHandToJapanese(sign.Current)}を選んでいます";
+        _notify.SetTextNotify(text);
     }
 }
