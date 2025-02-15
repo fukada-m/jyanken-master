@@ -2,7 +2,6 @@ using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using TMPro;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using UnityEngine.UI;
@@ -10,23 +9,16 @@ using UnityEngine.UI;
 
 public class ButtonsTest
 {
-    GameStarter _gameStarter;
     GameObject _menuButtonsObj;
     GameObject _startButtonObj;
     StartButton _startButton;
     GameObject _optionButtonObj;
     OptionButton _optionButton;
-    GameObject _handButtonsObj;
-    HandButtons _handButtons;
+    GameObject _handButtons;
     GameObject _settingModal;
     GameObject _returnButtonObj;
     ReturnButton _returnButton;
-    GameObject _ponButtonObj;
-    PonButton _ponButton;
-    GameObject _observerTextObj;
-    ObserverText _observerText;
-    Notify _start;
-    ISign Sign;
+    IObserver _observerText;
 
     [UnitySetUp]
     public IEnumerator ButtonsTestSetUp()
@@ -34,13 +26,8 @@ public class ButtonsTest
         SceneManager.LoadScene("JyankenScene");
         yield return null;
 
-        //_handButtonsObj = GameObject.Find("HandButtons");
-        //_handButtons = _handButtonsObj.GetComponent<HandButtons>();
-        //_observerTextObj = GameObject.Find("ObserverText");
-        //_observerText = _observerTextObj.GetComponent<ObserverText>();
-        //_ponButtonObj = GameObject.Find("PonButton");
-        //_ponButton = _ponButtonObj.GetComponent<PonButton>();
-        
+        _menuButtonsObj = GameObject.Find("MenuButtons");
+        Assert.IsNotNull( _menuButtonsObj);
     }
 
     [UnityTest]
@@ -59,8 +46,6 @@ public class ButtonsTest
         Assert.IsNotNull(_returnButton);
         Assert.IsTrue(CheckOnclickButton(_returnButtonObj));
 
-        _menuButtonsObj = GameObject.Find("MenuButtons");
-        Assert.IsNotNull( _menuButtonsObj);
 
         _optionButtonObj = GameObject.Find("OptionButton");
         Assert.IsNotNull(_optionButtonObj);
@@ -84,8 +69,6 @@ public class ButtonsTest
         Assert.IsFalse(_settingModal.activeSelf);
         Assert.IsTrue(_menuButtonsObj);
 
-
-
     }
     // A Test behaves as an ordinary method
     [UnityTest]
@@ -93,18 +76,22 @@ public class ButtonsTest
     {
         yield return null;
 
+        // falseになっているHandButtonsを取得する
+        GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
+        _handButtons = objects.FirstOrDefault(o => o.name == "HandButtons");
+        Assert.IsFalse(_handButtons.activeSelf);
         _startButtonObj = GameObject.Find("StartButton");
         Assert.IsNotNull(_startButtonObj);
         _startButton = _startButtonObj.GetComponent<StartButton>();
         Assert.IsNotNull(_startButton);
-        //optionButton.OnClickButton();
-        //Assert.IsTrue(settingModal.activeSelf);
-        //Assert.IsFalse(menuButtons.activeSelf);
-        //returnButton.OnClickButton();
-        //Assert.IsTrue(menuButtons.activeSelf);
-        //Assert.IsFalse(settingModal.activeSelf);
-        //startButton.OnClickButton();
-        //Assert.AreEqual(observerText.GetText(), "何の手を出すか決めてください");
+        Assert.IsTrue(CheckOnclickButton(_startButtonObj));
+        // スタートボタンをクリックするとメッセージが表示される
+        // MenuButtonsは非表示になる。
+        _startButton.OnClickButton();
+        _observerText = GameObject.Find("MessageText").GetComponent<IObserver>();
+        Assert.AreEqual(_observerText.GetText(), "何の手を出すか決めてください");
+        Assert.IsTrue(_handButtons.activeSelf);
+        Assert.IsFalse(_menuButtonsObj.activeSelf);
 
     }
 

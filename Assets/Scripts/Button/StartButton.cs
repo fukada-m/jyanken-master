@@ -9,7 +9,6 @@ public class StartButton : MonoBehaviour
     GameObject _menuButtons;
     [SerializeField]
     GameObject _handButtons;
-    [SerializeField]
     IObserver _messageText;
     Notify _notify;
 
@@ -31,6 +30,7 @@ public class StartButton : MonoBehaviour
     void Start()
     {
         _notify = new Notify();
+        _messageText = GameObject.Find("MessageText").GetComponent<IObserver>();
         _notify.AddObserver(_messageText);
     }
 }

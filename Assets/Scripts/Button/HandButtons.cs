@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class HandButtons : MonoBehaviour
 {
-    [SerializeField]
     IObserver _messageText;
     Notify _notify;
     ISign _sign;
@@ -12,6 +11,7 @@ public class HandButtons : MonoBehaviour
     {
         _sign = new Sign();
         _notify = new Notify();
+        _messageText = GameObject.Find("MessageText").GetComponent<IObserver>();
         _notify.AddObserver(_messageText);
     }
 
