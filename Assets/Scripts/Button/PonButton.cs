@@ -8,8 +8,6 @@ public class PonButton : MonoBehaviour
     ILogicJyanken logicJyanken;
     IEnemyHand enemyHand;
 
-    string result;
-
     void Start()
     {
         logicJyanken = new LogicJyanken(); 
