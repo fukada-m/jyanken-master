@@ -6,9 +6,9 @@ using UnityEngine.TestTools;
 
 public class StartButtonTest
 {
+    StartButton _startButton;
     GameObject _menuButtons;
     GameObject _handButtons;
-    StartButton _startButton;
     Mock<IObserver> _mockObserver;
     Mock<Notify> _mockNotify;
 
@@ -22,6 +22,7 @@ public class StartButtonTest
         _mockObserver = new Mock<IObserver>();
         // ÉeÉXÉgÇ∑ÇÈÇΩÇﬂÇ…falseÇ…ê›íË
         _handButtons.SetActive(false);
+
         _startButton.Initialize(_menuButtons, _handButtons, _mockObserver.Object,  _mockNotify.Object);
     }
     // A Test behaves as an ordinary method
