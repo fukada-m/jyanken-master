@@ -8,23 +8,19 @@ public class OptionButtonTest
     OptionButton optionButton;
     GameObject settingModal;
     GameObject menuButtons;
-
+    GameObject massageText;
     [SetUp]
     public void OptionButtonSetUp()
     {
         optionButton = new GameObject("OptionButton").AddComponent<OptionButton>();
         settingModal = new GameObject("SettingModal");
         menuButtons = new GameObject("MenuButtons");
+        massageText = new GameObject("MassageText");
+
         // ボタンクリックで有効化できるかテストするためにfalseにする
         settingModal.SetActive(false);
 
-        // コンポジションを設定
-        typeof(OptionButton)
-            .GetField("menuButtons", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(optionButton, menuButtons);
-        typeof(OptionButton)
-            .GetField("settingModal", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(optionButton, settingModal);
+        optionButton.Initialize(settingModal, menuButtons, massageText);
     } 
     // A Test behaves as an ordinary method
     [Test]
@@ -33,5 +29,6 @@ public class OptionButtonTest
         optionButton.OnClickButton();
         Assert.IsTrue(settingModal.activeSelf);
         Assert.IsFalse(menuButtons.activeSelf);
+        Assert.IsFalse(massageText.activeSelf);
     }
 }
