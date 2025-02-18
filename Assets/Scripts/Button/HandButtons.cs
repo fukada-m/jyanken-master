@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class HandButtons : MonoBehaviour
 {
+    [SerializeField]
+    GameObject _ponButton;
     IObserver _messageText;
     Notify _notify;
     ISign _sign;
@@ -16,8 +18,9 @@ public class HandButtons : MonoBehaviour
     }
 
     // テストの依存関係を注入するメソッド
-    public void Initialize(IObserver o, Notify n, ISign s)
+    public void Initialize(GameObject p, IObserver o, Notify n, ISign s)
     {
+        _ponButton = p;
         _messageText = o;
         _notify = n;
         _sign = s;
@@ -28,6 +31,7 @@ public class HandButtons : MonoBehaviour
     {
         _sign.Current = Sign.Hand.Stone;
         SetHand(_sign);
+        _ponButton.SetActive(true);
     }
 
     // プレイヤーがパーを選んだ
@@ -35,6 +39,7 @@ public class HandButtons : MonoBehaviour
     {
         _sign.Current = Sign.Hand.Paper;
         SetHand(_sign);
+        _ponButton.SetActive(true);
     }
 
     // プレイヤーがチョキを選んだ
@@ -42,6 +47,7 @@ public class HandButtons : MonoBehaviour
     {
         _sign.Current = Sign.Hand.Scissors;
         SetHand(_sign);
+        _ponButton.SetActive(true);
     }
 
     void SetHand(ISign sign)

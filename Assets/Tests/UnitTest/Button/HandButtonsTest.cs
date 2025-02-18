@@ -7,6 +7,7 @@ using Moq;
 public class HandButtonsTest
 {
     HandButtons _handButtons;
+    GameObject _ponButton;
     Mock<IObserver> _mockObserver;
     Mock<Notify> _mockNotify;
     Mock<ISign> _mockSign;
@@ -14,11 +15,16 @@ public class HandButtonsTest
     [SetUp]
     public void HandButtonsTestSetUp()
     {
+        _ponButton = new GameObject("PonButton");
         _handButtons = new GameObject().AddComponent<HandButtons>();
         _mockObserver = new Mock<IObserver>();
         _mockSign = new Mock<ISign>();
         _mockNotify = new Mock<Notify>();
-        _handButtons.Initialize(_mockObserver.Object, _mockNotify.Object, _mockSign.Object);
+
+        // テストを行うためにfalseにする
+        _ponButton.SetActive(false);
+
+        _handButtons.Initialize(_ponButton, _mockObserver.Object, _mockNotify.Object, _mockSign.Object);
     }
 
     [Test]
@@ -29,6 +35,7 @@ public class HandButtonsTest
         _handButtons.OnClickStoneButton();
         _mockSign.VerifySet(m => m.Current = Sign.Hand.Stone, Times.Once);
         _mockNotify.Verify(m => m.SetTextNotify(text), Times.Once);
+        Assert.IsTrue(_ponButton.activeSelf);
     }
 
     [Test]
@@ -39,6 +46,7 @@ public class HandButtonsTest
         _handButtons.OnClickPaperButton();
         _mockSign.VerifySet(m => m.Current = Sign.Hand.Paper, Times.Once);
         _mockNotify.Verify(m => m.SetTextNotify(text), Times.Once);
+        Assert.IsTrue(_ponButton.activeSelf);
     }
 
     [Test]
@@ -49,6 +57,7 @@ public class HandButtonsTest
         _handButtons.OnClickScissorsButton();
         _mockSign.VerifySet(m => m.Current = Sign.Hand.Scissors, Times.Once);
         _mockNotify.Verify(m => m.SetTextNotify(text), Times.Once);
+        Assert.IsTrue(_ponButton.activeSelf);
     }
 
 }

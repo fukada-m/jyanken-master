@@ -6,6 +6,7 @@ using UnityEngine.TestTools;
 
 public class IntegHandButtonTest
 {
+    GameObject _ponButton;
     HandButtons _handButtons;
     Notify _notify;
     ISign _sign;
@@ -16,13 +17,14 @@ public class IntegHandButtonTest
     public void HandButtonsTestSetUp()
     {
         _handButtons = new GameObject().AddComponent<HandButtons>();
+        _ponButton = new GameObject("PonButton");
         _observerText = new GameObject().AddComponent<ObserverText>();
         _text = new GameObject().AddComponent<TextMeshProUGUI>();
         _sign = new Sign();
         _notify = new Notify();
         _observerText.Initialize(_text);
         _notify.AddObserver(_observerText);
-        _handButtons.Initialize(_observerText, _notify, _sign);
+        _handButtons.Initialize(_ponButton, _observerText, _notify, _sign);
     }
 
     [Test]
