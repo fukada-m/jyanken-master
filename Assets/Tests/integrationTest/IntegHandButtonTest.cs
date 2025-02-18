@@ -32,6 +32,7 @@ public class IntegHandButtonTest
     {
         _handButtons.OnClickStoneButton();
         Assert.AreEqual("あなたはグーを選んでいます", _observerText.GetText());
+        Assert.IsTrue(_ponButton);
     }
 
     [Test]
@@ -39,6 +40,7 @@ public class IntegHandButtonTest
     {
         _handButtons.OnClickPaperButton();
         Assert.AreEqual("あなたはパーを選んでいます", _observerText.GetText());
+        Assert.IsTrue(_ponButton);
     }
 
     [Test]
@@ -46,6 +48,7 @@ public class IntegHandButtonTest
     {
         _handButtons.OnClickScissorsButton();
         Assert.AreEqual("あなたはチョキを選んでいます", _observerText.GetText());
+        Assert.IsTrue(_ponButton);
     }
 
 }
