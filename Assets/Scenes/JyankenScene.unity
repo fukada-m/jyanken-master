@@ -2778,6 +2778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingModal: {fileID: 1156275332}
   menuButtons: {fileID: 789022081}
+  massageText: {fileID: 1378448933}
 --- !u!1 &2071010842
 GameObject:
   m_ObjectHideFlags: 0
