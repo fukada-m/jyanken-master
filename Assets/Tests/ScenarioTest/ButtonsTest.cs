@@ -18,6 +18,7 @@ public class ButtonsTest
     GameObject _settingModal;
     GameObject _returnButtonObj;
     ReturnButton _returnButton;
+    GameObject _messageText;
     IObserver _observerText;
 
     [UnitySetUp]
@@ -40,6 +41,9 @@ public class ButtonsTest
         _settingModal = objects.FirstOrDefault(o => o.name == "SettingModal");
         Assert.IsNotNull(_settingModal);
 
+        _messageText = GameObject.Find("MessageText");
+        Assert.IsTrue(_messageText);
+
         _returnButtonObj = objects.FirstOrDefault(o => o.name == "ReturnButton");
         Assert.IsNotNull(_returnButtonObj);
         _returnButton = _returnButtonObj.GetComponent<ReturnButton>();
@@ -58,17 +62,18 @@ public class ButtonsTest
         Assert.IsFalse(_settingModal.activeSelf);
 
         // オプションボタンをクリックすると設定モーダルと戻るボタンが表示され、
-        // MenuButtonsは非表示になる
+        // MenuButtonsとMessageTextは非表示になる
         _optionButton.OnClickButton();
         Assert.IsTrue(_settingModal.activeSelf);
-        Assert.IsFalse( _menuButtonsObj.activeSelf);
+        Assert.IsFalse(_menuButtonsObj.activeSelf);
+        Assert.IsFalse(_messageText.activeSelf);
 
         // 戻るボタンをクリックすると再び設定モーダルは非表示になり、
-        // MenuButtonsが表示される
+        // MenuButtonsとMessageTextが表示される
         _returnButton.OnClickButton();
         Assert.IsFalse(_settingModal.activeSelf);
-        Assert.IsTrue(_menuButtonsObj);
-
+        Assert.IsTrue(_menuButtonsObj.activeSelf);
+        Assert.IsTrue(_messageText.activeSelf);
     }
     // A Test behaves as an ordinary method
     [UnityTest]
@@ -86,6 +91,7 @@ public class ButtonsTest
         Assert.IsNotNull(_startButton);
         Assert.IsTrue(CheckOnclickButton(_startButtonObj));
         // スタートボタンをクリックするとメッセージが表示される
+        // HandButtonsが表示される
         // MenuButtonsは非表示になる。
         _startButton.OnClickButton();
         _observerText = GameObject.Find("MessageText").GetComponent<IObserver>();
