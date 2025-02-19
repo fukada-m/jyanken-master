@@ -11,166 +11,110 @@ using System.Linq;
 
 public class JyankenTest
 {
-    GameManager gameManager;
+    GameObject handButtonsOBJ;
     HandButtons handButtons;
-    ObserverText observerText;
-
-    GameObject textObject;
-    GameObject gameManagerObj;
-    ObserverText ot;
     Transform stoneButtonObj;
     Transform scissorsButtonObj;
     Transform paperButtonObj;
-    Button stoneButtonComp;
-    Button paperButtonComp;
-    Button scissorsButtonComp;
+    Button stoneButton;
+    Button paperButton;
+    Button scissorsButton;
+    Button ponButton;
     TMP_Text text;
 
     Sign.Hand Stone = Sign.Hand.Stone;
     Sign.Hand Paper = Sign.Hand.Paper;
     Sign.Hand Scissors = Sign.Hand.Scissors;
 
-    [SetUp]
-    public void JyankenTestSetUp()
+    [UnitySetUp]
+    public IEnumerator Setup()
     {
-        gameManager = new GameObject().AddComponent<GameManager>();
-        handButtons = new GameObject().AddComponent<HandButtons>();
-        observerText = new GameObject().AddComponent<ObserverText>();
-        //hand = new GameObject().AddComponent<Hand>();
-        //hand.AddObserver(observerText);
+        SceneManager.LoadScene("JyankenScene");
+        yield return null;
+
+        //最初非表示のHandButtonsを取得する
+        GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
+        handButtonsOBJ = objects.FirstOrDefault(o => o.name == "HandButtons");
+        var ponButtonOBJ = objects.FirstOrDefault(o => o.name == "PonButton");
+        Assert.IsNotNull(handButtonsOBJ, "ハンドオブジェクトを作ろう");
+        handButtons = handButtonsOBJ.GetComponent<HandButtons>();
+        Assert.IsNotNull(handButtons, "HandButtonsをアタッチしよう");
+        // HandButtonsは最初非表示になっているから表示する
+        Assert.IsFalse(handButtonsOBJ.activeSelf);
+        handButtonsOBJ.SetActive(true);
+
+        //HandButtonsの子オブジェクトを確認する
+        Assert.IsTrue(handButtonsOBJ.activeSelf);
+        stoneButtonObj = handButtonsOBJ.transform.Find("StoneButton");
+        Assert.IsNotNull(stoneButtonObj, "Handの子オブジェクトにStoneButtonを作ろう");
+        scissorsButtonObj = handButtonsOBJ.transform.Find("ScissorsButton");
+        Assert.IsNotNull(scissorsButtonObj, "Handの子オブジェクトにScissorsButtonを作ろう");
+        paperButtonObj = handButtonsOBJ.transform.Find("PaperButton");
+        Assert.IsNotNull(paperButtonObj, "Handの子オブジェクトにPaperButtonを作ろう");
+
+        //Buttonが揃っているか確認する
+        stoneButton = stoneButtonObj.GetComponent<Button>();
+        Assert.IsNotNull(stoneButton, "StoneButonにButtonコンポーネントをつけよう");
+        paperButton = paperButtonObj.GetComponent<Button>();
+        Assert.IsNotNull(paperButton, "PaperButonにButtonコンポーネントをつけよう");
+        scissorsButton = scissorsButtonObj.GetComponent<Button>();
+        Assert.IsNotNull(scissorsButton, "ScissorsButonにButtonコンポーネントをつけよう");
+        ponButton = ponButtonOBJ.GetComponent<Button>();
+        Assert.IsNotNull(ponButton, "PonButonにButtonコンポーネントをアタッチしよう");
+
+        text = GameObject.Find("MessageText").GetComponent<TMP_Text>();
+        Assert.IsNotNull(text, "TMPコンポーネントがアタッチされてない");
+        // 最初にスタートボタンを押す
+        var startButton = GameObject.Find("StartButton").GetComponent<StartButton>();
+        startButton.OnClickButton();
+        Assert.AreEqual("何の手を出すか決めてください", text.text);
+
+        // ボタンにメソッドがアタッチしているか確認する
+        Assert.IsTrue(stoneButton.onClick.GetPersistentMethodName(0) == "OnClickStoneButton",
+            "StoneボタンにOnClickStoneButton()を設定しよう"
+        );
+        Assert.IsTrue(scissorsButton.onClick.GetPersistentMethodName(0) == "OnClickScissorsButton",
+            "scissorsボタンにOnClickScissorsButton()を設定しよう"
+        );
+        Assert.IsTrue(paperButton.onClick.GetPersistentMethodName(0) == "OnClickPaperButton",
+            "paperボタンにOnClickPaperButton()を設定しよう"
+        );
+
     }
 
-    //[UnitySetUp]
-    //public IEnumerator Setup()
-    //{
-    //    SceneManager.LoadScene("JyankenScene");
-    //    yield return null;
+    // ハンドボタンを複数回押したときのテスト
+    [UnityTest]
+    public IEnumerator HandButtonsClickTest()
+    {
 
-    //    //ゲームオブジェクトが揃っているか確認する
-    //    GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
-    //    handButtons = objects.FirstOrDefault(o => o.name == "HandButtons");
-    //    Assert.IsNotNull(handButtons, "ハンドオブジェクトを作ろう");
-    //    // HandButtonsは最初非表示になっている
-    //    handButtons.SetActive(true);
-    //    gameManagerObj = GameObject.Find("GameManager");
-    //    Assert.IsNotNull(gameManagerObj, "GameManagerをオブジェクトを作成しよう");
-    //    stoneButtonObj = handButtons.transform.Find("StoneButton");
-    //    Assert.IsNotNull(stoneButtonObj, "Handの子オブジェクトにStoneButtonを作ろう");
-    //    scissorsButtonObj = handButtons.transform.Find("ScissorsButton");
-    //    Assert.IsNotNull(scissorsButtonObj, "Handの子オブジェクトにScissorsButtonを作ろう");
-    //    paperButtonObj = handButtons.transform.Find("PaperButton");
-    //    Assert.IsNotNull(paperButtonObj, "Handの子オブジェクトにPaperButtonを作ろう");
-    //    observerText = GameObject.Find("ObserverText");
-    //    Assert.IsNotNull(observerText, "ハンドオブザーバーがない。");
-    //    textObject = GameObject.Find("Message");
-    //    Assert.IsNotNull(textObject, "テキストオブジェクトがない");
+        //グーボタンをシミュレート
+        stoneButton.onClick.Invoke();
+        Assert.AreEqual("あなたはグーを選んでいます", text.text);
 
+        //パーボタンをシミュレート
+        paperButton.onClick.Invoke();
+        Assert.AreEqual("あなたはパーを選んでいます", text.text);
 
-    //    //コンポーネントが揃っているか確認する
-    //    gameManager = gameManagerObj.GetComponent<GameManager>();
-    //    Assert.IsNotNull(gameManager, "GameManagerコンポーネントをアタッチしよう");
-    //    hand = handButtons.GetComponent<Hand>();
-    //    Assert.IsNotNull(hand, "Handスクリプトを追加しよう");
-    //    stoneButtonComp = stoneButtonObj.GetComponent<Button>();
-    //    Assert.IsNotNull(stoneButtonComp, "StoneButonにButtonコンポーネントをつけよう");
-    //    paperButtonComp = paperButtonObj.GetComponent<Button>();
-    //    Assert.IsNotNull(paperButtonComp, "PaperButonにButtonコンポーネントをつけよう");
-    //    scissorsButtonComp = scissorsButtonObj.GetComponent<Button>();
-    //    Assert.IsNotNull(scissorsButtonComp, "ScissorsButonにButtonコンポーネントをつけよう");
-    //    text = textObject.GetComponent<TMP_Text>();
-    //    Assert.IsNotNull(text, "TMPコンポーネントがアタッチされてない");
-    //    Assert.AreEqual("出す手を決めてください", text.text);
-    //    ot = observerText.GetComponent<ObserverText>();
-    //    Assert.IsNotNull(ot, "ハンドオブザーバースクリプトがない。");
+        //チョキボタンをシミュレート
+        scissorsButton.onClick.Invoke();
+        Assert.AreEqual("あなたはチョキを選んでいます", text.text);
 
-    //    // ボタンにメソッドがアタッチしているか確認する
-    //    Assert.IsTrue(stoneButtonComp.onClick.GetPersistentMethodName(0) == "onClickStoneButton",
-    //        "StoneボタンにOnClickStoneButton()を設定しよう"
-    //    );
-    //    Assert.IsTrue(scissorsButtonComp.onClick.GetPersistentMethodName(0) == "onClickScissorsButton",
-    //        "scissorsボタンにOnClickScissorsButton()を設定しよう"
-    //    );
-    //    Assert.IsTrue(paperButtonComp.onClick.GetPersistentMethodName(0) == "onClickPaperButton",
-    //        "paperボタンにOnClickPaperButton()を設定しよう"
-    //    );
+        //再度グーボタンをシミュレート
+        stoneButton.onClick.Invoke();
+        Assert.AreEqual("あなたはグーを選んでいます", text.text);
 
-    //}
+        yield return null;
+    }
 
-    //// ボタンを押したらオブザーバーに通知が行くかテスト
-    //[UnityTest]
-    //public IEnumerator HandButtonsTest()
-    //{
-    //    // オブザーバーが追加できるかテスト
-    //    var mock = new Mock<IObserver>();
-    //    mock.Setup(service => service.Up(hand));
-    //    hand.AddObserver(mock.Object);
-    //    var observer = hand.GetObserver(0);
-    //    Assert.IsInstanceOf<IObserver>(observer, "IObserver型ではなかった");
+    [UnityTest]
+    public IEnumerator DoJyankenTest()
+    {
+        yield return null;
+        stoneButton.onClick.Invoke();
+        ponButton.onClick.Invoke();
+        // HandButtonsは非表示になる。
+        Assert.IsFalse(handButtonsOBJ.activeSelf);
+        // CPUが選んだ手を表示する
 
-    //    //グーボタンをシミュレート
-    //    stoneButtonComp.onClick.Invoke();
-    //    Assert.AreEqual(hand.Current, Stone);
-    //    //パーボタンをシミュレート
-    //    paperButtonComp.onClick.Invoke();
-    //    Assert.AreEqual(hand.Current, Paper);
-    //    //チョキボタンをシミュレート
-    //    scissorsButtonComp.onClick.Invoke();
-    //    Assert.AreEqual(hand.Current, Scissors);
-
-    //    // オブザーバーに通知が送れているかテスト。ボタンを3回押したから3回呼ばれている。
-    //    mock.Verify(service => service.Up(hand), Times.Exactly(3));
-
-    //    yield return null;
-    //}
-
-    //// ハンドの状態によってテキストを書き換えられるかテスト
-    //[UnityTest]
-    //public IEnumerator ObserverTest()
-    //{
-    //    // モックを作成
-    //    var mock = new Mock<IHand>();
-
-    //    //　初期表示
-    //    Assert.AreEqual("出す手を決めてください", text.text);
-
-    //    // グーを選んだ場合
-    //    mock.Setup(p => p.Current).Returns(Stone);
-    //    //　テキストの表示が変えられるかテスト
-    //    ot.Up(mock.Object);
-    //    Assert.AreEqual("グーを選んでいます", text.text);
-
-    //    // パーを選んだ場合
-    //    mock.Setup(p => p.Current).Returns(Paper);
-    //    //　テキストの表示が変えられるかテスト
-    //    ot.Up(mock.Object);
-    //    Assert.AreEqual("パーを選んでいます", text.text);
-
-    //    // チョキを選んだ場合
-    //    mock.Setup(p => p.Current).Returns(Scissors);
-    //    //　テキストの表示が変えられるかテスト
-    //    ot.Up(mock.Object);
-    //    Assert.AreEqual("チョキを選んでいます", text.text);
-
-    //    yield return null;
-    //}
-
-    //// ハンドボタンの結合テスト
-    //[UnityTest]
-    //public IEnumerator JoinTest()
-    //{
-
-    //    //グーボタンをシミュレート
-    //    stoneButtonComp.onClick.Invoke();
-    //    Assert.AreEqual("グーを選んでいます", text.text);
-
-    //    //パーボタンをシミュレート
-    //    paperButtonComp.onClick.Invoke();
-    //    Assert.AreEqual("パーを選んでいます", text.text);
-
-    //    //チョキボタンをシミュレート
-    //    scissorsButtonComp.onClick.Invoke();
-    //    Assert.AreEqual("チョキを選んでいます", text.text);
-
-    //    yield return null;
-    //}
+    }
 }
