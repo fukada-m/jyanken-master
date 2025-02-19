@@ -8,6 +8,7 @@ public class ReturnButtonTest
     ReturnButton returnButton;
     GameObject settingModal;
     GameObject menuButtons;
+    GameObject messageText;
 
     [SetUp]
     public void ReturnButtonSetUp()
@@ -15,16 +16,13 @@ public class ReturnButtonTest
         returnButton = new GameObject("ReturnButton").AddComponent<ReturnButton>();
         settingModal = new GameObject("SettingModal");
         menuButtons = new GameObject("MenuButtons");
+        messageText = new GameObject("MessageText");
         // ボタンクリックで有効化できるかテストするためfalseにする
         menuButtons.SetActive(false);
+        messageText.SetActive(false);
 
         // コンポジションを設定
-        typeof(ReturnButton)
-            .GetField("menuButtons", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(returnButton, menuButtons);
-        typeof(ReturnButton)
-            .GetField("settingModal", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .SetValue(returnButton, settingModal);
+        returnButton.Initialize(settingModal, menuButtons, messageText);
     }
 
     // A Test behaves as an ordinary method
@@ -33,6 +31,7 @@ public class ReturnButtonTest
     {
         returnButton.OnClickButton();
         Assert.IsTrue(menuButtons.activeSelf);
+        Assert.IsTrue(messageText.activeSelf);
         Assert.IsFalse(settingModal.activeSelf);
     }
 
