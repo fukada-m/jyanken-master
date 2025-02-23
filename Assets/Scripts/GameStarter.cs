@@ -42,7 +42,7 @@ public class GameStarter : MonoBehaviour
     void Start()
     {
         HideObject();
-        SetSign();
+        SetPlayerHand();
     }
 
     void HideObject()
@@ -51,7 +51,7 @@ public class GameStarter : MonoBehaviour
         _settingModal.SetActive(false);
         _ponButtonOBJ.SetActive(false);
     }
-    void SetSign()
+    void SetPlayerHand()
     {
         var hand = new Hand();
         _handButtons.Hand = hand;
