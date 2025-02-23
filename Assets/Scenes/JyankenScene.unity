@@ -1502,6 +1502,8 @@ MonoBehaviour:
   _handButtonsOBJ: {fileID: 312027801}
   _settingModal: {fileID: 1156275332}
   _ponButtonOBJ: {fileID: 726107262}
+  _handButtons: {fileID: 312027804}
+  _ponButton: {fileID: 726107264}
 --- !u!4 &1233275869
 Transform:
   m_ObjectHideFlags: 0
