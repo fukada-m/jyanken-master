@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PonButton : MonoBehaviour
 {
@@ -27,7 +28,6 @@ public class PonButton : MonoBehaviour
     public void Initialize(
         GameObject h1, 
         GameObject p, 
-        IObserver m, 
         Notify n, 
         ILogicJyanken l, 
         IEnemyHand e, 
@@ -37,23 +37,34 @@ public class PonButton : MonoBehaviour
     {
         handButtons = h1;
         ponButton = p;
-        messageText = m;
         notify = n;
         logicJyanken = l;
         enemyHand = e;
         Hand = h2;
         result = r;
-
     }
 
     public void OnClickButton()
     {
         handButtons.SetActive(false);
-        ponButton.SetActive(false);
         var enemyChoseHand = enemyHand.PickHand();
         var hand = Hand.ConvertHandToJapanese(enemyChoseHand);
         notify.SetTextNotify($"相手は{hand}を選びました");
         result.Current = logicJyanken.Judge(Hand.Current, enemyChoseHand);
+        StartCoroutine(DispResult());
+        //ponButton.SetActive(false);
     }
 
+    // コルーチンのテスト用
+    public void TestDispResult()
+    {
+        StartCoroutine(DispResult());
+    }
+
+    IEnumerator DispResult()
+    {
+        yield return new WaitForSeconds(1f);
+        notify.SetTextNotify($"あなたの{result.ConvertResultToJapanese(result.Current)}");
+        Debug.Log("これでコルーチン終わり");
+    }
 }
