@@ -17,7 +17,7 @@ public class HandButtons : MonoBehaviour
     }
 
     // テストの依存関係を注入するメソッド
-    public void Initialize(GameObject p, IObserver o, Notify n, Hand s)
+    public void Initialize(GameObject p, IObserver o, Notify n, IHand s)
     {
         _ponButton = p;
         _messageText = o;
