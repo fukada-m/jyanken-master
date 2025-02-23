@@ -2,26 +2,26 @@ using UnityEngine;
 
 public class LogicJyanken : ILogicJyanken
 {
-    public Result.ResultEnum Judge(Sign.Hand myself, Sign.Hand enemy)
+    public Value.Result Judge(Value.Hand myself, Value.Hand enemy)
     {
-        var stone = Sign.Hand.Stone;
-        var paper = Sign.Hand.Paper;
-        var scissors = Sign.Hand.Scissors;
+        var stone = Value.Hand.Stone;
+        var paper = Value.Hand.Paper;
+        var scissors = Value.Hand.Scissors;
 
         // あいこのロジック
-        if (myself == enemy) return Result.ResultEnum.Draw;
+        if (myself == enemy) return Value.Result.Draw;
 
         // 勝つときのロジック
-        if (myself == paper && enemy == stone) return Result.ResultEnum.WIn;
-        if (myself == stone && enemy == scissors) return Result.ResultEnum.WIn;
-        if (myself == scissors && enemy == paper) return Result.ResultEnum.WIn;
+        if (myself == paper && enemy == stone) return Value.Result.WIn;
+        if (myself == stone && enemy == scissors) return Value.Result.WIn;
+        if (myself == scissors && enemy == paper) return Value.Result.WIn;
 
         // 負けるときのロジック
-        if (myself == scissors && enemy == stone) return Result.ResultEnum.Lose;
-        if (myself == paper && enemy == scissors) return Result.ResultEnum.Lose;
-        if (myself == stone && enemy == paper) return Result.ResultEnum.Lose;
+        if (myself == scissors && enemy == stone) return Value.Result.Lose;
+        if (myself == paper && enemy == scissors) return Value.Result.Lose;
+        if (myself == stone && enemy == paper) return Value.Result.Lose;
 
-        return Result.ResultEnum.Error;
+        return Value.Result.Error;
 
     }
 }

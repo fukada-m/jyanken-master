@@ -2,21 +2,15 @@ using UnityEngine;
 
 public class Result
 {
-    public ResultEnum Current { get; set; }
-    public enum ResultEnum
-    {
-        WIn,
-        Lose,
-        Draw,
-        Error
-    }
-    public string ConvertResultToJapanese(ResultEnum r)
+    public Value.Result Current { get; set; }
+
+    public string ConvertResultToJapanese(Value.Result r)
     {
         return r switch
         {
-            Result.ResultEnum.WIn => "勝ち",
-            Result.ResultEnum.Lose => "負け",
-            Result.ResultEnum.Draw => "あいこ",
+            Value.Result.WIn => "勝ち",
+            Value.Result.Lose => "負け",
+            Value.Result.Draw => "あいこ",
             _ => "エラー"  // デフォルトケース
         };
     }

@@ -10,7 +10,7 @@ public class HandButtonsTest
     GameObject _ponButton;
     Mock<IObserver> _mockObserver;
     Mock<Notify> _mockNotify;
-    Mock<ISign> _mockSign;
+    Mock<Hand> _mockHand;
 
     [SetUp]
     public void HandButtonsTestSetUp()
@@ -18,22 +18,22 @@ public class HandButtonsTest
         _ponButton = new GameObject("PonButton");
         _handButtons = new GameObject().AddComponent<HandButtons>();
         _mockObserver = new Mock<IObserver>();
-        _mockSign = new Mock<ISign>();
+        _mockHand = new Mock<Hand>();
         _mockNotify = new Mock<Notify>();
 
         // テストを行うためにfalseにする
         _ponButton.SetActive(false);
 
-        _handButtons.Initialize(_ponButton, _mockObserver.Object, _mockNotify.Object, _mockSign.Object);
+        _handButtons.Initialize(_ponButton, _mockObserver.Object, _mockNotify.Object, _mockHand.Object);
     }
 
     [Test]
     public void OnClickStoneButton_SetsHandToStone()
     {
-        _mockSign.Setup(m => m.ConvertHandToJapanese(_mockSign.Object.Current)).Returns("グー");
+        _mockHand.Setup(m => m.ConvertHandToJapanese(_mockHand.Object.Current)).Returns("グー");
         var text = "あなたはグーを選んでいます";
         _handButtons.OnClickStoneButton();
-        _mockSign.VerifySet(m => m.Current = Sign.Hand.Stone, Times.Once);
+        _mockHand.VerifySet(m => m.Current = Value.Hand.Stone, Times.Once);
         _mockNotify.Verify(m => m.SetTextNotify(text), Times.Once);
         Assert.IsTrue(_ponButton.activeSelf);
     }
@@ -41,10 +41,10 @@ public class HandButtonsTest
     [Test]
     public void OnClickPaperButton_SetsHandToPaper()
     {
-        _mockSign.Setup(m => m.ConvertHandToJapanese(_mockSign.Object.Current)).Returns("パー");
+        _mockHand.Setup(m => m.ConvertHandToJapanese(_mockHand.Object.Current)).Returns("パー");
         var text = "あなたはパーを選んでいます";
         _handButtons.OnClickPaperButton();
-        _mockSign.VerifySet(m => m.Current = Sign.Hand.Paper, Times.Once);
+        _mockHand.VerifySet(m => m.Current = Value.Hand.Paper, Times.Once);
         _mockNotify.Verify(m => m.SetTextNotify(text), Times.Once);
         Assert.IsTrue(_ponButton.activeSelf);
     }
@@ -52,10 +52,10 @@ public class HandButtonsTest
     [Test]
     public void OnClickScissorsButton_SetsHandToScissors()
     {
-        _mockSign.Setup(m => m.ConvertHandToJapanese(_mockSign.Object.Current)).Returns("チョキ");
+        _mockHand.Setup(m => m.ConvertHandToJapanese(_mockHand.Object.Current)).Returns("チョキ");
         var text = "あなたはチョキを選んでいます";
         _handButtons.OnClickScissorsButton();
-        _mockSign.VerifySet(m => m.Current = Sign.Hand.Scissors, Times.Once);
+        _mockHand.VerifySet(m => m.Current = Value.Hand.Scissors, Times.Once);
         _mockNotify.Verify(m => m.SetTextNotify(text), Times.Once);
         Assert.IsTrue(_ponButton.activeSelf);
     }

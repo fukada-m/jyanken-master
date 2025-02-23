@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class EnemyHand : IEnemyHand
 {
-    Sign.Hand stone = Sign.Hand.Stone;
-    Sign.Hand scissors = Sign.Hand.Scissors;
-    Sign.Hand paper = Sign.Hand.Paper;
+    Value.Hand stone = Value.Hand.Stone;
+    Value.Hand scissors = Value.Hand.Scissors;
+    Value.Hand paper = Value.Hand.Paper;
 
     // TODO ç°ÇÃCPUÇÕÉOÅ[ÇµÇ©èoÇ≥Ç»Ç¢
-    public Sign.Hand PickHand()
+    public Value.Hand PickHand()
     {
         return stone;
     }

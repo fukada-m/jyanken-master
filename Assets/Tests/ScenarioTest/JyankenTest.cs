@@ -22,9 +22,9 @@ public class JyankenTest
     Button ponButton;
     TMP_Text text;
 
-    Sign.Hand Stone = Sign.Hand.Stone;
-    Sign.Hand Paper = Sign.Hand.Paper;
-    Sign.Hand Scissors = Sign.Hand.Scissors;
+    Value.Hand Stone = Value.Hand.Stone;
+    Value.Hand Paper = Value.Hand.Paper;
+    Value.Hand Scissors = Value.Hand.Scissors;
 
     [UnitySetUp]
     public IEnumerator Setup()

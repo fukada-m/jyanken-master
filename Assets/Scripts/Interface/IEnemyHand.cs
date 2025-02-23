@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IEnemyHand
 {
-    Sign.Hand PickHand();
+    Value.Hand PickHand();
 }

@@ -7,52 +7,53 @@ public class HandButtons : MonoBehaviour
     GameObject _ponButton;
     IObserver _messageText;
     Notify _notify;
-    ISign _sign;
+    public IHand Hand {  get; set; }
 
     void Start()
     {
-        _sign = new Sign();
         _notify = new Notify();
         _messageText = GameObject.Find("MessageText").GetComponent<IObserver>();
         _notify.AddObserver(_messageText);
     }
 
     // テストの依存関係を注入するメソッド
-    public void Initialize(GameObject p, IObserver o, Notify n, ISign s)
+    public void Initialize(GameObject p, IObserver o, Notify n, Hand s)
     {
         _ponButton = p;
         _messageText = o;
         _notify = n;
-        _sign = s;
+        Hand = s;
     }
+
+
 
     // プレイヤーがグーを選んだ
     public void OnClickStoneButton()
     {
-        _sign.Current = Sign.Hand.Stone;
-        SetHand(_sign);
+        Hand.Current = Value.Hand.Stone;
+        SetHand(Hand);
         _ponButton.SetActive(true);
     }
 
     // プレイヤーがパーを選んだ
     public void OnClickPaperButton()
     {
-        _sign.Current = Sign.Hand.Paper;
-        SetHand(_sign);
+        Hand.Current = Value.Hand.Paper;
+        SetHand(Hand);
         _ponButton.SetActive(true);
     }
 
     // プレイヤーがチョキを選んだ
     public void OnClickScissorsButton()
     {
-        _sign.Current = Sign.Hand.Scissors;
-        SetHand(_sign);
+        Hand.Current = Value.Hand.Scissors;
+        SetHand(Hand);
         _ponButton.SetActive(true);
     }
 
-    void SetHand(ISign sign)
+    void SetHand(IHand Hand)
     {
-        var text = $"あなたは{_sign.ConvertHandToJapanese(sign.Current)}を選んでいます";
+        var text = $"あなたは{Hand.ConvertHandToJapanese(Hand.Current)}を選んでいます";
         _notify.SetTextNotify(text);
     }
 }

@@ -14,35 +14,35 @@ public class LogicJyankenTest
     }
 
     // あいこのテスト
-    [TestCase(Sign.Hand.Stone, Sign.Hand.Stone)]
-    [TestCase(Sign.Hand.Paper, Sign.Hand.Paper)]
-    [TestCase(Sign.Hand.Scissors, Sign.Hand.Scissors)]
+    [TestCase(Value.Hand.Stone, Value.Hand.Stone)]
+    [TestCase(Value.Hand.Paper, Value.Hand.Paper)]
+    [TestCase(Value.Hand.Scissors, Value.Hand.Scissors)]
 
-    public void LogicJyankenTestDraw(Sign.Hand myself, Sign.Hand enemy)
+    public void LogicJyankenTestDraw(Value.Hand myself, Value.Hand enemy)
     {
         var result = logicJyanken.Judge(myself, enemy);
-        Assert.AreEqual(Result.ResultEnum.Draw, result);
+        Assert.AreEqual(Value.Result.Draw, result);
     }
 
     // 自分が勝つときのテスト
-    [TestCase(Sign.Hand.Stone, Sign.Hand.Scissors)]
-    [TestCase(Sign.Hand.Scissors, Sign.Hand.Paper)]
-    [TestCase(Sign.Hand.Paper, Sign.Hand.Stone)]
+    [TestCase(Value.Hand.Stone, Value.Hand.Scissors)]
+    [TestCase(Value.Hand.Scissors, Value.Hand.Paper)]
+    [TestCase(Value.Hand.Paper, Value.Hand.Stone)]
 
-    public void LogicJyankenTestWin(Sign.Hand myself, Sign.Hand enemy)
+    public void LogicJyankenTestWin(Value.Hand myself, Value.Hand enemy)
     {
         var result = logicJyanken.Judge(myself, enemy);
-        Assert.AreEqual(Result.ResultEnum.WIn, result);
+        Assert.AreEqual(Value.Result.WIn, result);
     }
 
     // 自分が負けるときのテスト
-    [TestCase(Sign.Hand.Stone, Sign.Hand.Paper)]
-    [TestCase(Sign.Hand.Scissors, Sign.Hand.Stone)]
-    [TestCase(Sign.Hand.Paper, Sign.Hand.Scissors)]
-    public void LogicJyankenTestLose(Sign.Hand myself, Sign.Hand enemy)
+    [TestCase(Value.Hand.Stone, Value.Hand.Paper)]
+    [TestCase(Value.Hand.Scissors, Value.Hand.Stone)]
+    [TestCase(Value.Hand.Paper, Value.Hand.Scissors)]
+    public void LogicJyankenTestLose(Value.Hand myself, Value.Hand enemy)
     {
         var result = logicJyanken.Judge(myself, enemy);
-        Assert.AreEqual(Result.ResultEnum.Lose, result);
+        Assert.AreEqual(Value.Result.Lose, result);
     }
 
 }

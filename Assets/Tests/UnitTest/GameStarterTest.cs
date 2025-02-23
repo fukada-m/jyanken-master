@@ -7,22 +7,28 @@ using Moq;
 public class GameStarterTest
 {
     GameStarter _gameStarter;
-    GameObject _handButtons;
+    GameObject _handButtonsOBJ;
     GameObject _settingModal;
-    GameObject _ponBotton;
+    GameObject _ponBottonOBJ;
+    Mock<HandButtons> _mockHandButtons;
+    Mock<PonButton> _mockPonButton;
 
     [SetUp]
     public void GameStarterSetUp()
     {
         _gameStarter = new GameObject().AddComponent<GameStarter>();
-        _handButtons = new GameObject("HandButtons");
+        _handButtonsOBJ = new GameObject("HandButtons");
         _settingModal = new GameObject("SettingModal");
-        _ponBotton = new GameObject("PonButton");
+        _ponBottonOBJ = new GameObject("PonButton");
+        _mockHandButtons = new Mock<HandButtons>();
+        _mockPonButton = new Mock<PonButton>();
 
         _gameStarter.Initialize(
-            _handButtons, 
+            _handButtonsOBJ, 
             _settingModal, 
-            _ponBotton
+            _ponBottonOBJ,
+            _mockHandButtons.Object,
+            _mockPonButton.Object
          );
     }
 
@@ -31,10 +37,11 @@ public class GameStarterTest
     {
         _gameStarter.TestStart();
         // ボタンが非表示になっているか
-        Assert.IsFalse(_handButtons.activeSelf);
+        Assert.IsFalse(_handButtonsOBJ.activeSelf);
         Assert.IsFalse(_settingModal.activeSelf);
-        Assert.IsFalse(_ponBotton.activeSelf);
-
-
+        Assert.IsFalse(_ponBottonOBJ.activeSelf);
+        // SignをDI出来ているか
+        _mockHandButtons.VerifySet( m => m.Hand = new Hand(), Times.Once);
+        _mockPonButton.VerifySet(m => m.Hand = new Hand(), Times.Once);
     }
 }

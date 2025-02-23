@@ -13,7 +13,7 @@ public class PonButtonTest
     Mock<Notify> mockNotify;
     Mock<ILogicJyanken> mockLogicJyanken;
     Mock<IEnemyHand> mockEnemyHand;
-    Mock<ISign> mockSign;
+    Mock<IHand> mockHand;
 
     [SetUp]
     public void PonButtonSetUp()
@@ -25,9 +25,9 @@ public class PonButtonTest
         mockNotify = new Mock<Notify>();
         mockLogicJyanken = new Mock<ILogicJyanken>();
         mockEnemyHand = new Mock<IEnemyHand>();
-        mockSign = new Mock<ISign>();
-        mockEnemyHand.Setup(s => s.PickHand()).Returns(Sign.Hand.Stone);
-        mockSign.Setup(m => m.ConvertHandToJapanese(Sign.Hand.Stone)).Returns("グー");
+        mockHand = new Mock<IHand>();
+        mockEnemyHand.Setup(s => s.PickHand()).Returns(Value.Hand.Stone);
+        mockHand.Setup(m => m.ConvertHandToJapanese(Value.Hand.Stone)).Returns("グー");
         ponButton.Initialize(
             handButtons,
             ponButtonOBJ,
@@ -35,7 +35,7 @@ public class PonButtonTest
             mockNotify.Object,
             mockLogicJyanken.Object,
             mockEnemyHand.Object,
-            mockSign.Object
+            mockHand.Object
          );
     }
     // A Test behaves as an ordinary method
@@ -52,7 +52,7 @@ public class PonButtonTest
         // オブザーバーに通知を送る
         mockNotify.Verify(m => m.SetTextNotify("相手はグーを選びました"), Times.Once);
         // じゃんけんの勝敗判定処理が呼ばれる
-        mockLogicJyanken.Verify(l => l.Judge(Sign.Hand.Scissors, Sign.Hand.Stone), Times.Once);
+        mockLogicJyanken.Verify(l => l.Judge(Value.Hand.Scissors, Value.Hand.Stone), Times.Once);
         // オブザーバーに通知を送る
         mockNotify.Verify(m => m.SetTextNotify("あなたの負けです"), Times.Once);
     }
