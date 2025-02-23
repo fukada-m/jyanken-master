@@ -10,7 +10,7 @@ public class PonButton : MonoBehaviour
     Notify notify;
     ILogicJyanken logicJyanken;
     IEnemyHand enemyHand;
-    public IHand Hand {  get; set; }
+    public virtual IHand Hand {  get; set; }
 
     void Start()
     {

@@ -7,7 +7,7 @@ public class HandButtons : MonoBehaviour
     GameObject _ponButton;
     IObserver _messageText;
     Notify _notify;
-    public IHand Hand {  get; set; }
+    public virtual IHand Hand {  get; set; }
 
     void Start()
     {

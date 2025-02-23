@@ -41,7 +41,7 @@ public class GameStarterTest
         Assert.IsFalse(_settingModal.activeSelf);
         Assert.IsFalse(_ponBottonOBJ.activeSelf);
         // Sign‚ðDIo—ˆ‚Ä‚¢‚é‚©
-        _mockHandButtons.VerifySet( m => m.Hand = new Hand(), Times.Once);
-        _mockPonButton.VerifySet(m => m.Hand = new Hand(), Times.Once);
+        _mockHandButtons.VerifySet( m => m.Hand = It.IsAny<Hand>(), Times.Once);
+        _mockPonButton.VerifySet(m => m.Hand = It.IsAny<Hand>(), Times.Once);
     }
 }
