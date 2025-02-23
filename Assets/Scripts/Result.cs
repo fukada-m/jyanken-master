@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Result
+public class Result : IResult
 {
     public Value.Result Current { get; set; }
 
