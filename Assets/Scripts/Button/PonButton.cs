@@ -20,6 +20,7 @@ public class PonButton : MonoBehaviour
         notify.AddObserver(messageText);
         logicJyanken = new LogicJyanken();
         enemyHand = new EnemyHand();
+        result = new Result();
     }
 
     // テスト用の依存関係を注入するメソッド

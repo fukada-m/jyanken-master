@@ -1499,9 +1499,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d63edad1e371e84498dc9b55f62e448c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _handButtonsOBJ: {fileID: 0}
+  _handButtonsOBJ: {fileID: 312027801}
   _settingModal: {fileID: 1156275332}
-  _ponButtonOBJ: {fileID: 0}
+  _ponButtonOBJ: {fileID: 726107262}
 --- !u!4 &1233275869
 Transform:
   m_ObjectHideFlags: 0

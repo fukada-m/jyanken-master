@@ -12,7 +12,9 @@ public class GameStarter : MonoBehaviour
     GameObject _settingModal;
     [SerializeField]
     GameObject _ponButtonOBJ;
+    [SerializeField]
     HandButtons _handButtons;
+    [SerializeField]
     PonButton _ponButton;
 
     // テスト用の依存関係を注入するメソッド
