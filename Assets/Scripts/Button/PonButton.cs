@@ -7,6 +7,8 @@ public class PonButton : MonoBehaviour
     GameObject handButtons;
     [SerializeField]
     GameObject ponButton;
+    [SerializeField]
+    GameObject resultbutton;
     IObserver messageText;
     Notify notify;
     ILogicJyanken logicJyanken;
@@ -28,20 +30,22 @@ public class PonButton : MonoBehaviour
     public void Initialize(
         GameObject h1, 
         GameObject p, 
+        GameObject r1,
         Notify n, 
         ILogicJyanken l, 
         IEnemyHand e, 
         IHand h2, 
-        IResult r
+        IResult r2
     )
     {
         handButtons = h1;
         ponButton = p;
+        resultbutton = r1;
         notify = n;
         logicJyanken = l;
         enemyHand = e;
         Hand = h2;
-        result = r;
+        result = r2;
     }
 
     public void OnClickButton()
@@ -51,20 +55,8 @@ public class PonButton : MonoBehaviour
         var hand = Hand.ConvertHandToJapanese(enemyChoseHand);
         notify.SetTextNotify($"相手は{hand}を選びました");
         result.Current = logicJyanken.Judge(Hand.Current, enemyChoseHand);
-        StartCoroutine(DispResult());
-        //ponButton.SetActive(false);
+        ponButton.SetActive(false);
+        resultbutton.SetActive(true);
     }
 
-    // コルーチンのテスト用
-    public void TestDispResult()
-    {
-        StartCoroutine(DispResult());
-    }
-
-    IEnumerator DispResult()
-    {
-        yield return new WaitForSeconds(1f);
-        notify.SetTextNotify($"あなたの{result.ConvertResultToJapanese(result.Current)}");
-        Debug.Log("これでコルーチン終わり");
-    }
 }

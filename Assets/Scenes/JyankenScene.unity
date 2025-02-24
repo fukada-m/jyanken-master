@@ -966,6 +966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handButtons: {fileID: 312027801}
   ponButton: {fileID: 726107262}
+  resultbutton: {fileID: 1993358339}
 --- !u!114 &726107265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3024,7 +3025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1de9caa4866bef5449e8c0875cff5646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resultButtonOBJ: {fileID: 0}
+  resultButtonOBJ: {fileID: 1993358339}
 --- !u!1 &2071010842
 GameObject:
   m_ObjectHideFlags: 0
