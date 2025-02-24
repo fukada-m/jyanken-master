@@ -1638,6 +1638,7 @@ MonoBehaviour:
   _handButtonsOBJ: {fileID: 312027801}
   _settingModal: {fileID: 1156275332}
   _ponButtonOBJ: {fileID: 726107262}
+  _resultButtonOBJ: {fileID: 1993358339}
   _handButtons: {fileID: 312027804}
   _ponButton: {fileID: 726107264}
 --- !u!4 &1233275869
@@ -3023,7 +3024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1de9caa4866bef5449e8c0875cff5646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageTextOBJ: {fileID: 1993358339}
+  resultButtonOBJ: {fileID: 0}
 --- !u!1 &2071010842
 GameObject:
   m_ObjectHideFlags: 0
