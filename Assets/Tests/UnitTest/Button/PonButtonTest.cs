@@ -20,7 +20,7 @@ public class PonButtonTest
     {
         handButtons = new GameObject("HandButtons");
         ponButtonOBJ = new GameObject("PonButton");
-        ponButton = new GameObject().AddComponent<PonButton>();
+        ponButton = ponButtonOBJ.AddComponent<PonButton>();
         mockNotify = new Mock<Notify>();
         mockLogicJyanken = new Mock<ILogicJyanken>();
         mockEnemyHand = new Mock<IEnemyHand>();
