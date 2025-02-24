@@ -6,22 +6,30 @@ using UnityEngine.TestTools;
 
 public class ResultButtonText
 {
+    GameObject resultButtonOBJ;
     ResultButton resultButton;
-    Mock<Notify> mockNotify;
+    Mock<INotify> mockNotify;
+    Mock<IResult> mockResult;
 
     [SetUp]
     public void SetUp()
     {
-        resultButton = new GameObject().AddComponent<ResultButton>();
-        mockNotify = new Mock<Notify>();
-        resultButton.Initialize(mockNotify.Object);
+        resultButtonOBJ = new GameObject("ResultButton");
+        resultButton = resultButtonOBJ.AddComponent<ResultButton>();
+        mockNotify = new Mock<INotify>();
+        mockResult = new Mock<IResult>();
+        mockResult.Setup(m => m.ConvertResultToJapanese(mockResult.Object.Current)).Returns("負け");
+        resultButton.Initialize(resultButtonOBJ, mockNotify.Object, mockResult.Object);
     }
 
     [Test]
     public void OnClickButton_ShowResult()
     {
+        Assert.IsNotNull(resultButton);
         resultButton.OnClickButton();
         // オブザーバーに結果を送る
-
+        mockNotify.Verify(m => m.SetTextNotify("あなたの負けです"));
+        // Resultボタンが非表示になる
+        Assert.IsFalse(resultButtonOBJ.activeSelf);
     }
 }
