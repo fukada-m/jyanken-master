@@ -15,6 +15,8 @@ public class GameStarter : MonoBehaviour
     [SerializeField]
     GameObject _resultButtonOBJ;
     [SerializeField]
+    ResultButton _resultButton;
+    [SerializeField]
     HandButtons _handButtons;
     [SerializeField]
     PonButton _ponButton;
@@ -25,7 +27,8 @@ public class GameStarter : MonoBehaviour
         GameObject h1,
         GameObject s,
         GameObject p1,
-        GameObject r,
+        GameObject r1,
+        ResultButton r2,
         HandButtons h2,
         PonButton p2
      )
@@ -33,7 +36,8 @@ public class GameStarter : MonoBehaviour
         _handButtonsOBJ = h1;
         _settingModal = s;
         _ponButtonOBJ = p1;
-        _resultButtonOBJ = r;
+        _resultButtonOBJ = r1;
+        _resultButton = r2;
         _handButtons = h2;
         _ponButton = p2;
 
@@ -50,6 +54,7 @@ public class GameStarter : MonoBehaviour
     {
         HideObject();
         SetPlayerHand();
+        SetResult();
     }
 
     void HideObject()
@@ -64,5 +69,12 @@ public class GameStarter : MonoBehaviour
         var hand = new Hand();
         _handButtons.Hand = hand;
         _ponButton.Hand = hand;
+    }
+
+    void SetResult()
+    {
+        var result = new Result();
+        _resultButton.Result = result;
+        _ponButton.Result = result;
     }
 }

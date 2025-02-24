@@ -13,6 +13,7 @@ public class GameStarterTest
     GameObject _resultButtonOBJ;
     Mock<HandButtons> _mockHandButtons;
     Mock<PonButton> _mockPonButton;
+    Mock<ResultButton> _mockResultButton;
 
     [SetUp]
     public void GameStarterSetUp()
@@ -24,12 +25,14 @@ public class GameStarterTest
         _resultButtonOBJ = new GameObject("ResultButton");
         _mockHandButtons = new Mock<HandButtons>();
         _mockPonButton = new Mock<PonButton>();
+        _mockResultButton = new Mock<ResultButton>();
 
         _gameStarter.Initialize(
             _handButtonsOBJ, 
             _settingModal, 
             _ponBottonOBJ,
             _resultButtonOBJ,
+            _mockResultButton.Object,
             _mockHandButtons.Object,
             _mockPonButton.Object
          );
@@ -47,5 +50,8 @@ public class GameStarterTest
         // Hand‚ðDIo—ˆ‚Ä‚¢‚é‚©
         _mockHandButtons.VerifySet( m => m.Hand = It.IsAny<Hand>(), Times.Once);
         _mockPonButton.VerifySet(m => m.Hand = It.IsAny<Hand>(), Times.Once);
+        // Result‚ðDIo—ˆ‚Ä‚¢‚é‚©
+        _mockPonButton.VerifySet(m => m.Result = It.IsAny<Result>(), Times.Once);
+        _mockResultButton.VerifySet(m => m.Result = It.IsAny<Result>(), Times.Once);
     }
 }

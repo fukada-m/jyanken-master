@@ -13,8 +13,8 @@ public class PonButton : MonoBehaviour
     Notify notify;
     ILogicJyanken logicJyanken;
     IEnemyHand enemyHand;
-    IResult result;
     public virtual IHand Hand {  get; set; }
+    public virtual IResult Result { get; set; }
 
     void Start()
     {
@@ -23,7 +23,6 @@ public class PonButton : MonoBehaviour
         notify.AddObserver(messageText);
         logicJyanken = new LogicJyanken();
         enemyHand = new EnemyHand();
-        result = new Result();
     }
 
     // テスト用の依存関係を注入するメソッド
@@ -45,7 +44,7 @@ public class PonButton : MonoBehaviour
         logicJyanken = l;
         enemyHand = e;
         Hand = h2;
-        result = r2;
+        Result = r2;
     }
 
     public void OnClickButton()
@@ -54,7 +53,7 @@ public class PonButton : MonoBehaviour
         var enemyChoseHand = enemyHand.PickHand();
         var hand = Hand.ConvertHandToJapanese(enemyChoseHand);
         notify.SetTextNotify($"相手は{hand}を選びました");
-        result.Current = logicJyanken.Judge(Hand.Current, enemyChoseHand);
+        Result.Current = logicJyanken.Judge(Hand.Current, enemyChoseHand);
         ponButton.SetActive(false);
         resultbutton.SetActive(true);
     }
