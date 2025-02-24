@@ -28,7 +28,7 @@ public class ResultButtonText
         Assert.IsNotNull(resultButton);
         resultButton.OnClickButton();
         // オブザーバーに結果を送る
-        mockNotify.Verify(m => m.SetTextNotify("あなたの負けです"));
+        mockNotify.Verify(m => m.SetTextNotify("結果は負けです"));
         // Resultボタンが非表示になる
         Assert.IsFalse(resultButtonOBJ.activeSelf);
     }

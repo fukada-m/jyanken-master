@@ -6,17 +6,17 @@ public class ResultButton : MonoBehaviour
     GameObject resultButtonOBJ;
     IObserver messageText;
     INotify notify;
-    public IResult Result { get; set; }
+    public virtual IResult Result { get; set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         notify = new Notify();
-        resultButtonOBJ = GameObject.Find("ResultButton");
-        messageText = resultButtonOBJ.GetComponent<IObserver>();
+        messageText = GameObject.Find("MessageText").GetComponent<IObserver>();
         notify.AddObserver(messageText);
     }
 
+    //テスト用の依存関係を注入するメソッド
     public void Initialize(GameObject r1, INotify n, IResult r2)
     {
         resultButtonOBJ =  r1;
@@ -26,7 +26,7 @@ public class ResultButton : MonoBehaviour
 
     public void OnClickButton()
     {
-        notify.SetTextNotify($"あなたの{Result.ConvertResultToJapanese(Result.Current)}です");
+        notify.SetTextNotify($"結果は{Result.ConvertResultToJapanese(Result.Current)}です");
         resultButtonOBJ.SetActive(false);
     }
 
