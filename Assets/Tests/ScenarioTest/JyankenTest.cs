@@ -12,7 +12,8 @@ using System.Linq;
 public class JyankenTest
 {
     GameObject handButtonsOBJ;
-    HandButtons handButtons;
+    GameObject ponButtonOBJ;
+    GameObject resultButtonOBJ;
     Transform stoneButtonObj;
     Transform scissorsButtonObj;
     Transform paperButtonObj;
@@ -20,6 +21,7 @@ public class JyankenTest
     Button paperButton;
     Button scissorsButton;
     Button ponButton;
+    Button resultButton;
     TMP_Text text;
 
     Value.Hand Stone = Value.Hand.Stone;
@@ -35,22 +37,19 @@ public class JyankenTest
         //最初非表示のHandButtonsを取得する
         GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
         handButtonsOBJ = objects.FirstOrDefault(o => o.name == "HandButtons");
-        var ponButtonOBJ = objects.FirstOrDefault(o => o.name == "PonButton");
-        Assert.IsNotNull(handButtonsOBJ, "ハンドオブジェクトを作ろう");
-        handButtons = handButtonsOBJ.GetComponent<HandButtons>();
-        Assert.IsNotNull(handButtons, "HandButtonsをアタッチしよう");
-        // HandButtonsは最初非表示になっているから表示する
-        Assert.IsFalse(handButtonsOBJ.activeSelf);
-        handButtonsOBJ.SetActive(true);
+        ponButtonOBJ = objects.FirstOrDefault(o => o.name == "PonButton");
+        resultButtonOBJ = objects.FirstOrDefault(o => o.name == "ResultButton");
+        Assert.IsNotNull(handButtonsOBJ, "ハンドボタンオブジェクトを作ろう");
+        Assert.IsNotNull(ponButtonOBJ, "ポンボタンオブジェクトを作ろう");
+        Assert.IsNotNull(resultButtonOBJ, "リザルトボタンオブジェクトを作ろう");
 
         //HandButtonsの子オブジェクトを確認する
-        Assert.IsTrue(handButtonsOBJ.activeSelf);
         stoneButtonObj = handButtonsOBJ.transform.Find("StoneButton");
-        Assert.IsNotNull(stoneButtonObj, "Handの子オブジェクトにStoneButtonを作ろう");
+        Assert.IsNotNull(stoneButtonObj, "HandButtonの子オブジェクトにStoneButtonを作ろう");
         scissorsButtonObj = handButtonsOBJ.transform.Find("ScissorsButton");
-        Assert.IsNotNull(scissorsButtonObj, "Handの子オブジェクトにScissorsButtonを作ろう");
+        Assert.IsNotNull(scissorsButtonObj, "HandButtonの子オブジェクトにScissorsButtonを作ろう");
         paperButtonObj = handButtonsOBJ.transform.Find("PaperButton");
-        Assert.IsNotNull(paperButtonObj, "Handの子オブジェクトにPaperButtonを作ろう");
+        Assert.IsNotNull(paperButtonObj, "HandButtonの子オブジェクトにPaperButtonを作ろう");
 
         //Buttonが揃っているか確認する
         stoneButton = stoneButtonObj.GetComponent<Button>();
@@ -61,12 +60,14 @@ public class JyankenTest
         Assert.IsNotNull(scissorsButton, "ScissorsButonにButtonコンポーネントをつけよう");
         ponButton = ponButtonOBJ.GetComponent<Button>();
         Assert.IsNotNull(ponButton, "PonButonにButtonコンポーネントをアタッチしよう");
+        resultButton = resultButtonOBJ.GetComponent<Button>();
+        Assert.IsNotNull(resultButton, "ResultButtonにButtonコンポーネントをアタッチしよう");
 
         text = GameObject.Find("MessageText").GetComponent<TMP_Text>();
         Assert.IsNotNull(text, "TMPコンポーネントがアタッチされてない");
         // 最初にスタートボタンを押す
-        var startButton = GameObject.Find("StartButton").GetComponent<StartButton>();
-        startButton.OnClickButton();
+        var startButton = GameObject.Find("StartButton").GetComponent<Button>();
+        startButton.onClick.Invoke();
         Assert.AreEqual("何の手を出すか決めてください", text.text);
 
         // ボタンにメソッドがアタッチしているか確認する
@@ -79,6 +80,13 @@ public class JyankenTest
         Assert.IsTrue(paperButton.onClick.GetPersistentMethodName(0) == "OnClickPaperButton",
             "paperボタンにOnClickPaperButton()を設定しよう"
         );
+        Assert.IsTrue(ponButton.onClick.GetPersistentMethodName(0) == "OnClickButton",
+            "ポンボタンにOnClickButtonを設定しよう"
+        );
+        Assert.IsTrue(resultButton.onClick.GetPersistentMethodName(0) == "OnClickButton",
+            "リザルトボタンにOnClickButtonを設定しよう"
+        );
+        resultButton = resultButtonOBJ.GetComponent<Button>();
 
     }
 
@@ -106,15 +114,27 @@ public class JyankenTest
         yield return null;
     }
 
+    // じゃんけんをするテスト
     [UnityTest]
     public IEnumerator DoJyankenTest()
     {
         yield return null;
+        // プレイヤーはグーを選択
         stoneButton.onClick.Invoke();
+        // ポンボタンが押せるようになる
+        Assert.IsTrue(ponButtonOBJ.activeSelf);
+        // ポンボタンをクリック
         ponButton.onClick.Invoke();
         // HandButtonsは非表示になる。
         Assert.IsFalse(handButtonsOBJ.activeSelf);
+        // リザルトボタンが押せるようになる
+        Assert.IsTrue(resultButtonOBJ.activeSelf);
         // CPUが選んだ手を表示する
+        // 今のCPUはグーしか出さない
+        Assert.AreEqual("相手はグーを選びました", text.text);
+        // リザルトボタンをクリック
+        resultButton.onClick.Invoke();
+        Assert.AreEqual("結果はあいこです", text.text);
 
     }
 }

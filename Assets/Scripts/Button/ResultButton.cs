@@ -11,8 +11,8 @@ public class ResultButton : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        notify = new Notify();
         messageText = GameObject.Find("MessageText").GetComponent<IObserver>();
+        notify = new Notify();
         notify.AddObserver(messageText);
     }
 
@@ -26,6 +26,11 @@ public class ResultButton : MonoBehaviour
 
     public void OnClickButton()
     {
+        // なぜかシナリオテストをするとnotifyがNullになるから処理を追加
+        if (notify == null)
+        {
+            Start();
+        }
         notify.SetTextNotify($"結果は{Result.ConvertResultToJapanese(Result.Current)}です");
         resultButtonOBJ.SetActive(false);
     }
