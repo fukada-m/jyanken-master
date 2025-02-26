@@ -9,7 +9,6 @@ public class IntegPonButtonTest
     GameObject handButtonsOBJ;
     GameObject ponButtonOBJ;
     GameObject resultButtonOBJ;
-    GameObject messageTextOBJ;
     PonButton ponButton;
     IObserver messageText;
     Notify notify;
@@ -28,9 +27,8 @@ public class IntegPonButtonTest
         // 最初はリザルトボタンは非表示
         resultButtonOBJ.SetActive(false);
         ponButton = new GameObject().AddComponent<PonButton>();
-        messageTextOBJ = new GameObject("MessageText");
-        messageText = messageTextOBJ.AddComponent<ObserverText>();
-        text = messageTextOBJ.AddComponent<TextMeshProUGUI>();
+        messageText = new GameObject().AddComponent<ObserverText>();
+        text = new GameObject().AddComponent<TextMeshProUGUI>();
         notify = new Notify();
         messageText.Initialize(text);
         notify.AddObserver(messageText);
