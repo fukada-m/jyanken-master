@@ -18,7 +18,7 @@ public class ResultButtonText
         resultButton = resultButtonOBJ.AddComponent<ResultButton>();
         mockNotify = new Mock<INotify>();
         mockResult = new Mock<IResult>();
-        mockResult.Setup(m => m.ConvertResultToJapanese(mockResult.Object.Current)).Returns("•‰‚¯");
+        mockResult.Setup(m => m.ConvertResultToJapanese()).Returns("•‰‚¯");
         resultButton.Initialize(resultButtonOBJ, mockNotify.Object, mockResult.Object);
     }
 

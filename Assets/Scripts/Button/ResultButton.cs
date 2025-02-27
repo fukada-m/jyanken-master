@@ -31,7 +31,7 @@ public class ResultButton : MonoBehaviour
         {
             Start();
         }
-        notify.SetTextNotify($"Œ‹‰Ê‚Í{Result.ConvertResultToJapanese(Result.Current)}‚Å‚·");
+        notify.SetTextNotify($"Œ‹‰Ê‚Í{Result.ConvertResultToJapanese()}‚Å‚·");
         resultButtonOBJ.SetActive(false);
     }
 

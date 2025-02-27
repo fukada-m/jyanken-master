@@ -4,9 +4,9 @@ public class Result : IResult
 {
     public Value.Result Current { get; set; }
 
-    public string ConvertResultToJapanese(Value.Result r)
+    public string ConvertResultToJapanese()
     {
-        return r switch
+        return Current switch
         {
             Value.Result.WIn => "Ÿ‚¿",
             Value.Result.Lose => "•‰‚¯",

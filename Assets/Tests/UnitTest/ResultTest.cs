@@ -11,13 +11,16 @@ public class ResultTest
     [Test]
     public void ConvertResultToJapanese_Convert()
     {
-        var str = result.ConvertResultToJapanese(Value.Result.WIn);
+        result.Current = Value.Result.WIn;
+        var str = result.ConvertResultToJapanese();
         Assert.AreEqual("Ÿ‚¿", str);
 
-        str = result.ConvertResultToJapanese(Value.Result.Lose);
+        result.Current = Value.Result.Lose;
+        str = result.ConvertResultToJapanese();
         Assert.AreEqual("•‰‚¯", str);
 
-        str = result.ConvertResultToJapanese(Value.Result.Draw);
+        result.Current = Value.Result.Draw;
+        str = result.ConvertResultToJapanese();
         Assert.AreEqual("‚ ‚¢‚±", str);
     }
 
