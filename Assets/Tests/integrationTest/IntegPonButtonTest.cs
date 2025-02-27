@@ -3,6 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using TMPro;
+using System.Collections.Generic;
 
 public class IntegPonButtonTest
 {
@@ -54,10 +55,10 @@ public class IntegPonButtonTest
     [Test]
     public void OnClickButton_EnemyPickHand()
     {
+        var expect = new List<string> { "相手はグーを選びました", "相手はパーを選びました", "相手はチョキを選びました" };
         ponButton.OnClickButton();
         Assert.IsFalse(handButtonsOBJ.activeSelf);
-        // 今のCPUの使用だとグーしか出さない
-        Assert.AreEqual(text.text, "相手はグーを選びました");
+        Assert.That(expect, Contains.Item(text.text));
         Assert.IsFalse(ponButtonOBJ.activeSelf);
         Assert.IsTrue(resultButtonOBJ.activeSelf);
     }

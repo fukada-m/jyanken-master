@@ -17,9 +17,15 @@ public class EnemyHandTest
     [Test]
     public void ChoseHand_enemyChoseHand()
     {
-        var result = enemyHand.PickHand();
-        List<Value.Hand> expectHand = new List<Value.Hand> { Value.Hand.Stone, Value.Hand.Scissors, Value.Hand.Paper };
-        Assert.That(expectHand, Contains.Item(result) );
+        Value.Hand result;
+        var expectHand = new List<Value.Hand> { Value.Hand.Stone, Value.Hand.Scissors, Value.Hand.Paper };
+
+        for (int i = 0; i < 10; i++)
+        {
+            result = enemyHand.PickHand();
+            Assert.That(expectHand, Contains.Item(result));
+            Debug.Log(result);
+        }
     }
 
     

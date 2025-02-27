@@ -8,6 +8,7 @@ using TMPro;
 using System;
 using Moq;
 using System.Linq;
+using System.Collections.Generic;
 
 public class JyankenTest
 {
@@ -23,10 +24,6 @@ public class JyankenTest
     Button ponButton;
     Button resultButton;
     TMP_Text text;
-
-    Value.Hand Stone = Value.Hand.Stone;
-    Value.Hand Paper = Value.Hand.Paper;
-    Value.Hand Scissors = Value.Hand.Scissors;
 
     [UnitySetUp]
     public IEnumerator Setup()
@@ -130,11 +127,11 @@ public class JyankenTest
         // リザルトボタンが押せるようになる
         Assert.IsTrue(resultButtonOBJ.activeSelf);
         // CPUが選んだ手を表示する
-        // 今のCPUはグーしか出さない
-        Assert.AreEqual("相手はグーを選びました", text.text);
+        var expectHand = new List<string> { "相手はグーを選びました", "相手はパーを選びました", "相手はチョキを選びました" };
+        Assert.That(expectHand, Contains.Item(text.text));
         // リザルトボタンをクリック
         resultButton.onClick.Invoke();
-        Assert.AreEqual("結果はあいこです", text.text);
-
+        var expectResult = new List<string> { "結果は勝ちです", "結果はあいこです", "結果は負けです" };
+        Assert.That(expectResult, Contains.Item(text.text));
     }
 }
