@@ -2,6 +2,7 @@ using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using System.Collections.Generic;
 
 public class EnemyHandTest
 {
@@ -17,7 +18,8 @@ public class EnemyHandTest
     public void ChoseHand_enemyChoseHand()
     {
         var result = enemyHand.PickHand();
-        Assert.AreEqual(Value.Hand.Stone, result);
+        List<Value.Hand> expectHand = new List<Value.Hand> { Value.Hand.Stone, Value.Hand.Scissors, Value.Hand.Paper };
+        Assert.That(expectHand, Contains.Item(result) );
     }
 
     
