@@ -12,8 +12,8 @@ public class PonButton : MonoBehaviour
     IObserver messageText;
     Notify notify;
     ILogicJyanken logicJyanken;
-    IEnemyHand enemyHand;
-    public virtual IHand Hand {  get; set; }
+    EnemyHand enemyHand;
+    public virtual Hand Hand {  get; set; }
     public virtual IResult Result { get; set; }
 
     void Start()
@@ -32,8 +32,8 @@ public class PonButton : MonoBehaviour
         GameObject r1,
         Notify n, 
         ILogicJyanken l, 
-        IEnemyHand e, 
-        IHand h2, 
+        EnemyHand e, 
+        Hand h2, 
         IResult r2
     )
     {

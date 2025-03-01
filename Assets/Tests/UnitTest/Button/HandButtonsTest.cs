@@ -10,7 +10,7 @@ public class HandButtonsTest
     GameObject _ponButton;
     Mock<IObserver> _mockObserver;
     Mock<Notify> _mockNotify;
-    Mock<IHand> _mockHand;
+    Mock<Hand> _mockHand;
 
     [SetUp]
     public void HandButtonsTestSetUp()
@@ -18,7 +18,7 @@ public class HandButtonsTest
         _ponButton = new GameObject("PonButton");
         _handButtons = new GameObject().AddComponent<HandButtons>();
         _mockObserver = new Mock<IObserver>();
-        _mockHand = new Mock<IHand>();
+        _mockHand = new Mock<Hand>();
         _mockNotify = new Mock<Notify>();
 
         // テストを行うためにfalseにする

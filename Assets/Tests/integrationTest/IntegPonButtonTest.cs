@@ -15,8 +15,8 @@ public class IntegPonButtonTest
     Notify notify;
     TMP_Text text;
     ILogicJyanken logicJyanken;
-    IEnemyHand enemyHand;
-    IHand hand;
+    EnemyHand enemyHand;
+    Hand hand;
     IResult result;
 
     [SetUp]
@@ -35,7 +35,7 @@ public class IntegPonButtonTest
         notify.AddObserver(messageText);
         logicJyanken = new LogicJyanken();
         enemyHand = new EnemyHand();
-        hand = new Hand();
+        hand = new PlayerHand();
         result = new Result();
 
         ponButton.Initialize(

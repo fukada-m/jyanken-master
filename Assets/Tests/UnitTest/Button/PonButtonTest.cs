@@ -12,8 +12,8 @@ public class PonButtonTest
     PonButton ponButton;
     Mock<Notify> mockNotify;
     Mock<ILogicJyanken> mockLogicJyanken;
-    Mock<IEnemyHand> mockEnemyHand;
-    Mock<IHand> mockHand;
+    Mock<EnemyHand> mockEnemyHand;
+    Mock<Hand> mockHand;
     Mock<IResult> mockResult;
 
     [SetUp]
@@ -27,8 +27,8 @@ public class PonButtonTest
         ponButton = ponButtonOBJ.AddComponent<PonButton>();
         mockNotify = new Mock<Notify>();
         mockLogicJyanken = new Mock<ILogicJyanken>();
-        mockEnemyHand = new Mock<IEnemyHand>();
-        mockHand = new Mock<IHand>();
+        mockEnemyHand = new Mock<EnemyHand>();
+        mockHand = new Mock<Hand>();
         mockResult = new Mock<IResult>();
         mockHand.Setup(m => m.Current).Returns(Value.Hand.Scissors);
         mockHand.Setup(m => m.ConvertHandToJapanese(Value.Hand.Stone)).Returns("ÉOÅ[");

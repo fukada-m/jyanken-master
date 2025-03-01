@@ -3,9 +3,9 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class HandTest
+public class PlayerHandTest
 {
-    Hand _hand = new Hand();
+    Hand _hand = new PlayerHand();
 
     [Test]
     public void ConvertSignToJapanese_Convert()

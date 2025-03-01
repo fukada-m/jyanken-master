@@ -20,7 +20,7 @@ public class IntegHandButtonTest
         _ponButton = new GameObject("PonButton");
         _observerText = new GameObject().AddComponent<ObserverText>();
         _text = new GameObject().AddComponent<TextMeshProUGUI>();
-        _hand = new Hand();
+        _hand = new PlayerHand();
         _notify = new Notify();
         _observerText.Initialize(_text);
         _notify.AddObserver(_observerText);

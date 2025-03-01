@@ -1,15 +1,12 @@
 using UnityEngine;
 
-public class EnemyHand : IEnemyHand
+public class EnemyHand : Hand
 {
-    public Value.Hand Current {  get; set; }
-
     Value.Hand stone = Value.Hand.Stone;
     Value.Hand scissors = Value.Hand.Scissors;
     Value.Hand paper = Value.Hand.Paper;
 
-    // TODO 今のCPUはグーしか出さない
-    public void PickHand()
+    public virtual void PickHand()
     {
         // 0, 1, 2のどれかをランダムに生成する
         int num = Random.Range(0, 3);

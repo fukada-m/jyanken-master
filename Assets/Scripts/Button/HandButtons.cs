@@ -7,7 +7,7 @@ public class HandButtons : MonoBehaviour
     GameObject _ponButton;
     IObserver _messageText;
     Notify _notify;
-    public virtual IHand Hand {  get; set; }
+    public virtual Hand Hand {  get; set; }
 
     void Start()
     {
@@ -17,12 +17,12 @@ public class HandButtons : MonoBehaviour
     }
 
     // テストの依存関係を注入するメソッド
-    public void Initialize(GameObject p, IObserver o, Notify n, IHand s)
+    public void Initialize(GameObject p, IObserver o, Notify n, Hand h)
     {
         _ponButton = p;
         _messageText = o;
         _notify = n;
-        Hand = s;
+        Hand = h;
     }
 
 
@@ -51,7 +51,7 @@ public class HandButtons : MonoBehaviour
         _ponButton.SetActive(true);
     }
 
-    void SetHand(IHand Hand)
+    void SetHand(Hand Hand)
     {
         var text = $"あなたは{Hand.ConvertHandToJapanese(Hand.Current)}を選んでいます";
         _notify.SetTextNotify(text);
