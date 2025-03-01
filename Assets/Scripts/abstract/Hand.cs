@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Hand : IHand
+public abstract class Hand
 {
-    public Value.Hand Current { get; set; }
+    public virtual Value.Hand Current { get; set; }
 
-    public string ConvertHandToJapanese(Value.Hand h)
+    public virtual string ConvertHandToJapanese(Value.Hand h)
     {
         return h switch
         {
