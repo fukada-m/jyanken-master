@@ -13,18 +13,25 @@ public class EnemyHandTest
     {
         enemyHand = new EnemyHand();
     }
+
+    [Test]
+    public void SetAndGetTest()
+    {
+        enemyHand.Current = Value.Hand.Stone;
+        Assert.AreEqual(Value.Hand.Stone, enemyHand.Current);
+
+    }
     // A Test behaves as an ordinary method
     [Test]
     public void ChoseHand_enemyChoseHand()
     {
-        Value.Hand result;
         var expectHand = new List<Value.Hand> { Value.Hand.Stone, Value.Hand.Scissors, Value.Hand.Paper };
 
         for (int i = 0; i < 10; i++)
         {
-            result = enemyHand.PickHand();
-            Assert.That(expectHand, Contains.Item(result));
-            Debug.Log(result);
+            enemyHand.PickHand();
+            Assert.That(expectHand, Contains.Item(enemyHand.Current));
+            Debug.Log(enemyHand.Current);
         }
     }
 

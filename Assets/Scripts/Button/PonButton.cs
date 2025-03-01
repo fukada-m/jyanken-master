@@ -50,10 +50,10 @@ public class PonButton : MonoBehaviour
     public void OnClickButton()
     {
         handButtons.SetActive(false);
-        var enemyChoseHand = enemyHand.PickHand();
-        var hand = Hand.ConvertHandToJapanese(enemyChoseHand);
+        enemyHand.PickHand();
+        var hand = Hand.ConvertHandToJapanese(enemyHand.Current);
         notify.SetTextNotify($"‘ŠŽè‚Í{hand}‚ð‘I‚Ñ‚Ü‚µ‚½");
-        Result.Current = logicJyanken.Judge(Hand.Current, enemyChoseHand);
+        Result.Current = logicJyanken.Judge(Hand.Current, enemyHand.Current);
         ponButton.SetActive(false);
         resultbutton.SetActive(true);
     }

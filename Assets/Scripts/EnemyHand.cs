@@ -2,21 +2,28 @@ using UnityEngine;
 
 public class EnemyHand : IEnemyHand
 {
+    public Value.Hand Current {  get; set; }
+
     Value.Hand stone = Value.Hand.Stone;
     Value.Hand scissors = Value.Hand.Scissors;
     Value.Hand paper = Value.Hand.Paper;
 
     // TODO 今のCPUはグーしか出さない
-    public Value.Hand PickHand()
+    public void PickHand()
     {
-        // 0, 1, 2のどれか
+        // 0, 1, 2のどれかをランダムに生成する
         int num = Random.Range(0, 3);
-        return num switch
+
+        switch(num)
         {
-            0 => stone,
-            1 => scissors,
-            2 => paper,
-            _=> Value.Hand.Error //デフォルトケース
+            case 0:
+                Current = stone; break;
+            case 1:
+                Current = scissors; break;
+            case 2:
+                Current = paper; break;
+            default:
+                Current = Value.Hand.Error; break;
         };
     }
 }

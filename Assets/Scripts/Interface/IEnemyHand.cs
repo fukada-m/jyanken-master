@@ -2,5 +2,6 @@ using UnityEngine;
 
 public interface IEnemyHand
 {
-    Value.Hand PickHand();
+    Value.Hand Current {  get; set; }
+    void PickHand();
 }
