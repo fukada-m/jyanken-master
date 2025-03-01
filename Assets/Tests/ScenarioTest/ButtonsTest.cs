@@ -11,13 +11,13 @@ public class ButtonsTest
 {
     GameObject _menuButtonsObj;
     GameObject _startButtonObj;
-    StartButton _startButton;
+    Button _startButton;
     GameObject _optionButtonObj;
-    OptionButton _optionButton;
+    Button _optionButton;
     GameObject _handButtons;
     GameObject _settingModal;
     GameObject _returnButtonObj;
-    ReturnButton _returnButton;
+    Button _returnButton;
     GameObject _messageText;
     IObserver _observerText;
 
@@ -46,16 +46,16 @@ public class ButtonsTest
 
         _returnButtonObj = objects.FirstOrDefault(o => o.name == "ReturnButton");
         Assert.IsNotNull(_returnButtonObj);
-        _returnButton = _returnButtonObj.GetComponent<ReturnButton>();
+        _returnButton = _returnButtonObj.GetComponent<Button>();
         Assert.IsNotNull(_returnButton);
-        Assert.IsTrue(CheckOnclickButton(_returnButtonObj));
+        Assert.IsTrue(CheckOnclickButton(_returnButton));
 
 
         _optionButtonObj = GameObject.Find("OptionButton");
         Assert.IsNotNull(_optionButtonObj);
-        _optionButton = _optionButtonObj.GetComponent<OptionButton>();
+        _optionButton = _optionButtonObj.GetComponent<Button>();
         Assert.IsNotNull(_optionButton);
-        Assert.IsTrue(CheckOnclickButton(_optionButtonObj));
+        Assert.IsTrue(CheckOnclickButton(_optionButton));
 
         // 初期状態ではMenuButtonsは表示、設定モーダルは非表示
         Assert.IsTrue(_menuButtonsObj.activeSelf);
@@ -63,14 +63,14 @@ public class ButtonsTest
 
         // オプションボタンをクリックすると設定モーダルと戻るボタンが表示され、
         // MenuButtonsとMessageTextは非表示になる
-        _optionButton.OnClickButton();
+        _optionButton.onClick.Invoke();
         Assert.IsTrue(_settingModal.activeSelf);
         Assert.IsFalse(_menuButtonsObj.activeSelf);
         Assert.IsFalse(_messageText.activeSelf);
 
         // 戻るボタンをクリックすると再び設定モーダルは非表示になり、
         // MenuButtonsとMessageTextが表示される
-        _returnButton.OnClickButton();
+        _returnButton.onClick.Invoke();
         Assert.IsFalse(_settingModal.activeSelf);
         Assert.IsTrue(_menuButtonsObj.activeSelf);
         Assert.IsTrue(_messageText.activeSelf);
@@ -87,13 +87,13 @@ public class ButtonsTest
         Assert.IsFalse(_handButtons.activeSelf);
         _startButtonObj = GameObject.Find("StartButton");
         Assert.IsNotNull(_startButtonObj);
-        _startButton = _startButtonObj.GetComponent<StartButton>();
+        _startButton = _startButtonObj.GetComponent<Button>();
         Assert.IsNotNull(_startButton);
-        Assert.IsTrue(CheckOnclickButton(_startButtonObj));
+        Assert.IsTrue(CheckOnclickButton(_startButton));
         // スタートボタンをクリックするとメッセージが表示される
         // HandButtonsが表示される
         // MenuButtonsは非表示になる。
-        _startButton.OnClickButton();
+        _startButton.onClick.Invoke();
         _observerText = GameObject.Find("MessageText").GetComponent<IObserver>();
         Assert.AreEqual(_observerText.GetText(), "何の手を出すか決めてください");
         Assert.IsTrue(_handButtons.activeSelf);
@@ -101,11 +101,9 @@ public class ButtonsTest
 
     }
 
-    // 送られてきたGameObjectのボタンコンポーネントに、
-    // OnClickButtonがセットされているか確認する
-    bool CheckOnclickButton(GameObject g)
+    // 送られてきたButtonに、OnClickButtonがセットされているか確認する
+    bool CheckOnclickButton(Button b)
     {
-        var button = g.GetComponent<Button>();
-        return (button.onClick.GetPersistentMethodName(0) == "OnClickButton");
+        return (b.onClick.GetPersistentMethodName(0) == "OnClickButton");
     }
 }
