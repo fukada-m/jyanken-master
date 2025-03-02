@@ -9,7 +9,7 @@ public class IntegHandButtonTest
     GameObject _ponButton;
     HandButtons _handButtons;
     Notify _notify;
-    Hand _hand;
+    PlayerHand _playerHand;
     IObserver _observerText;
     TMP_Text _text;
 
@@ -20,11 +20,11 @@ public class IntegHandButtonTest
         _ponButton = new GameObject("PonButton");
         _observerText = new GameObject().AddComponent<ObserverText>();
         _text = new GameObject().AddComponent<TextMeshProUGUI>();
-        _hand = new PlayerHand();
+        _playerHand = new PlayerHand();
         _notify = new Notify();
         _observerText.Initialize(_text);
         _notify.AddObserver(_observerText);
-        _handButtons.Initialize(_ponButton, _observerText, _notify, _hand);
+        _handButtons.Initialize(_ponButton, _observerText, _notify, _playerHand);
     }
 
     [Test]

@@ -7,7 +7,7 @@ public class HandButtons : MonoBehaviour
     GameObject _ponButton;
     IObserver _messageText;
     Notify _notify;
-    public virtual Hand Hand {  get; set; }
+    public virtual PlayerHand PlayerHand {  get; set; }
 
     void Start()
     {
@@ -17,12 +17,12 @@ public class HandButtons : MonoBehaviour
     }
 
     // テストの依存関係を注入するメソッド
-    public void Initialize(GameObject p, IObserver o, Notify n, Hand h)
+    public void Initialize(GameObject p, IObserver o, Notify n, PlayerHand ph)
     {
         _ponButton = p;
         _messageText = o;
         _notify = n;
-        Hand = h;
+        PlayerHand = ph;
     }
 
 
@@ -30,30 +30,30 @@ public class HandButtons : MonoBehaviour
     // プレイヤーがグーを選んだ
     public void OnClickStoneButton()
     {
-        Hand.Current = Value.Hand.Stone;
-        SetHand(Hand);
+        PlayerHand.Current = Value.Hand.Stone;
+        SetHand();
         _ponButton.SetActive(true);
     }
 
     // プレイヤーがパーを選んだ
     public void OnClickPaperButton()
     {
-        Hand.Current = Value.Hand.Paper;
-        SetHand(Hand);
+        PlayerHand.Current = Value.Hand.Paper;
+        SetHand();
         _ponButton.SetActive(true);
     }
 
     // プレイヤーがチョキを選んだ
     public void OnClickScissorsButton()
     {
-        Hand.Current = Value.Hand.Scissors;
-        SetHand(Hand);
+        PlayerHand.Current = Value.Hand.Scissors;
+        SetHand();
         _ponButton.SetActive(true);
     }
 
-    void SetHand(Hand Hand)
+    void SetHand()
     {
-        var text = $"あなたは{Hand.ConvertHandToJapanese(Hand.Current)}を選んでいます";
+        var text = $"あなたは{PlayerHand.ConvertHandToJapanese(PlayerHand.Current)}を選んでいます";
         _notify.SetTextNotify(text);
     }
 }

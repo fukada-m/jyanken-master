@@ -67,7 +67,7 @@ public class GameStarter : MonoBehaviour
     void SetPlayerHand()
     {
         var hand = new PlayerHand();
-        _handButtons.Hand = hand;
+        _handButtons.PlayerHand = hand;
         _ponButton.Hand = hand;
     }
 
