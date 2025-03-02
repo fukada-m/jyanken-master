@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PonButton : MonoBehaviour
 {
+    public virtual Hand Hand {  get; set; }
+    public virtual IResult Result { get; set; }
     [SerializeField]
     GameObject handButtons;
     [SerializeField]
@@ -13,8 +15,6 @@ public class PonButton : MonoBehaviour
     Notify notify;
     ILogicJyanken logicJyanken;
     EnemyHand enemyHand;
-    public virtual Hand Hand {  get; set; }
-    public virtual IResult Result { get; set; }
 
     void Start()
     {
