@@ -7,20 +7,20 @@ public class OptionButton : MonoBehaviour
     [SerializeField]
     GameObject menuButtons;
     [SerializeField]
-    GameObject massageText;
+    GameObject messageText;
 
     // テスト用の依存関係を注入するメソッド
     public void Initialize(GameObject s, GameObject m1, GameObject m2)
     {
         settingModal = s;
         menuButtons = m1;
-        massageText = m2;
+        messageText = m2;
     }
 
     public void OnClickButton()
     {
         settingModal.SetActive(true);
         menuButtons.SetActive(false);
-        massageText.SetActive(false);
+        messageText.SetActive(false);
     }
 }
