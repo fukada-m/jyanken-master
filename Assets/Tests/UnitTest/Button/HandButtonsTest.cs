@@ -30,7 +30,7 @@ public class HandButtonsTest
     [Test]
     public void OnClickStoneButton_SetsHandToStone()
     {
-        _mockHand.Setup(m => m.ConvertHandToJapanese(_mockHand.Object.Current)).Returns("グー");
+        _mockHand.Setup(m => m.ConvertHandToJapanese()).Returns("グー");
         var text = "あなたはグーを選んでいます";
         _handButtons.OnClickStoneButton();
         _mockHand.VerifySet(m => m.Current = Value.Hand.Stone, Times.Once);
@@ -41,7 +41,7 @@ public class HandButtonsTest
     [Test]
     public void OnClickPaperButton_SetsHandToPaper()
     {
-        _mockHand.Setup(m => m.ConvertHandToJapanese(_mockHand.Object.Current)).Returns("パー");
+        _mockHand.Setup(m => m.ConvertHandToJapanese()).Returns("パー");
         var text = "あなたはパーを選んでいます";
         _handButtons.OnClickPaperButton();
         _mockHand.VerifySet(m => m.Current = Value.Hand.Paper, Times.Once);
@@ -52,7 +52,7 @@ public class HandButtonsTest
     [Test]
     public void OnClickScissorsButton_SetsHandToScissors()
     {
-        _mockHand.Setup(m => m.ConvertHandToJapanese(_mockHand.Object.Current)).Returns("チョキ");
+        _mockHand.Setup(m => m.ConvertHandToJapanese()).Returns("チョキ");
         var text = "あなたはチョキを選んでいます";
         _handButtons.OnClickScissorsButton();
         _mockHand.VerifySet(m => m.Current = Value.Hand.Scissors, Times.Once);

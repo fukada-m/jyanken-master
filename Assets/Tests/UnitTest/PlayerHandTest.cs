@@ -10,13 +10,16 @@ public class PlayerHandTest
     [Test]
     public void ConvertSignToJapanese_Convert()
     {
-        var result = _hand.ConvertHandToJapanese(Value.Hand.Stone);
+        _hand.Current = Value.Hand.Stone;
+        var result = _hand.ConvertHandToJapanese();
         Assert.AreEqual("グー", result);
 
-        result = _hand.ConvertHandToJapanese(Value.Hand.Scissors);
+        _hand.Current = Value.Hand.Scissors;
+        result = _hand.ConvertHandToJapanese();
         Assert.AreEqual("チョキ", result);
 
-        result = _hand.ConvertHandToJapanese(Value.Hand.Paper);
+        _hand.Current = Value.Hand.Paper;
+        result = _hand.ConvertHandToJapanese();
         Assert.AreEqual("パー", result);
     }
 

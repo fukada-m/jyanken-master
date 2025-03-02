@@ -53,7 +53,7 @@ public class HandButtons : MonoBehaviour
 
     void SetHand()
     {
-        var text = $"‚ ‚È‚½‚Í{PlayerHand.ConvertHandToJapanese(PlayerHand.Current)}‚ð‘I‚ñ‚Å‚¢‚Ü‚·";
+        var text = $"‚ ‚È‚½‚Í{PlayerHand.ConvertHandToJapanese()}‚ð‘I‚ñ‚Å‚¢‚Ü‚·";
         _notify.SetTextNotify(text);
     }
 }

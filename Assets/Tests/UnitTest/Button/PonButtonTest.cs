@@ -31,7 +31,7 @@ public class PonButtonTest
         mockHand = new Mock<Hand>();
         mockResult = new Mock<IResult>();
         mockHand.Setup(m => m.Current).Returns(Value.Hand.Scissors);
-        mockHand.Setup(m => m.ConvertHandToJapanese(Value.Hand.Stone)).Returns("グー");
+        mockHand.Setup(m => m.ConvertHandToJapanese()).Returns("グー");
         mockEnemyHand.Setup(m => m.Current).Returns(Value.Hand.Stone);
         ponButton.Initialize(
             handButtons,
@@ -54,7 +54,7 @@ public class PonButtonTest
         // CPUが出す手を決める
         mockEnemyHand.Verify(e => e.PickHand(), Times.Once);
         // CPUが出した手を変換する
-        mockHand.Verify(m => m.ConvertHandToJapanese(mockEnemyHand.Object.Current), Times.Once);
+        mockHand.Verify(m => m.ConvertHandToJapanese(), Times.Once);
         // オブザーバーに通知を送る
         mockNotify.Verify(m => m.SetTextNotify("相手はグーを選びました"), Times.Once);
         // じゃんけんの勝敗判定処理が呼ばれる

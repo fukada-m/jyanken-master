@@ -4,9 +4,9 @@ public abstract class Hand
 {
     public virtual Value.Hand Current { get; set; }
 
-    public virtual string ConvertHandToJapanese(Value.Hand h)
+    public virtual string ConvertHandToJapanese()
     {
-        return h switch
+        return Current switch
         {
             Value.Hand.Stone => "グー",
             Value.Hand.Scissors => "チョキ",
