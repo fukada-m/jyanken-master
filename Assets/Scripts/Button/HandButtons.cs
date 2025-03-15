@@ -25,8 +25,6 @@ public class HandButtons : MonoBehaviour
         PlayerHand = ph;
     }
 
-
-
     // プレイヤーがグーを選んだ
     public void OnClickStoneButton()
     {
