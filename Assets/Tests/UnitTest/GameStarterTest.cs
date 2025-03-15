@@ -11,6 +11,7 @@ public class GameStarterTest
     GameObject _settingModal;
     GameObject _ponBottonOBJ;
     GameObject _resultButtonOBJ;
+    GameObject _endButtonOBJ;
     Mock<HandButtons> _mockHandButtons;
     Mock<PonButton> _mockPonButton;
     Mock<ResultButton> _mockResultButton;
@@ -23,6 +24,7 @@ public class GameStarterTest
         _settingModal = new GameObject("SettingModal");
         _ponBottonOBJ = new GameObject("PonButton");
         _resultButtonOBJ = new GameObject("ResultButton");
+        _endButtonOBJ = new GameObject("endButton");
         _mockHandButtons = new Mock<HandButtons>();
         _mockPonButton = new Mock<PonButton>();
         _mockResultButton = new Mock<ResultButton>();
@@ -32,6 +34,7 @@ public class GameStarterTest
             _settingModal, 
             _ponBottonOBJ,
             _resultButtonOBJ,
+            _endButtonOBJ,
             _mockResultButton.Object,
             _mockHandButtons.Object,
             _mockPonButton.Object
@@ -47,6 +50,7 @@ public class GameStarterTest
         Assert.IsFalse(_settingModal.activeSelf);
         Assert.IsFalse(_ponBottonOBJ.activeSelf);
         Assert.IsFalse(_resultButtonOBJ.activeSelf );
+        Assert.IsFalse(_endButtonOBJ.activeSelf );
         // Hand‚ðDIo—ˆ‚Ä‚¢‚é‚©
         _mockHandButtons.VerifySet( m => m.PlayerHand = It.IsAny<PlayerHand>(), Times.Once);
         _mockPonButton.VerifySet(m => m.Hand = It.IsAny<Hand>(), Times.Once);

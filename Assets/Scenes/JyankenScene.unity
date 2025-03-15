@@ -1776,6 +1776,7 @@ MonoBehaviour:
   _settingModal: {fileID: 1156275332}
   _ponButtonOBJ: {fileID: 726107262}
   _resultButtonOBJ: {fileID: 1993358339}
+  _endButtonOBJ: {fileID: 1889796521}
   _resultButton: {fileID: 1993358344}
   _handButtons: {fileID: 312027804}
   _ponButton: {fileID: 726107264}
