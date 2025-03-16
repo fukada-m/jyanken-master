@@ -9,6 +9,7 @@ public class IntegResultButton
     ResultButton resultButton;
     GameObject resultButtonOBJ;
     GameObject endButtonOBJ;
+    GameObject winCountTextOBJ;
     IObserver messageText;
     INotify notify;
     IResult result;
@@ -19,12 +20,15 @@ public class IntegResultButton
     {
         resultButtonOBJ = new GameObject("ResultButton");
         endButtonOBJ = new GameObject("EndButton");
+        winCountTextOBJ = new GameObject("WinCountText");
+        // ç≈èâÇÕWinCountTextÇÕîÒï\é¶
+        winCountTextOBJ.SetActive(false);
         resultButton = resultButtonOBJ.AddComponent<ResultButton>();
         messageText = new GameObject().AddComponent<ObserverText>();
         notify = new Notify();
         result = new Result();
         text = new GameObject().AddComponent<TextMeshProUGUI>();
-        resultButton.Initialize(resultButtonOBJ, endButtonOBJ, notify, result);
+        resultButton.Initialize(resultButtonOBJ, endButtonOBJ,winCountTextOBJ, notify, result);
         messageText.Initialize(text);
         notify.AddObserver(messageText);
     }
@@ -36,6 +40,7 @@ public class IntegResultButton
         result.Current = Value.Result.WIn;
         Assert.AreEqual(text.text, "åãâ ÇÕèüÇøÇ≈Ç∑");
         Assert.IsFalse(resultButtonOBJ.activeSelf);
+        Assert.IsTrue(winCountTextOBJ.activeSelf);
     }
 
 }

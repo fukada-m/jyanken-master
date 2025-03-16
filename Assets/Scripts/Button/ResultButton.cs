@@ -6,6 +6,8 @@ public class ResultButton : MonoBehaviour
     GameObject resultButtonOBJ;
     [SerializeField]
     GameObject endButtonOBJ;
+    [SerializeField]
+    GameObject winCountTextOBJ;
     IObserver messageText;
     INotify notify;
     public virtual IResult Result { get; set; }
@@ -19,10 +21,17 @@ public class ResultButton : MonoBehaviour
     }
 
     //テスト用の依存関係を注入するメソッド
-    public void Initialize(GameObject r1,GameObject e, INotify n, IResult r2)
+    public void Initialize(
+        GameObject r1,
+        GameObject e,
+        GameObject w,
+        INotify n,
+        IResult r2
+    )
     {
         resultButtonOBJ =  r1;
         endButtonOBJ = e;
+        winCountTextOBJ = w;
         notify = n;
         Result = r2;
     }
@@ -37,6 +46,7 @@ public class ResultButton : MonoBehaviour
         notify.SetTextNotify($"結果は{Result.ConvertResultToJapanese()}です");
         resultButtonOBJ.SetActive(false);
         endButtonOBJ.SetActive(true);
+        winCountTextOBJ.SetActive(true);
     }
 
 }
