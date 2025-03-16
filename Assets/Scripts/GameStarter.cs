@@ -17,6 +17,8 @@ public class GameStarter : MonoBehaviour
     [SerializeField]
     GameObject _endButtonOBJ;
     [SerializeField]
+    GameObject _winCountTextOBJ;
+    [SerializeField]
     ResultButton _resultButton;
     [SerializeField]
     HandButtons _handButtons;
@@ -31,6 +33,7 @@ public class GameStarter : MonoBehaviour
         GameObject p1,
         GameObject r1,
         GameObject e,
+        GameObject w,
         ResultButton r2,
         HandButtons h2,
         PonButton p2
@@ -41,6 +44,7 @@ public class GameStarter : MonoBehaviour
         _ponButtonOBJ = p1;
         _resultButtonOBJ = r1;
         _endButtonOBJ = e;
+        _winCountTextOBJ = w;
         _resultButton = r2;
         _handButtons = h2;
         _ponButton = p2;
@@ -68,6 +72,7 @@ public class GameStarter : MonoBehaviour
         _ponButtonOBJ.SetActive(false);
         _resultButtonOBJ.SetActive(false);
         _endButtonOBJ.SetActive(false) ;
+        _winCountTextOBJ.SetActive(false);
     }
     void SetPlayerHand()
     {

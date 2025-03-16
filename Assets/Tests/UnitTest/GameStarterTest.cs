@@ -12,6 +12,7 @@ public class GameStarterTest
     GameObject _ponBottonOBJ;
     GameObject _resultButtonOBJ;
     GameObject _endButtonOBJ;
+    GameObject _winCountTextOBJ;
     Mock<HandButtons> _mockHandButtons;
     Mock<PonButton> _mockPonButton;
     Mock<ResultButton> _mockResultButton;
@@ -24,7 +25,8 @@ public class GameStarterTest
         _settingModal = new GameObject("SettingModal");
         _ponBottonOBJ = new GameObject("PonButton");
         _resultButtonOBJ = new GameObject("ResultButton");
-        _endButtonOBJ = new GameObject("endButton");
+        _endButtonOBJ = new GameObject("EndButton");
+        _winCountTextOBJ = new GameObject("WinCountText");
         _mockHandButtons = new Mock<HandButtons>();
         _mockPonButton = new Mock<PonButton>();
         _mockResultButton = new Mock<ResultButton>();
@@ -35,6 +37,7 @@ public class GameStarterTest
             _ponBottonOBJ,
             _resultButtonOBJ,
             _endButtonOBJ,
+            _winCountTextOBJ,
             _mockResultButton.Object,
             _mockHandButtons.Object,
             _mockPonButton.Object
@@ -51,9 +54,14 @@ public class GameStarterTest
         Assert.IsFalse(_ponBottonOBJ.activeSelf);
         Assert.IsFalse(_resultButtonOBJ.activeSelf );
         Assert.IsFalse(_endButtonOBJ.activeSelf );
+
+        // 連勝数は最初は非表示になっているか
+        Assert.IsFalse(_winCountTextOBJ.activeSelf);
+
         // HandをDI出来ているか
         _mockHandButtons.VerifySet( m => m.PlayerHand = It.IsAny<PlayerHand>(), Times.Once);
         _mockPonButton.VerifySet(m => m.Hand = It.IsAny<Hand>(), Times.Once);
+        
         // ResultをDI出来ているか
         _mockPonButton.VerifySet(m => m.Result = It.IsAny<Result>(), Times.Once);
         _mockResultButton.VerifySet(m => m.Result = It.IsAny<Result>(), Times.Once);
