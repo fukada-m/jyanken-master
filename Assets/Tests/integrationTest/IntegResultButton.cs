@@ -11,9 +11,12 @@ public class IntegResultButton
     GameObject endButtonOBJ;
     GameObject winCountTextOBJ;
     IObserver messageText;
-    INotify notify;
+    IObserver winCountText;
+    INotify messageNotify;
+    INotify winCountNotify;
     IResult result;
-    TMP_Text text;
+    TMP_Text text1;
+    TMP_Text text2;
 
     [SetUp]
     public void SetUp()
@@ -25,12 +28,17 @@ public class IntegResultButton
         winCountTextOBJ.SetActive(false);
         resultButton = resultButtonOBJ.AddComponent<ResultButton>();
         messageText = new GameObject().AddComponent<ObserverText>();
-        notify = new Notify();
+        winCountText = new GameObject().AddComponent<ObserverText>();
+        messageNotify = new Notify();
+        winCountNotify = new Notify();
         result = new Result();
-        text = new GameObject().AddComponent<TextMeshProUGUI>();
-        resultButton.Initialize(resultButtonOBJ, endButtonOBJ,winCountTextOBJ, notify, result);
-        messageText.Initialize(text);
-        notify.AddObserver(messageText);
+        text1 = new GameObject().AddComponent<TextMeshProUGUI>();
+        text2 = new GameObject().AddComponent<TextMeshProUGUI>();
+        resultButton.Initialize(resultButtonOBJ, endButtonOBJ,winCountTextOBJ, messageNotify, winCountNotify, result);
+        messageText.Initialize(text1);
+        winCountText.Initialize(text2);
+        messageNotify.AddObserver(messageText);
+        winCountNotify.AddObserver(winCountText);
     }
 
     [Test]
@@ -38,7 +46,8 @@ public class IntegResultButton
     {
         resultButton.OnClickButton();
         result.Current = Value.Result.WIn;
-        Assert.AreEqual(text.text, "åãâ ÇÕèüÇøÇ≈Ç∑");
+        Assert.AreEqual(text1.text, "åãâ ÇÕèüÇøÇ≈Ç∑");
+        Assert.AreEqual(text2.text, "òAèüêîÅF1");
         Assert.IsFalse(resultButtonOBJ.activeSelf);
         Assert.IsTrue(winCountTextOBJ.activeSelf);
     }
