@@ -15,10 +15,6 @@ public class ResultButton : MonoBehaviour
     int winCount = 0;
     public virtual IResult Result { get; set; }
 
-    //void Awake()
-    //{
-    //    winCountText = GameObject.Find("WinCountText").GetComponent<ObserverText>();
-    //}
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
