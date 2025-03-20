@@ -13,6 +13,7 @@ public class GameStarterTest
     GameObject _resultButtonOBJ;
     GameObject _endButtonOBJ;
     GameObject _winCountTextOBJ;
+    GameObject _againButtonOBJ;
     Mock<HandButtons> _mockHandButtons;
     Mock<PonButton> _mockPonButton;
     Mock<ResultButton> _mockResultButton;
@@ -27,6 +28,7 @@ public class GameStarterTest
         _resultButtonOBJ = new GameObject("ResultButton");
         _endButtonOBJ = new GameObject("EndButton");
         _winCountTextOBJ = new GameObject("WinCountText");
+        _againButtonOBJ = new GameObject("AgainButton");
         _mockHandButtons = new Mock<HandButtons>();
         _mockPonButton = new Mock<PonButton>();
         _mockResultButton = new Mock<ResultButton>();
@@ -38,6 +40,7 @@ public class GameStarterTest
             _resultButtonOBJ,
             _endButtonOBJ,
             _winCountTextOBJ,
+            _againButtonOBJ,
             _mockResultButton.Object,
             _mockHandButtons.Object,
             _mockPonButton.Object
@@ -54,6 +57,7 @@ public class GameStarterTest
         Assert.IsFalse(_ponBottonOBJ.activeSelf);
         Assert.IsFalse(_resultButtonOBJ.activeSelf );
         Assert.IsFalse(_endButtonOBJ.activeSelf );
+        Assert.IsFalse(_againButtonOBJ.activeSelf ) ;
 
         // òAèüêîÇÕç≈èâÇÕîÒï\é¶Ç…Ç»Ç¡ÇƒÇ¢ÇÈÇ©
         Assert.IsFalse(_winCountTextOBJ.activeSelf);
