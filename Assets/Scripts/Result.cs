@@ -8,7 +8,7 @@ public class Result : IResult
     {
         return Current switch
         {
-            Value.Result.WIn => "勝ち",
+            Value.Result.Win => "勝ち",
             Value.Result.Lose => "負け",
             Value.Result.Draw => "あいこ",
             _ => "エラー"  // デフォルトケース

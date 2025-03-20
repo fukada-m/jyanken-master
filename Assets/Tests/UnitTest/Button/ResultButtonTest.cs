@@ -30,14 +30,32 @@ public class ResultButtonTest
         mockMessageNotify = new Mock<INotify>();
         mockWinCountNotify = new Mock<INotify>();
         mockResult = new Mock<IResult>();
-        mockResult.Setup(m => m.Current).Returns(Value.Result.Lose);
-        mockResult.Setup(m => m.ConvertResultToJapanese()).Returns("負け");
         resultButton.Initialize(resultButtonOBJ, endButtonOBJ, winCountTextOBJ, againButtonOBJ, mockMessageNotify.Object, mockWinCountNotify.Object, mockResult.Object);
     }
 
     [Test]
-    public void OnClickButton_ShowResult()
+    public void OnClickButton_ShowResult_Win()
     {
+        mockResult.Setup(m => m.Current).Returns(Value.Result.Win);
+        mockResult.Setup(m => m.ConvertResultToJapanese()).Returns("勝ち");
+        Assert.IsNotNull(resultButton);
+        resultButton.OnClickButton();
+        // オブザーバーに結果を送る
+        mockMessageNotify.Verify(m => m.SetTextNotify("結果は負けです"));
+        mockWinCountNotify.Verify(m => m.SetTextNotify("連勝数：0"));
+        // Resultボタンが非表示になる
+        Assert.IsFalse(resultButtonOBJ.activeSelf);
+        // WinCountが表示される
+        Assert.IsTrue(winCountTextOBJ.activeSelf);
+        // Endボタンが表示される
+        Assert.IsTrue(endButtonOBJ.activeSelf);
+        // Againボタンが表示される
+        Assert.IsTrue(againButtonOBJ.activeSelf);
+    }
+    public void OnClickButton_ShowResult_Lose()
+    {
+        mockResult.Setup(m => m.Current).Returns(Value.Result.Lose);
+        mockResult.Setup(m => m.ConvertResultToJapanese()).Returns("負け");
         Assert.IsNotNull(resultButton);
         resultButton.OnClickButton();
         // オブザーバーに結果を送る

@@ -11,7 +11,7 @@ public class Value
     }
     public enum Result
     {
-        WIn,
+        Win,
         Lose,
         Draw,
         Error

@@ -12,9 +12,9 @@ public class LogicJyanken : ILogicJyanken
         if (myself == enemy) return Value.Result.Draw;
 
         // 勝つときのロジック
-        if (myself == paper && enemy == stone) return Value.Result.WIn;
-        if (myself == stone && enemy == scissors) return Value.Result.WIn;
-        if (myself == scissors && enemy == paper) return Value.Result.WIn;
+        if (myself == paper && enemy == stone) return Value.Result.Win;
+        if (myself == stone && enemy == scissors) return Value.Result.Win;
+        if (myself == scissors && enemy == paper) return Value.Result.Win;
 
         // 負けるときのロジック
         if (myself == scissors && enemy == stone) return Value.Result.Lose;
