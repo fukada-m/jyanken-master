@@ -8,6 +8,8 @@ public class ResultButton : MonoBehaviour
     GameObject endButtonOBJ;
     [SerializeField]
     GameObject winCountTextOBJ;
+    [SerializeField]
+    GameObject againButtonOBJ;
     IObserver messageText;
     IObserver winCountText;
     INotify messageNotify;
@@ -36,6 +38,7 @@ public class ResultButton : MonoBehaviour
         GameObject r1,
         GameObject e,
         GameObject w,
+        GameObject a,
         INotify n1,
         INotify n2,
         IResult r2
@@ -44,6 +47,7 @@ public class ResultButton : MonoBehaviour
         resultButtonOBJ =  r1;
         endButtonOBJ = e;
         winCountTextOBJ = w;
+        againButtonOBJ = a;
         messageNotify = n1;
         winCountNotify = n2;
         Result = r2;
@@ -62,6 +66,7 @@ public class ResultButton : MonoBehaviour
         resultButtonOBJ.SetActive(false);
         endButtonOBJ.SetActive(true);
         winCountTextOBJ.SetActive(true);
+        againButtonOBJ.SetActive(true);
     }
 
 }

@@ -9,7 +9,7 @@ public class ResultButtonTest
     GameObject resultButtonOBJ;
     GameObject endButtonOBJ;
     GameObject winCountTextOBJ;
-    GameObject messageTextOBJ;
+    GameObject againButtonOBJ;
     ResultButton resultButton;
     Mock<INotify> mockMessageNotify;
     Mock<INotify> mockWinCountNotify;
@@ -21,18 +21,18 @@ public class ResultButtonTest
         resultButtonOBJ = new GameObject("ResultButton");
         endButtonOBJ = new GameObject("EndButton");
         winCountTextOBJ = new GameObject("WinCountText");
-        messageTextOBJ = new GameObject("MessageText");
-        winCountTextOBJ.AddComponent<ObserverText>();
-        messageTextOBJ.AddComponent<ObserverText>();
+        againButtonOBJ = new GameObject("AgainButton");
         // 最初はWinCountTextは非表示
         winCountTextOBJ.SetActive(false);
+        // 最初はもう一度ボタンは非表示
+        againButtonOBJ.SetActive(false);
         resultButton = resultButtonOBJ.AddComponent<ResultButton>();
         mockMessageNotify = new Mock<INotify>();
         mockWinCountNotify = new Mock<INotify>();
         mockResult = new Mock<IResult>();
         mockResult.Setup(m => m.Current).Returns(Value.Result.Lose);
         mockResult.Setup(m => m.ConvertResultToJapanese()).Returns("負け");
-        resultButton.Initialize(resultButtonOBJ, endButtonOBJ, winCountTextOBJ, mockMessageNotify.Object, mockWinCountNotify.Object, mockResult.Object);
+        resultButton.Initialize(resultButtonOBJ, endButtonOBJ, winCountTextOBJ, againButtonOBJ, mockMessageNotify.Object, mockWinCountNotify.Object, mockResult.Object);
     }
 
     [Test]
@@ -49,5 +49,7 @@ public class ResultButtonTest
         Assert.IsTrue(winCountTextOBJ.activeSelf);
         // Endボタンが表示される
         Assert.IsTrue(endButtonOBJ.activeSelf);
+        // Againボタンが表示される
+        Assert.IsTrue(againButtonOBJ.activeSelf);
     }
 }
