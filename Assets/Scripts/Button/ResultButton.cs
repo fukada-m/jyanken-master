@@ -61,12 +61,18 @@ public class ResultButton : MonoBehaviour
             Start();
         }
         messageNotify.SetTextNotify($"結果は{Result.ConvertResultToJapanese()}です");
-        if (Result.Current == Value.Result.WIn) winCount++;
-        winCountNotify.SetTextNotify($"連勝数：{winCount}");
+        WinCountLogic();
         resultButtonOBJ.SetActive(false);
         endButtonOBJ.SetActive(true);
         winCountTextOBJ.SetActive(true);
         againButtonOBJ.SetActive(true);
+    }
+
+    void WinCountLogic()
+    {
+        if (Result.Current == Value.Result.Win) winCount++;
+        if (Result.Current == Value.Result.Lose) winCount = 0;
+        winCountNotify.SetTextNotify($"連勝数：{winCount}");
     }
 
 }

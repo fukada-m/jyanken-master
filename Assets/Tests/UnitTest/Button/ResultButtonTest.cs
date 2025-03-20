@@ -41,16 +41,9 @@ public class ResultButtonTest
         Assert.IsNotNull(resultButton);
         resultButton.OnClickButton();
         // オブザーバーに結果を送る
-        mockMessageNotify.Verify(m => m.SetTextNotify("結果は負けです"));
-        mockWinCountNotify.Verify(m => m.SetTextNotify("連勝数：0"));
-        // Resultボタンが非表示になる
-        Assert.IsFalse(resultButtonOBJ.activeSelf);
-        // WinCountが表示される
-        Assert.IsTrue(winCountTextOBJ.activeSelf);
-        // Endボタンが表示される
-        Assert.IsTrue(endButtonOBJ.activeSelf);
-        // Againボタンが表示される
-        Assert.IsTrue(againButtonOBJ.activeSelf);
+        mockMessageNotify.Verify(m => m.SetTextNotify("結果は勝ちです"));
+        mockWinCountNotify.Verify(m => m.SetTextNotify("連勝数：1"));
+        ButtonDispTest();
     }
     public void OnClickButton_ShowResult_Lose()
     {
@@ -61,6 +54,22 @@ public class ResultButtonTest
         // オブザーバーに結果を送る
         mockMessageNotify.Verify(m => m.SetTextNotify("結果は負けです"));
         mockWinCountNotify.Verify(m => m.SetTextNotify("連勝数：0"));
+        ButtonDispTest();
+    }
+    public void OnClickButton_ShowResult_Draw()
+    {
+        mockResult.Setup(m => m.Current).Returns(Value.Result.Draw);
+        mockResult.Setup(m => m.ConvertResultToJapanese()).Returns("あいこ");
+        Assert.IsNotNull(resultButton);
+        resultButton.OnClickButton();
+        // オブザーバーに結果を送る
+        mockMessageNotify.Verify(m => m.SetTextNotify("結果はあいこです"));
+        mockWinCountNotify.Verify(m => m.SetTextNotify("連勝数：0"));
+        ButtonDispTest();
+    }
+
+    void ButtonDispTest()
+    {
         // Resultボタンが非表示になる
         Assert.IsFalse(resultButtonOBJ.activeSelf);
         // WinCountが表示される
@@ -69,5 +78,6 @@ public class ResultButtonTest
         Assert.IsTrue(endButtonOBJ.activeSelf);
         // Againボタンが表示される
         Assert.IsTrue(againButtonOBJ.activeSelf);
+
     }
 }
