@@ -47,7 +47,7 @@ public class IntegResultButton
     public void OnclickButton_ShowResult()
     {
         resultButton.OnClickButton();
-        result.Current = Value.Result.WIn;
+        result.Current = Value.Result.Win;
         Assert.AreEqual(text1.text, "Œ‹‰Ê‚ÍŸ‚¿‚Å‚·");
         Assert.AreEqual(text2.text, "˜AŸ”F1");
         Assert.IsFalse(resultButtonOBJ.activeSelf);

@@ -11,7 +11,7 @@ public class ResultTest
     [Test]
     public void ConvertResultToJapanese_Convert()
     {
-        result.Current = Value.Result.WIn;
+        result.Current = Value.Result.Win;
         var str = result.ConvertResultToJapanese();
         Assert.AreEqual("èüÇø", str);
 
@@ -24,7 +24,7 @@ public class ResultTest
         Assert.AreEqual("Ç†Ç¢Ç±", str);
     }
 
-    [TestCase(Value.Result.WIn)]
+    [TestCase(Value.Result.Win)]
     [TestCase(Value.Result.Lose)]
     [TestCase(Value.Result.Draw)]
     public void Current_SetAndGet(Value.Result r)

@@ -32,7 +32,7 @@ public class LogicJyankenTest
     public void LogicJyankenTestWin(Value.Hand myself, Value.Hand enemy)
     {
         var result = logicJyanken.Judge(myself, enemy);
-        Assert.AreEqual(Value.Result.WIn, result);
+        Assert.AreEqual(Value.Result.Win, result);
     }
 
     // Ž©•ª‚ª•‰‚¯‚é‚Æ‚«‚ÌƒeƒXƒg
