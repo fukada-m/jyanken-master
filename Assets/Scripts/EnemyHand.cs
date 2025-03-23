@@ -8,6 +8,13 @@ public class EnemyHand : Hand
 
     public virtual void PickHand()
     {
+        // ランダムに出す手を決める
+        RandomHand();
+    }
+
+    // ランダムに出す手を決める
+    void RandomHand()
+    {
         // 0, 1, 2のどれかをランダムに生成する
         int num = Random.Range(0, 3);
 
@@ -22,5 +29,12 @@ public class EnemyHand : Hand
             default:
                 Current = Value.Hand.Error; break;
         };
+
+    }
+
+    // 必ずグーを出す
+    void PickStone()
+    {
+        Current = stone;
     }
 }
