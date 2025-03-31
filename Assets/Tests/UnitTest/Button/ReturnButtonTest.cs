@@ -9,6 +9,7 @@ public class ReturnButtonTest
     GameObject settingModal;
     GameObject menuButtons;
     GameObject messageText;
+    GameObject rankingButton;
 
     [SetUp]
     public void ReturnButtonSetUp()
@@ -17,12 +18,14 @@ public class ReturnButtonTest
         settingModal = new GameObject("SettingModal");
         menuButtons = new GameObject("MenuButtons");
         messageText = new GameObject("MessageText");
+        rankingButton = new GameObject("RankingButton");
         // ボタンクリックで有効化できるかテストするためfalseにする
         menuButtons.SetActive(false);
         messageText.SetActive(false);
+        rankingButton.SetActive(false);
 
         // コンポジションを設定
-        returnButton.Initialize(settingModal, menuButtons, messageText);
+        returnButton.Initialize(settingModal, menuButtons, messageText, rankingButton);
     }
 
     // A Test behaves as an ordinary method
@@ -33,6 +36,7 @@ public class ReturnButtonTest
         Assert.IsTrue(menuButtons.activeSelf);
         Assert.IsTrue(messageText.activeSelf);
         Assert.IsFalse(settingModal.activeSelf);
+        Assert.IsTrue(rankingButton.activeSelf);
     }
 
     

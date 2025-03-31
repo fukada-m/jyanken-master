@@ -213,6 +213,7 @@ MonoBehaviour:
   settingModal: {fileID: 68765996}
   menuButtons: {fileID: 789022081}
   messageText: {fileID: 1378448933}
+  rankingButton: {fileID: 0}
 --- !u!114 &102741242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2328,6 +2329,7 @@ MonoBehaviour:
   settingModal: {fileID: 1156275332}
   menuButtons: {fileID: 789022081}
   messageText: {fileID: 1378448933}
+  rankingButton: {fileID: 1575477056}
 --- !u!1 &925001316
 GameObject:
   m_ObjectHideFlags: 0
@@ -3378,6 +3380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menuButtons: {fileID: 789022081}
   _handButtons: {fileID: 312027801}
+  _rankingButton: {fileID: 1575477056}
 --- !u!1 &1378448933
 GameObject:
   m_ObjectHideFlags: 0
@@ -4203,6 +4206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingModal: {fileID: 1156275332}
   menuButtons: {fileID: 789022081}
+  rankingButton: {fileID: 1575477056}
   messageText: {fileID: 1378448933}
 --- !u!1 &1790436490
 GameObject:

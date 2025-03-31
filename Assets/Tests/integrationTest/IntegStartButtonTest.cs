@@ -8,6 +8,7 @@ public class IntegStartButtonTest
 {
     GameObject _menuButtons;
     GameObject _handButtons;
+    GameObject _rankingButton;
     StartButton _startButton;
     Notify _notify;
     IObserver _observerText;
@@ -18,6 +19,7 @@ public class IntegStartButtonTest
     {
         _menuButtons = new GameObject("MenuButtons");
         _handButtons = new GameObject("HandButtons");
+        _rankingButton = new GameObject("RankingButton");
         _startButton = new GameObject().AddComponent<StartButton>();
         _notify = new Notify();
         _observerText = new GameObject().AddComponent<ObserverText>();
@@ -26,7 +28,7 @@ public class IntegStartButtonTest
         _handButtons.SetActive(false);
         _observerText.Initialize(_text);
         _notify.AddObserver(_observerText);
-        _startButton.Initialize(_menuButtons, _handButtons, _observerText, _notify);
+        _startButton.Initialize(_menuButtons, _handButtons, _rankingButton, _observerText, _notify);
     }
     // A Test behaves as an ordinary method
     [Test]

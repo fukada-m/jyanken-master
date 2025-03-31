@@ -9,13 +9,16 @@ public class StartButton : MonoBehaviour
     GameObject _menuButtons;
     [SerializeField]
     GameObject _handButtons;
+    [SerializeField]
+    GameObject _rankingButton;
     IObserver _messageText;
     Notify _notify;
 
-    public void Initialize(GameObject m, GameObject h, IObserver o, Notify s)
+    public void Initialize(GameObject m, GameObject h, GameObject r, IObserver o, Notify s)
     {
         _menuButtons = m;
         _handButtons = h;
+        _rankingButton = r;
         _messageText = o;
         _notify = s;
     }
@@ -24,6 +27,7 @@ public class StartButton : MonoBehaviour
     {
         _handButtons.SetActive(true);
         _menuButtons.SetActive(false);
+        _rankingButton.SetActive(false);
         _notify.SetTextNotify("âΩÇÃéËÇèoÇ∑Ç©åàÇﬂÇƒÇ≠ÇæÇ≥Ç¢");
 
     }
