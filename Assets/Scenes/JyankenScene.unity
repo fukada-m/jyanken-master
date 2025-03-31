@@ -213,7 +213,7 @@ MonoBehaviour:
   settingModal: {fileID: 68765996}
   menuButtons: {fileID: 789022081}
   messageText: {fileID: 1378448933}
-  rankingButton: {fileID: 0}
+  rankingButton: {fileID: 1575477056}
 --- !u!114 &102741242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3789,6 +3789,7 @@ GameObject:
   - component: {fileID: 1575477060}
   - component: {fileID: 1575477059}
   - component: {fileID: 1575477058}
+  - component: {fileID: 1575477062}
   m_Layer: 5
   m_Name: RankingButton
   m_TagString: Untagged
@@ -3872,8 +3873,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1575477058}
-        m_TargetAssemblyTypeName: GetRanking, SctriptAssembly
+      - m_Target: {fileID: 1575477062}
+        m_TargetAssemblyTypeName: RankingButton, SctriptAssembly
         m_MethodName: OnClickButton
         m_Mode: 1
         m_Arguments:
@@ -3922,6 +3923,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575477056}
   m_CullTransparentMesh: 1
+--- !u!114 &1575477062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575477056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eec24159ce82a04195529ab4d4017ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rankingModal: {fileID: 68765996}
 --- !u!1 &1598313168
 GameObject:
   m_ObjectHideFlags: 0
