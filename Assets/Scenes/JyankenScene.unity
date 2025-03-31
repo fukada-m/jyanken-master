@@ -2811,6 +2811,7 @@ MonoBehaviour:
   _endButtonOBJ: {fileID: 1889796521}
   _winCountTextOBJ: {fileID: 575458782}
   _againButtonOBJ: {fileID: 684978821}
+  _rankingModal: {fileID: 68765996}
   _resultButton: {fileID: 1993358344}
   _handButtons: {fileID: 312027804}
   _ponButton: {fileID: 726107264}
