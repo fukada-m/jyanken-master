@@ -3,27 +3,23 @@ using UnityEngine;
 public class ReturnButton : MonoBehaviour
 {
     [SerializeField]
-    GameObject settingModal;
+    GameObject modal;
     [SerializeField]
     GameObject menuButtons;
     [SerializeField]
     GameObject messageText;
-    [SerializeField]
-    GameObject rankingButton;
 
     // テスト用の依存関係を注入するメソッド
-    public void Initialize(GameObject s, GameObject m1, GameObject m2, GameObject r)
+    public void Initialize(GameObject m1, GameObject m2, GameObject m3)
     {
-        settingModal = s;
-        menuButtons = m1;
-        messageText = m2;
-        rankingButton = r;
+        modal = m1;
+        menuButtons = m2;
+        messageText = m3;
     }
     public void OnClickButton()
     {
-        settingModal.SetActive(false);
+        modal.SetActive(false);
         menuButtons.SetActive(true);
         messageText.SetActive(true);
-        rankingButton.SetActive(true);
     }
 }
