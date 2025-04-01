@@ -7,13 +7,13 @@ using System.Collections;
 public class GetRanking : MonoBehaviour
 {
     private string apiUrl = "https://s8fwnpqtcb.execute-api.ap-northeast-1.amazonaws.com/jyanken";
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         
     }
 
-    public void OnClickButton()
+    public void Get()
     {
         StartCoroutine(CallAPI());
     }
@@ -22,9 +22,10 @@ public class GetRanking : MonoBehaviour
     {
         // GETリクエストの送信
         UnityWebRequest request = UnityWebRequest.Get(apiUrl);  // GETリクエストを使う
-
+        request.timeout = 5;
         // レスポンスを待機
         yield return request.SendWebRequest();
+        Debug.Log("Get ranking request.result: " + request.result);
 
         // エラーハンドリング
         if (request.result != UnityWebRequest.Result.Success)
@@ -33,9 +34,8 @@ public class GetRanking : MonoBehaviour
         }
         else
         {
-            // レスポンスの内容を表示
+            // レスポンスの内容を取得したけど今は特に使ってない
             string responseText = request.downloadHandler.text;
-            Debug.Log("API Response (raw): " + responseText);
 
             // JSONレスポンスをデシリアライズして表示
             try
@@ -49,6 +49,7 @@ public class GetRanking : MonoBehaviour
                 Debug.LogError("Error parsing JSON response: " + ex.Message);
             }
         }
+
     }
 }
 

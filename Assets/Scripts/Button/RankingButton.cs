@@ -8,6 +8,8 @@ public class RankingButton : MonoBehaviour
     GameObject menuButtons;
     [SerializeField]
     GameObject messageText;
+    [SerializeField]
+    GetRanking getRanking;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,14 +18,16 @@ public class RankingButton : MonoBehaviour
     }
 
     // テスト用の依存関係を注入するメソッド
-    public void Initialize(GameObject r,
-                           GameObject m1, 
-                           GameObject m2
+    public void Initialize(GameObject r1,
+                           GameObject m1,
+                           GameObject m2,
+                           GetRanking r2
                            )
     {
-        rankingModal = r;
+        rankingModal = r1;
         menuButtons = m1;
         messageText = m2;
+        getRanking = r2;
     }
 
    public void OnClickButton()
@@ -31,5 +35,6 @@ public class RankingButton : MonoBehaviour
         rankingModal.SetActive(true);
         menuButtons.SetActive(false);
         messageText.SetActive(false);
+        getRanking.Get();
     }
 }
