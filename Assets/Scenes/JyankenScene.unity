@@ -3937,6 +3937,7 @@ MonoBehaviour:
   menuButtons: {fileID: 789022081}
   messageText: {fileID: 1378448933}
   getRanking: {fileID: 1233275870}
+  rankingText: {fileID: 1790436492}
 --- !u!1 &1598313168
 GameObject:
   m_ObjectHideFlags: 0

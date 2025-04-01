@@ -9,7 +9,7 @@ using TMPro;
 
 public class GetRanking : MonoBehaviour
 {
-    string apiUrl = "https://s8fwnpqtcb.execute-api.ap-northeast-1.amazonaws.com/jyanken";
+    string apiUrl = "https://s8fwnpqtcb.execute-api.ap-northeast-1.amazonaws.com/jyanken/Get";
     TMP_Text rankingText;
     string result;
 
