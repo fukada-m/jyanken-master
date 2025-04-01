@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class RankingButton : MonoBehaviour
@@ -10,11 +11,13 @@ public class RankingButton : MonoBehaviour
     GameObject messageText;
     [SerializeField]
     GetRanking getRanking;
+    [SerializeField]
+    TMP_Text rankingText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        rankingText.text = "ランキングを取得中...";
     }
 
     // テスト用の依存関係を注入するメソッド
@@ -35,6 +38,6 @@ public class RankingButton : MonoBehaviour
         rankingModal.SetActive(true);
         menuButtons.SetActive(false);
         messageText.SetActive(false);
-        getRanking.Get();
+        getRanking.DispRanking(rankingText);
     }
 }
