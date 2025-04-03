@@ -1560,7 +1560,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -123}
+  m_AnchoredPosition: {x: 0, y: -105}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &684978823
@@ -1578,6 +1578,7 @@ MonoBehaviour:
   handButtons: {fileID: 312027801}
   againButtonOBJ: {fileID: 684978821}
   endButtonOBJ: {fileID: 1889796521}
+  postRankingButtonOBJ: {fileID: 1988396604}
 --- !u!114 &684978824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2601,6 +2602,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 925001316}
   m_CullTransparentMesh: 1
+--- !u!1 &929866215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 929866217}
+  - component: {fileID: 929866216}
+  m_Layer: 0
+  m_Name: Ranking
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &929866216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929866215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae071103e124f71479d93acd789922b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &929866217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929866215}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 550, y: 253, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1015121804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2922,7 +2967,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1233275869}
   - component: {fileID: 1233275868}
-  - component: {fileID: 1233275870}
   m_Layer: 0
   m_Name: GameStarter
   m_TagString: Untagged
@@ -2970,18 +3014,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1233275870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1233275867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae071103e124f71479d93acd789922b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1297194840
 GameObject:
   m_ObjectHideFlags: 0
@@ -4075,7 +4107,7 @@ MonoBehaviour:
   rankingModal: {fileID: 68765996}
   menuButtons: {fileID: 789022081}
   messageText: {fileID: 1378448933}
-  ranking: {fileID: 1233275870}
+  ranking: {fileID: 929866216}
   rankingText: {fileID: 1790436492}
 --- !u!1 &1598313168
 GameObject:
@@ -4696,7 +4728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7bbacdbfb2d2f748aabf63c851f2c57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ranking: {fileID: 1233275870}
+  ranking: {fileID: 929866216}
 --- !u!114 &1988396607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4942,6 +4974,7 @@ MonoBehaviour:
   winCountTextOBJ: {fileID: 575458782}
   againButtonOBJ: {fileID: 684978821}
   postRankingButton: {fileID: 1988396604}
+  ranking: {fileID: 929866216}
 --- !u!1 &2071010842
 GameObject:
   m_ObjectHideFlags: 0
@@ -5102,3 +5135,4 @@ SceneRoots:
   - {fileID: 1496002592}
   - {fileID: 411225018}
   - {fileID: 1233275869}
+  - {fileID: 929866217}
