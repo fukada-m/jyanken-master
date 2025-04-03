@@ -10,6 +10,8 @@ public class ResultButton : MonoBehaviour
     GameObject winCountTextOBJ;
     [SerializeField]
     GameObject againButtonOBJ;
+    [SerializeField]
+    GameObject checkRankingButton;
     IObserver messageText;
     IObserver winCountText;
     INotify messageNotify;
@@ -66,6 +68,14 @@ public class ResultButton : MonoBehaviour
         endButtonOBJ.SetActive(true);
         winCountTextOBJ.SetActive(true);
         againButtonOBJ.SetActive(true);
+
+
+        //負けかつランキングに登録できるときはの場合はランキング登録ボタンを表示する
+        if (Result.Current == Value.Result.Lose)
+        {
+            checkRankingButton.SetActive(true);
+        }
+
     }
 
     void WinCountLogic()

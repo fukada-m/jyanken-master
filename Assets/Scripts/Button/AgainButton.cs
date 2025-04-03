@@ -8,6 +8,8 @@ public class AgainButton : MonoBehaviour
     GameObject againButtonOBJ;
     [SerializeField]
     GameObject endButtonOBJ;
+    [SerializeField]
+    GameObject checkRankingButtonOBJ;
     Notify messageNotify;
     Notify winCountNotify;
     IObserver messageText;
@@ -55,5 +57,7 @@ public class AgainButton : MonoBehaviour
             Result.WinCount = 0;
             winCountNotify.SetTextNotify($"連勝数：{Result.WinCount}");
         }
+        // ランキング登録ボタンは非表示
+        checkRankingButtonOBJ.SetActive(false);
     }
 }

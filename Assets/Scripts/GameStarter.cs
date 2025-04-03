@@ -25,6 +25,8 @@ public class GameStarter : MonoBehaviour
     [SerializeField]
     GameObject _postRankingButton;
     [SerializeField]
+    GameObject _checkRankingButtonOBJ;
+    [SerializeField]
     ResultButton _resultButton;
     [SerializeField]
     HandButtons _handButtons;
@@ -45,6 +47,7 @@ public class GameStarter : MonoBehaviour
         GameObject a1,
         GameObject r2,
         GameObject r3,
+        GameObject c,
         ResultButton r4,
         HandButtons h2,
         PonButton p2,
@@ -60,6 +63,7 @@ public class GameStarter : MonoBehaviour
         _againButtonOBJ = a1;
         _rankingModal = r2;
         _postRankingButton = r3;
+        _checkRankingButtonOBJ = c;
         _resultButton = r4;
         _handButtons = h2;
         _ponButton = p2;
@@ -92,6 +96,7 @@ public class GameStarter : MonoBehaviour
         _againButtonOBJ.SetActive(false);
         _rankingModal.SetActive(false);
         _postRankingButton.SetActive(false);
+        _checkRankingButtonOBJ.SetActive(false);
     }
     void SetPlayerHand()
     {
