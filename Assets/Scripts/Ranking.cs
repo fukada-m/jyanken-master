@@ -21,7 +21,7 @@ public class Ranking : MonoBehaviour
         request.timeout = 10;
 
         yield return request.SendWebRequest();
-        Debug.Log("GetRankngを行った結果t: " + request.result);
+        Debug.Log("GetRankngを行った結果: " + request.result);
 
         // エラーハンドリング
         if (request.result != UnityWebRequest.Result.Success)
