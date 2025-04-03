@@ -14,7 +14,6 @@ public class ResultButton : MonoBehaviour
     IObserver winCountText;
     INotify messageNotify;
     INotify winCountNotify;
-    int winCount = 0;
     public virtual IResult Result { get; set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,6 +30,7 @@ public class ResultButton : MonoBehaviour
         messageNotify.AddObserver(messageText);
         winCountNotify = new Notify();
         winCountNotify.AddObserver(winCountText);
+        
     }
 
     //テスト用の依存関係を注入するメソッド
@@ -70,9 +70,8 @@ public class ResultButton : MonoBehaviour
 
     void WinCountLogic()
     {
-        if (Result.Current == Value.Result.Win) winCount++;
-        if (Result.Current == Value.Result.Lose) winCount = 0;
-        winCountNotify.SetTextNotify($"連勝数：{winCount}");
+        if (Result.Current == Value.Result.Win) Result.WinCount++;
+        winCountNotify.SetTextNotify($"連勝数：{Result.WinCount}");
     }
 
 }

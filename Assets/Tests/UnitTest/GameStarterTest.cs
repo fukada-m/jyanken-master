@@ -15,9 +15,11 @@ public class GameStarterTest
     GameObject _winCountTextOBJ;
     GameObject _againButtonOBJ;
     GameObject _rankingModal;
+    GameObject _postRankingButtonOBJ;
     Mock<HandButtons> _mockHandButtons;
     Mock<PonButton> _mockPonButton;
     Mock<ResultButton> _mockResultButton;
+    Mock<AgainButton> _mockAgainButton;
 
     [SetUp]
     public void GameStarterSetUp()
@@ -31,9 +33,11 @@ public class GameStarterTest
         _winCountTextOBJ = new GameObject("WinCountText");
         _againButtonOBJ = new GameObject("AgainButton");
         _rankingModal = new GameObject("RankingModal");
+        _postRankingButtonOBJ = new GameObject("PostRankingButton");
         _mockHandButtons = new Mock<HandButtons>();
         _mockPonButton = new Mock<PonButton>();
         _mockResultButton = new Mock<ResultButton>();
+        _mockAgainButton = new Mock<AgainButton>();
 
         _gameStarter.Initialize(
             _handButtonsOBJ, 
@@ -44,9 +48,11 @@ public class GameStarterTest
             _winCountTextOBJ,
             _againButtonOBJ,
             _rankingModal,
+            _postRankingButtonOBJ,
             _mockResultButton.Object,
             _mockHandButtons.Object,
-            _mockPonButton.Object
+            _mockPonButton.Object,
+            _mockAgainButton.Object
          );
     }
 
@@ -62,6 +68,7 @@ public class GameStarterTest
         Assert.IsFalse(_endButtonOBJ.activeSelf );
         Assert.IsFalse(_againButtonOBJ.activeSelf ) ;
         Assert.IsFalse(_rankingModal.activeSelf );
+        Assert.IsFalse(_postRankingButtonOBJ.activeSelf);
 
         // ˜AŸ”‚ÍÅ‰‚Í”ñ•\Ž¦‚É‚È‚Á‚Ä‚¢‚é‚©
         Assert.IsFalse(_winCountTextOBJ.activeSelf);
@@ -73,5 +80,6 @@ public class GameStarterTest
         // Result‚ðDIo—ˆ‚Ä‚¢‚é‚©
         _mockPonButton.VerifySet(m => m.Result = It.IsAny<Result>(), Times.Once);
         _mockResultButton.VerifySet(m => m.Result = It.IsAny<Result>(), Times.Once);
+        _mockAgainButton.VerifySet(m => m.Result = It.IsAny<Result>(), Times.Once);
     }
 }

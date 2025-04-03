@@ -7,11 +7,17 @@ using UnityEngine.Networking;
 public class Ranking : MonoBehaviour
 {
     string getUrl = "https://s8fwnpqtcb.execute-api.ap-northeast-1.amazonaws.com/jyanken/Get";
+    string postUrl = "https://s8fwnpqtcb.execute-api.ap-northeast-1.amazonaws.com/jyanken/Post";
     string currentRanking;
 
     public void GetRanking(TMP_Text text)
     {
         StartCoroutine(CallGetAPI(text));
+    }
+
+    public void PostRanking()
+    {
+        StartCoroutine(CallPostAPI());
     }
 
     IEnumerator CallGetAPI(TMP_Text text)
@@ -46,6 +52,33 @@ public class Ranking : MonoBehaviour
                 Debug.LogError("Error parsing JSON response: " + ex.Message);
                 text.text = "ランキングの取得に失敗しました。\n もう一度ランキングボタンを押してください。";
             }
+        }
+    }
+
+    IEnumerator CallPostAPI()
+    {
+        // 送信するデータ
+        string jsonPayload = "{\"ranking\": \"1位,4連勝,ぱちぱち\"}";
+
+        // POSTリクエストの送信
+        UnityWebRequest request = new UnityWebRequest(postUrl, "POST");
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonPayload);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        // レスポンスを待機
+        yield return request.SendWebRequest();
+
+        // エラーハンドリング
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("API call failed: " + request.error);
+        }
+        else
+        {
+            // レスポンスの内容を表示
+            Debug.Log("API Response: " + request.downloadHandler.text);
         }
     }
 

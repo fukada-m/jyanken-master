@@ -23,11 +23,15 @@ public class GameStarter : MonoBehaviour
     [SerializeField]
     GameObject _rankingModal;
     [SerializeField]
+    GameObject _postRankingButton;
+    [SerializeField]
     ResultButton _resultButton;
     [SerializeField]
     HandButtons _handButtons;
     [SerializeField]
     PonButton _ponButton;
+    [SerializeField]
+    AgainButton _againButton;
 
 
     // テスト用の依存関係を注入するメソッド
@@ -38,11 +42,13 @@ public class GameStarter : MonoBehaviour
         GameObject r1,
         GameObject e,
         GameObject w,
-        GameObject a,
+        GameObject a1,
         GameObject r2,
-        ResultButton r3,
+        GameObject r3,
+        ResultButton r4,
         HandButtons h2,
-        PonButton p2
+        PonButton p2,
+        AgainButton a2
      )
     {
         _handButtonsOBJ = h1;
@@ -51,11 +57,13 @@ public class GameStarter : MonoBehaviour
         _resultButtonOBJ = r1;
         _endButtonOBJ = e;
         _winCountTextOBJ = w;
-        _againButtonOBJ = a;
+        _againButtonOBJ = a1;
         _rankingModal = r2;
-        _resultButton = r3;
+        _postRankingButton = r3;
+        _resultButton = r4;
         _handButtons = h2;
         _ponButton = p2;
+        _againButton = a2;
 
     }
 
@@ -83,6 +91,7 @@ public class GameStarter : MonoBehaviour
         _winCountTextOBJ.SetActive(false);
         _againButtonOBJ.SetActive(false);
         _rankingModal.SetActive(false);
+        _postRankingButton.SetActive(false);
     }
     void SetPlayerHand()
     {
@@ -96,5 +105,6 @@ public class GameStarter : MonoBehaviour
         var result = new Result();
         _resultButton.Result = result;
         _ponButton.Result = result;
+        _againButton.Result = result;
     }
 }

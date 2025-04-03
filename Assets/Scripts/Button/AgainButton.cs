@@ -8,15 +8,26 @@ public class AgainButton : MonoBehaviour
     GameObject againButtonOBJ;
     [SerializeField]
     GameObject endButtonOBJ;
-    Notify notify;
+    Notify messageNotify;
+    Notify winCountNotify;
     IObserver messageText;
+    IObserver winCountText;
+    public virtual IResult Result { get; set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        notify = new Notify();
         messageText = GameObject.Find("MessageText").GetComponent<IObserver>();
-        notify.AddObserver(messageText);
+        messageNotify = new Notify();
+        messageNotify.AddObserver(messageText);
+        // WinCountTextは最初非表示になっているので
+        // 親オブジェクトのCanvasをたどって取得
+        Transform parent = GameObject.Find("Canvas").transform;
+        Transform child = parent.transform.Find("WinCountText");
+        var winCountTextOBJ = child.gameObject;
+        winCountText = winCountTextOBJ.GetComponent<ObserverText>();
+        winCountNotify = new Notify();
+        winCountNotify.AddObserver(winCountText);
     }
 
     // テストの依存関係を注入するメソッド
@@ -25,7 +36,7 @@ public class AgainButton : MonoBehaviour
         handButtons = h;
         againButtonOBJ = a;
         endButtonOBJ = e;
-        notify = n;
+        messageNotify = n;
     }
 
     public void OnClickButton()
@@ -37,6 +48,12 @@ public class AgainButton : MonoBehaviour
         // エンドボタンを非表示
         endButtonOBJ.SetActive(false);
         // テキストメッセージを"何の手を出すか決めてください"に変更
-        notify.SetTextNotify("何の手を出すか決めてください");
+        messageNotify.SetTextNotify("何の手を出すか決めてください");
+        // 直前に負けていた場合は連勝数を0にする
+        if (Result.Current == Value.Result.Lose)
+        {
+            Result.WinCount = 0;
+            winCountNotify.SetTextNotify($"連勝数：{Result.WinCount}");
+        }
     }
 }
