@@ -10,7 +10,7 @@ public class RankingButton : MonoBehaviour
     [SerializeField]
     GameObject messageText;
     [SerializeField]
-    GetRanking getRanking;
+    Ranking ranking;
     [SerializeField]
     TMP_Text rankingText;
 
@@ -24,13 +24,13 @@ public class RankingButton : MonoBehaviour
     public void Initialize(GameObject r1,
                            GameObject m1,
                            GameObject m2,
-                           GetRanking r2
+                           Ranking r2
                            )
     {
         rankingModal = r1;
         menuButtons = m1;
         messageText = m2;
-        getRanking = r2;
+        ranking = r2;
     }
 
    public void OnClickButton()
@@ -38,6 +38,6 @@ public class RankingButton : MonoBehaviour
         rankingModal.SetActive(true);
         menuButtons.SetActive(false);
         messageText.SetActive(false);
-        getRanking.DispRanking(rankingText);
+        ranking.GetRanking(rankingText);
     }
 }

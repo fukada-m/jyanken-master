@@ -18,3 +18,4 @@ public class PostRankingButton : MonoBehaviour
         ranking.PostRanking();
     }
 }
+

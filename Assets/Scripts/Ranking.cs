@@ -2,7 +2,9 @@ using UnityEngine;
 using TMPro;
 using System.Text;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Networking;
+using System.Text.RegularExpressions;
 
 public class Ranking : MonoBehaviour
 {
@@ -19,6 +21,10 @@ public class Ranking : MonoBehaviour
     {
         StartCoroutine(CallPostAPI());
     }
+    public void CheckRanking(int winStreak)
+    {
+        StartCoroutine(CallCheckAPI(winStreak));
+    }
 
     IEnumerator CallGetAPI(TMP_Text text)
     {
@@ -34,7 +40,7 @@ public class Ranking : MonoBehaviour
         {
             Debug.LogError("API call failed: " + request.error);
             currentRanking = "ランキングの取得に失敗しました。\n もう一度ランキングボタンを押してください。";
-            text.text = Conversion(currentRanking);
+            text.text = currentRanking;
         }
         else
         {
@@ -45,7 +51,8 @@ public class Ranking : MonoBehaviour
             {
                 // レスポンスがJSONの場合、デシリアライズしてオブジェクトとして処理
                 LambdaResponse jsonResponse = JsonUtility.FromJson<LambdaResponse>(responseText);
-                text.text = jsonResponse.body;
+                currentRanking = jsonResponse.body;
+                text.text = Conversion(currentRanking);
             }
             catch (System.Exception ex)
             {
@@ -58,7 +65,7 @@ public class Ranking : MonoBehaviour
     IEnumerator CallPostAPI()
     {
         // 送信するデータ
-        string jsonPayload = "{\"ranking\": \"1位,4連勝,ぱちぱち\"}";
+        string jsonPayload = "{\"ranking\": \"1位,40連勝,ぱちぱち,2位,8連勝,ぱっち\"}";
 
         // POSTリクエストの送信
         UnityWebRequest request = new UnityWebRequest(postUrl, "POST");
@@ -82,6 +89,41 @@ public class Ranking : MonoBehaviour
         }
     }
 
+    IEnumerator CallCheckAPI(int winstreak)
+    {
+        // GETリクエストの送信
+        UnityWebRequest request = UnityWebRequest.Get(getUrl);  // GETリクエストを使う
+        request.timeout = 10;
+
+        yield return request.SendWebRequest();
+        Debug.Log("Rankngを取得した結果: " + request.result);
+
+        // エラーハンドリング
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("API call failed: " + request.error);
+        }
+        else
+        {
+            string responseText = request.downloadHandler.text;
+
+            // JSONレスポンスをデシアライズ
+            try
+            {
+                // レスポンスがJSONの場合、デシリアライズしてオブジェクトとして処理
+                LambdaResponse jsonResponse = JsonUtility.FromJson<LambdaResponse>(responseText);
+                // 今までのランキングを格納する辞書を作成
+                Dictionary<int, Score> scores = GetScore(jsonResponse.body);
+                CompareScore(winstreak, scores);
+                
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError("Error parsing JSON response: " + ex.Message);
+            }
+        }
+    }
+
     string Conversion (string currentRanking)
     {
         string[] parts = currentRanking.Split(',');
@@ -96,5 +138,58 @@ public class Ranking : MonoBehaviour
         }
         string result = sb.ToString();
         return result;
+    }
+    Dictionary<int, Score> GetScore(string ranking)
+    {
+        var pattern = @"(\d+)位,(\d+)連勝,([^,]+)";
+
+        // 正規表現で全ての一致を検索
+        MatchCollection matches = Regex.Matches(ranking, pattern);
+        Dictionary<int, Score> scores = new Dictionary<int, Score>();
+
+        // 各マッチから連勝数と名前を取り出して辞書に格納
+        foreach (Match match in matches)
+        {
+            int rank = int.Parse(match.Groups[1].Value);        // 順位
+            int winStreak = int.Parse(match.Groups[2].Value);   // 連勝数
+            string name = match.Groups[3].Value;                // 名前
+
+            scores[rank] = new Score(rank, winStreak, name);
+        }
+        return scores;
+        
+    }
+
+    bool CompareScore(int winStreak, Dictionary<int, Score> scores)
+    {
+        foreach (var score in scores)
+        {
+            if(score.Value.WinStreak < winStreak)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public class Score
+    {
+        public int Rank { get; set; }
+        public int WinStreak { get; set; }
+        public string Name { get; set; }
+
+        public Score(int rank,int winStreak, string name)
+        {
+            Rank = rank;
+            WinStreak = winStreak;
+            Name = name;
+        }
+    }
+    // Lambdaのレスポンス構造に合わせたクラス
+    [System.Serializable]
+    public class LambdaResponse
+    {
+        public int statusCode;
+        public string body;
     }
 }

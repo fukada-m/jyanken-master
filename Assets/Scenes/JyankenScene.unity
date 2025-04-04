@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 51321516}
   - component: {fileID: 51321515}
   - component: {fileID: 51321514}
+  - component: {fileID: 51321517}
   m_Layer: 5
   m_Name: CheckRankingButton
   m_TagString: Untagged
@@ -201,7 +202,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 51321515}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 51321517}
+        m_TargetAssemblyTypeName: CheckRankingButton, SctriptAssembly
+        m_MethodName: OnclickButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &51321515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +253,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51321512}
   m_CullTransparentMesh: 1
+--- !u!114 &51321517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51321512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eeb196b2bb0ea743a07a4a0233baf49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ranking: {fileID: 929866216}
 --- !u!1 &68765996
 GameObject:
   m_ObjectHideFlags: 0
@@ -3121,6 +3147,7 @@ MonoBehaviour:
   _handButtons: {fileID: 312027804}
   _ponButton: {fileID: 726107264}
   _againButton: {fileID: 684978823}
+  _checkRankingButton: {fileID: 51321517}
 --- !u!4 &1233275869
 Transform:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ public class GameStarterTest
     Mock<PonButton> _mockPonButton;
     Mock<ResultButton> _mockResultButton;
     Mock<AgainButton> _mockAgainButton;
+    Mock<CheckRankingButton> _mockCheckRankingButton;
 
     [SetUp]
     public void GameStarterSetUp()
@@ -40,6 +41,7 @@ public class GameStarterTest
         _mockPonButton = new Mock<PonButton>();
         _mockResultButton = new Mock<ResultButton>();
         _mockAgainButton = new Mock<AgainButton>();
+        _mockCheckRankingButton = new Mock<CheckRankingButton>();
 
         _gameStarter.Initialize(
             _handButtonsOBJ, 
@@ -55,7 +57,8 @@ public class GameStarterTest
             _mockResultButton.Object,
             _mockHandButtons.Object,
             _mockPonButton.Object,
-            _mockAgainButton.Object
+            _mockAgainButton.Object,
+            _mockCheckRankingButton.Object
          );
     }
 
@@ -85,5 +88,6 @@ public class GameStarterTest
         _mockPonButton.VerifySet(m => m.Result = It.IsAny<Result>(), Times.Once);
         _mockResultButton.VerifySet(m => m.Result = It.IsAny<Result>(), Times.Once);
         _mockAgainButton.VerifySet(m => m.Result = It.IsAny<Result>(), Times.Once);
+        _mockCheckRankingButton.VerifySet(m => m.Result = It.IsAny<Result>(), Times.Once);
     }
 }

@@ -34,6 +34,8 @@ public class GameStarter : MonoBehaviour
     PonButton _ponButton;
     [SerializeField]
     AgainButton _againButton;
+    [SerializeField]
+    CheckRankingButton _checkRankingButton;
 
 
     // テスト用の依存関係を注入するメソッド
@@ -47,11 +49,13 @@ public class GameStarter : MonoBehaviour
         GameObject a1,
         GameObject r2,
         GameObject r3,
-        GameObject c,
+        GameObject c1,
         ResultButton r4,
         HandButtons h2,
         PonButton p2,
-        AgainButton a2
+        AgainButton a2,
+        CheckRankingButton c2
+
      )
     {
         _handButtonsOBJ = h1;
@@ -63,12 +67,12 @@ public class GameStarter : MonoBehaviour
         _againButtonOBJ = a1;
         _rankingModal = r2;
         _postRankingButton = r3;
-        _checkRankingButtonOBJ = c;
+        _checkRankingButtonOBJ = c1;
         _resultButton = r4;
         _handButtons = h2;
         _ponButton = p2;
         _againButton = a2;
-
+        _checkRankingButton = c2;
     }
 
     // テスト内でStart()を実行するためのpublicなメソッド
@@ -111,5 +115,6 @@ public class GameStarter : MonoBehaviour
         _resultButton.Result = result;
         _ponButton.Result = result;
         _againButton.Result = result;
+        _checkRankingButton.Result = result;
     }
 }
