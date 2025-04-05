@@ -27,6 +27,10 @@ public class GameStarter : MonoBehaviour
     [SerializeField]
     GameObject _checkRankingButtonOBJ;
     [SerializeField]
+    GameObject _inputNameFieldOBJ;
+    [SerializeField]
+    GameObject _postRankingButtonOBJ;
+    [SerializeField]
     ResultButton _resultButton;
     [SerializeField]
     HandButtons _handButtons;
@@ -36,6 +40,7 @@ public class GameStarter : MonoBehaviour
     AgainButton _againButton;
     [SerializeField]
     CheckRankingButton _checkRankingButton;
+
 
 
     // テスト用の依存関係を注入するメソッド
@@ -101,6 +106,8 @@ public class GameStarter : MonoBehaviour
         _rankingModal.SetActive(false);
         _postRankingButton.SetActive(false);
         _checkRankingButtonOBJ.SetActive(false);
+        _inputNameFieldOBJ.SetActive(false);
+        _postRankingButtonOBJ.SetActive(false);
     }
     void SetPlayerHand()
     {

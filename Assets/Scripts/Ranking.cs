@@ -21,9 +21,9 @@ public class Ranking : MonoBehaviour
     {
         StartCoroutine(CallPostAPI());
     }
-    public void CheckRanking(int winStreak)
+    public void CheckRanking(int winStreak, PostRankingFlag prf)
     {
-        StartCoroutine(CallCheckAPI(winStreak));
+        StartCoroutine(CallCheckAPI(winStreak, prf));
     }
 
     IEnumerator CallGetAPI(TMP_Text text)
@@ -89,7 +89,7 @@ public class Ranking : MonoBehaviour
         }
     }
 
-    IEnumerator CallCheckAPI(int winstreak)
+    IEnumerator CallCheckAPI(int winstreak, PostRankingFlag prf)
     {
         // GETリクエストの送信
         UnityWebRequest request = UnityWebRequest.Get(getUrl);  // GETリクエストを使う
@@ -114,7 +114,7 @@ public class Ranking : MonoBehaviour
                 LambdaResponse jsonResponse = JsonUtility.FromJson<LambdaResponse>(responseText);
                 // 今までのランキングを格納する辞書を作成
                 Dictionary<int, Score> scores = GetScore(jsonResponse.body);
-                CompareScore(winstreak, scores);
+                prf.Flag = CompareScore(winstreak, scores);
                 
             }
             catch (System.Exception ex)
@@ -160,16 +160,27 @@ public class Ranking : MonoBehaviour
         
     }
 
-    bool CompareScore(int winStreak, Dictionary<int, Score> scores)
+    // 2を返したらランキング更新可能
+    // 1を返したらランキング更新不可
+    int CompareScore(int winStreak, Dictionary<int, Score> scores)
     {
+        // いずれかのスコアより高ければ更新可能
+        int scoreCount = 0;
         foreach (var score in scores)
         {
+            scoreCount++;
             if(score.Value.WinStreak < winStreak)
             {
-                return true;
+                return 2;
             }
         }
-        return false;
+
+        //ランキングが9件未満なら追加できる
+        if (scoreCount < 9)
+        {
+            return 2;
+        }
+        return 1;
     }
 
     public class Score

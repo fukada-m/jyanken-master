@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class ReturnButton : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class ReturnButton : MonoBehaviour
     GameObject menuButtons;
     [SerializeField]
     GameObject messageText;
+    [SerializeField]
+    TMP_Text rankingText;
 
     // テスト用の依存関係を注入するメソッド
     public void Initialize(GameObject m1, GameObject m2, GameObject m3)
@@ -21,5 +24,6 @@ public class ReturnButton : MonoBehaviour
         modal.SetActive(false);
         menuButtons.SetActive(true);
         messageText.SetActive(true);
+        rankingText.text = "ランキング取得中...";
     }
 }

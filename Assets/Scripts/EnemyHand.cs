@@ -9,7 +9,9 @@ public class EnemyHand : Hand
     public virtual void PickHand()
     {
         // ランダムに出す手を決める
-        RandomHand();
+        //RandomHand();
+        // テスト用に必ずグーを出す
+        PickStone();
     }
 
     // ランダムに出す手を決める
