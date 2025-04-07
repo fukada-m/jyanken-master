@@ -43,6 +43,7 @@ public class AgainButton : MonoBehaviour
 
     public void OnClickButton()
     {
+
         // ハンドボタンズを表示
         handButtons.SetActive(true);
         // 自身を非表示

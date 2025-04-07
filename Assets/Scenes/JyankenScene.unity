@@ -1309,7 +1309,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Input name\u200B"
+  m_text: "\u540D\u524D\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f787a93a9fad38049b621f915b9a141d, type: 2}
   m_sharedMaterial: {fileID: 1866793077350806125, guid: f787a93a9fad38049b621f915b9a141d, type: 2}
@@ -3283,7 +3283,6 @@ MonoBehaviour:
   _winCountTextOBJ: {fileID: 575458782}
   _againButtonOBJ: {fileID: 684978821}
   _rankingModal: {fileID: 68765996}
-  _postRankingButton: {fileID: 1988396604}
   _checkRankingButtonOBJ: {fileID: 51321512}
   _inputNameFieldOBJ: {fileID: 1764316563}
   _postRankingButtonOBJ: {fileID: 1988396604}
@@ -3292,6 +3291,8 @@ MonoBehaviour:
   _ponButton: {fileID: 726107264}
   _againButton: {fileID: 684978823}
   _checkRankingButton: {fileID: 51321517}
+  _postRankingButton: {fileID: 1988396610}
+  _endButton: {fileID: 1889796526}
 --- !u!4 &1233275869
 Transform:
   m_ObjectHideFlags: 0
@@ -5159,7 +5160,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: Input name
+  m_Text: "\u540D\u524D"
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -5642,6 +5643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ranking: {fileID: 929866216}
   dispRakingButton: {fileID: 1575477062}
+  inputField: {fileID: 1764316565}
 --- !u!1 &1993358339
 GameObject:
   m_ObjectHideFlags: 0

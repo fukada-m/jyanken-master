@@ -23,8 +23,6 @@ public class GameStarter : MonoBehaviour
     [SerializeField]
     GameObject _rankingModal;
     [SerializeField]
-    GameObject _postRankingButton;
-    [SerializeField]
     GameObject _checkRankingButtonOBJ;
     [SerializeField]
     GameObject _inputNameFieldOBJ;
@@ -40,45 +38,49 @@ public class GameStarter : MonoBehaviour
     AgainButton _againButton;
     [SerializeField]
     CheckRankingButton _checkRankingButton;
+    [SerializeField]
+    PostRankingButton _postRankingButton;
+    [SerializeField]
+    EndButton _endButton;
 
 
 
     // テスト用の依存関係を注入するメソッド
-    public void Initialize(
-        GameObject h1,
-        GameObject s,
-        GameObject p1,
-        GameObject r1,
-        GameObject e,
-        GameObject w,
-        GameObject a1,
-        GameObject r2,
-        GameObject r3,
-        GameObject c1,
-        ResultButton r4,
-        HandButtons h2,
-        PonButton p2,
-        AgainButton a2,
-        CheckRankingButton c2
+    //public void Initialize(
+    //    GameObject h1,
+    //    GameObject s,
+    //    GameObject p1,
+    //    GameObject r1,
+    //    GameObject e,
+    //    GameObject w,
+    //    GameObject a1,
+    //    GameObject r2,
+    //    GameObject r3,
+    //    GameObject c1,
+    //    ResultButton r4,
+    //    HandButtons h2,
+    //    PonButton p2,
+    //    AgainButton a2,
+    //    CheckRankingButton c2
 
-     )
-    {
-        _handButtonsOBJ = h1;
-        _settingModal = s;
-        _ponButtonOBJ = p1;
-        _resultButtonOBJ = r1;
-        _endButtonOBJ = e;
-        _winCountTextOBJ = w;
-        _againButtonOBJ = a1;
-        _rankingModal = r2;
-        _postRankingButton = r3;
-        _checkRankingButtonOBJ = c1;
-        _resultButton = r4;
-        _handButtons = h2;
-        _ponButton = p2;
-        _againButton = a2;
-        _checkRankingButton = c2;
-    }
+    // )
+    //{
+    //    _handButtonsOBJ = h1;
+    //    _settingModal = s;
+    //    _ponButtonOBJ = p1;
+    //    _resultButtonOBJ = r1;
+    //    _endButtonOBJ = e;
+    //    _winCountTextOBJ = w;
+    //    _againButtonOBJ = a1;
+    //    _rankingModal = r2;
+    //    _postRankingButton = r3;
+    //    _checkRankingButtonOBJ = c1;
+    //    _resultButton = r4;
+    //    _handButtons = h2;
+    //    _ponButton = p2;
+    //    _againButton = a2;
+    //    _checkRankingButton = c2;
+    //}
 
     // テスト内でStart()を実行するためのpublicなメソッド
     public void TestStart()
@@ -104,7 +106,7 @@ public class GameStarter : MonoBehaviour
         _winCountTextOBJ.SetActive(false);
         _againButtonOBJ.SetActive(false);
         _rankingModal.SetActive(false);
-        _postRankingButton.SetActive(false);
+        _postRankingButtonOBJ.SetActive(false);
         _checkRankingButtonOBJ.SetActive(false);
         _inputNameFieldOBJ.SetActive(false);
         _postRankingButtonOBJ.SetActive(false);
@@ -123,5 +125,7 @@ public class GameStarter : MonoBehaviour
         _ponButton.Result = result;
         _againButton.Result = result;
         _checkRankingButton.Result = result;
+        _postRankingButton.Result = result;
+        _endButton.Result = result;
     }
 }

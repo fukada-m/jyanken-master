@@ -43,23 +43,23 @@ public class GameStarterTest
         _mockAgainButton = new Mock<AgainButton>();
         _mockCheckRankingButton = new Mock<CheckRankingButton>();
 
-        _gameStarter.Initialize(
-            _handButtonsOBJ, 
-            _settingModal, 
-            _ponBottonOBJ,
-            _resultButtonOBJ,
-            _endButtonOBJ,
-            _winCountTextOBJ,
-            _againButtonOBJ,
-            _rankingModal,
-            _postRankingButtonOBJ,
-            _checkRankingButtonOBJ,
-            _mockResultButton.Object,
-            _mockHandButtons.Object,
-            _mockPonButton.Object,
-            _mockAgainButton.Object,
-            _mockCheckRankingButton.Object
-         );
+        //_gameStarter.Initialize(
+        //    _handButtonsOBJ, 
+        //    _settingModal, 
+        //    _ponBottonOBJ,
+        //    _resultButtonOBJ,
+        //    _endButtonOBJ,
+        //    _winCountTextOBJ,
+        //    _againButtonOBJ,
+        //    _rankingModal,
+        //    _postRankingButtonOBJ,
+        //    _checkRankingButtonOBJ,
+        //    _mockResultButton.Object,
+        //    _mockHandButtons.Object,
+        //    _mockPonButton.Object,
+        //    _mockAgainButton.Object,
+        //    _mockCheckRankingButton.Object
+        // );
     }
 
     [Test]

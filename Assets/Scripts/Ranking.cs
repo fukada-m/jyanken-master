@@ -1,10 +1,10 @@
 using UnityEngine;
 using TMPro;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 using System.Text.RegularExpressions;
+using System;
 
 public class Ranking : MonoBehaviour
 {
@@ -17,9 +17,9 @@ public class Ranking : MonoBehaviour
         StartCoroutine(CallGetAPI(text));
     }
 
-    public void PostRanking()
+    public void PostRanking(int winStreak, string userName)
     {
-        StartCoroutine(CallPostAPI());
+        StartCoroutine(CallPostAPI(winStreak, userName));
     }
     public void CheckRanking(int winStreak, PostRankingFlag prf)
     {
@@ -45,14 +45,19 @@ public class Ranking : MonoBehaviour
         else
         {
             string responseText = request.downloadHandler.text;
+            Debug.Log("responseText:" + responseText);
 
             // JSONレスポンスをデシリアライズして表示
             try
             {
                 // レスポンスがJSONの場合、デシリアライズしてオブジェクトとして処理
                 LambdaResponse jsonResponse = JsonUtility.FromJson<LambdaResponse>(responseText);
-                currentRanking = jsonResponse.body;
-                text.text = Conversion(currentRanking);
+                foreach (var item in jsonResponse.body)
+                {
+                    currentRanking += $"{item.rank}位 {item.streak}連勝  {item.name}\n";
+                }
+                text.text = currentRanking;
+
             }
             catch (System.Exception ex)
             {
@@ -62,10 +67,44 @@ public class Ranking : MonoBehaviour
         }
     }
 
-    IEnumerator CallPostAPI()
+    IEnumerator CallPostAPI(int winStreak, string userName)
     {
+        string jsonPayload = "";
+        // GETリクエストの送信
+        UnityWebRequest getRequest = UnityWebRequest.Get(getUrl);  // GETリクエストを使う
+        getRequest.timeout = 10;
+        yield return getRequest.SendWebRequest();
+        Debug.Log("Rankngを取得した結果: " + getRequest.result);
+
+        // エラーハンドリング
+        if (getRequest.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("API call failed: " + getRequest.error);
+        }
+        else
+        {
+            string responseText = getRequest.downloadHandler.text;
+
+            // JSONレスポンスをデシアライズ
+            try
+            {
+                // レスポンスがJSONの場合、デシリアライズしてオブジェクトとして処理
+                LambdaResponse jsonResponse = JsonUtility.FromJson<LambdaResponse>(responseText);
+                // 今までのランキングを格納する辞書を作成
+                //Dictionary<int, Score> scores = GetScore(jsonResponse.body);
+                //int rankingNumber = CalcScore(winStreak, scores);
+                //jsonPayload = MakeRankingText(rankingNumber, winStreak, userName, scores);
+
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError("Error parsing JSON response: " + ex.Message);
+            }
+        }
+        jsonPayload = "{\"ranking\": \"" + jsonPayload + "\"}";
+        Debug.Log("登録する文字列：" + jsonPayload);
         // 送信するデータ
-        string jsonPayload = "{\"ranking\": \"1位,40連勝,ぱちぱち,2位,8連勝,ぱっち\"}";
+        //jsonPayload = "{\"ranking\": \"1位,40連勝,ぱちぱち,2位,8連勝,ぱっち\"}";
 
         // POSTリクエストの送信
         UnityWebRequest request = new UnityWebRequest(postUrl, "POST");
@@ -113,8 +152,8 @@ public class Ranking : MonoBehaviour
                 // レスポンスがJSONの場合、デシリアライズしてオブジェクトとして処理
                 LambdaResponse jsonResponse = JsonUtility.FromJson<LambdaResponse>(responseText);
                 // 今までのランキングを格納する辞書を作成
-                Dictionary<int, Score> scores = GetScore(jsonResponse.body);
-                prf.Flag = CompareScore(winstreak, scores);
+                //Dictionary<int, Score> scores = GetScore(jsonResponse.body);
+                //prf.Flag = CompareScore(winstreak, scores);
                 
             }
             catch (System.Exception ex)
@@ -126,18 +165,19 @@ public class Ranking : MonoBehaviour
 
     string Conversion (string currentRanking)
     {
-        string[] parts = currentRanking.Split(',');
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < parts.Length; i += 3)
-        {
-            // 安全確認（要素数が3の倍数でない場合にも対応）
-            if (i + 2 < parts.Length)
-            {
-                sb.AppendLine($"{parts[i]} {parts[i + 1]} {parts[i + 2]}");
-            }
-        }
-        string result = sb.ToString();
-        return result;
+        //string[] parts = currentRanking.Split(',');
+        //StringBuilder sb = new StringBuilder();
+        //for (int i = 0; i < parts.Length; i += 3)
+        //{
+        //    // 安全確認（要素数が3の倍数でない場合にも対応）
+        //    if (i + 2 < parts.Length)
+        //    {
+        //        sb.AppendLine($"{parts[i]} {parts[i + 1]} {parts[i + 2]}");
+        //    }
+        //}
+        //string result = sb.ToString();
+        //return result;
+        return "";
     }
     Dictionary<int, Score> GetScore(string ranking)
     {
@@ -183,6 +223,54 @@ public class Ranking : MonoBehaviour
         return 1;
     }
 
+    int CalcScore(int winStreak, Dictionary<int, Score> scores)
+    {
+        // 自分より高いスコアの数を数える
+        int scoreCount = 1;
+        foreach (var score in scores)
+        {
+            if (score.Value.WinStreak > winStreak)
+            {
+                scoreCount++;
+            }
+        }
+        // 自分の順位を返す
+        return scoreCount;
+    }
+
+    string MakeRankingText(int num, int winStreak, string name, Dictionary<int, Score> scores)
+    {
+        string rankingText = "";
+        foreach (var score in scores)
+        {
+            // 既存のランキングを更新
+            if (score.Value.Rank < num)
+            {
+                // Getした値をそのまま
+                rankingText += $"{score.Value.Rank}位,{score.Value.WinStreak}連勝,{score.Value.Name},";
+            }
+            else if (score.Value.Rank == num)
+            {
+                // 新しくランキングに追加する値
+                rankingText += $"{num}位,{winStreak}連勝,{name},";
+                //既存の値はランキングに+1する
+                rankingText += $"{score.Value.Rank + 1}位,{score.Value.WinStreak}連勝,{score.Value.Name},";
+            }
+            else
+            {
+                // 今の順位に+1した順位にする
+                rankingText += $"{score.Value.Rank + 1}位,{score.Value.WinStreak}連勝,{score.Value.Name},";
+            }
+
+        }
+        // 最下位に追加したい場合の処理
+        if (num > scores.Count)
+        {
+            rankingText += $"{num}位,{winStreak}連勝,{name},";
+        }
+        return rankingText;
+    }
+
     public class Score
     {
         public int Rank { get; set; }
@@ -197,10 +285,20 @@ public class Ranking : MonoBehaviour
         }
     }
     // Lambdaのレスポンス構造に合わせたクラス
-    [System.Serializable]
+    [Serializable]
     public class LambdaResponse
     {
         public int statusCode;
-        public string body;
+        public BodyItem[] body;
+    }
+
+    // body 内のアイテム構造
+    [Serializable]
+    public class BodyItem
+    {
+        public int ID;
+        public int streak;
+        public string name;
+        public int rank;
     }
 }
