@@ -51,13 +51,5 @@ public class PostRankingButton : MonoBehaviour
             
         }
     }
-
-    //IEnumerator MoveTop()
-    //{
-    //    yield return new WaitForSeconds(1f);
-    //    // ƒV[ƒ“‚ğÄ“Ç‚İ‚İ
-    //    Scene currentScene = SceneManager.GetActiveScene();
-    //    SceneManager.LoadScene(currentScene.name);
-    //}
 }
 

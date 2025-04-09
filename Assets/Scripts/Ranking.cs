@@ -3,8 +3,8 @@ using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
-using System.Text.RegularExpressions;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Ranking : MonoBehaviour
 {
@@ -57,6 +57,8 @@ public class Ranking : MonoBehaviour
                     currentRanking += $"{item.rank}位 {item.streak}連勝  {item.name}\n";
                 }
                 text.text = currentRanking;
+                // ""を代入しないとボタンを押すたびにランキングが足される
+                currentRanking = "";
 
             }
             catch (System.Exception ex)
@@ -73,6 +75,7 @@ public class Ranking : MonoBehaviour
         // GETリクエストの送信
         UnityWebRequest getRequest = UnityWebRequest.Get(getUrl);  // GETリクエストを使う
         getRequest.timeout = 10;
+
         yield return getRequest.SendWebRequest();
         Debug.Log("Rankngを取得した結果: " + getRequest.result);
 
@@ -90,10 +93,6 @@ public class Ranking : MonoBehaviour
             {
                 // レスポンスがJSONの場合、デシリアライズしてオブジェクトとして処理
                 LambdaResponse jsonResponse = JsonUtility.FromJson<LambdaResponse>(responseText);
-                // 今までのランキングを格納する辞書を作成
-                //Dictionary<int, Score> scores = GetScore(jsonResponse.body);
-                //int rankingNumber = CalcScore(winStreak, scores);
-                //jsonPayload = MakeRankingText(rankingNumber, winStreak, userName, scores);
 
             }
             catch (System.Exception ex)
@@ -101,10 +100,9 @@ public class Ranking : MonoBehaviour
                 Debug.LogError("Error parsing JSON response: " + ex.Message);
             }
         }
-        jsonPayload = "{\"ranking\": \"" + jsonPayload + "\"}";
+        jsonPayload = "{\"name\": \"" + userName +"\",\"streak\": \""+ winStreak +"\"}";
         Debug.Log("登録する文字列：" + jsonPayload);
-        // 送信するデータ
-        //jsonPayload = "{\"ranking\": \"1位,40連勝,ぱちぱち,2位,8連勝,ぱっち\"}";
+
 
         // POSTリクエストの送信
         UnityWebRequest request = new UnityWebRequest(postUrl, "POST");
@@ -126,6 +124,9 @@ public class Ranking : MonoBehaviour
             // レスポンスの内容を表示
             Debug.Log("API Response: " + request.downloadHandler.text);
         }
+        // シーンを再読み込み
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 
     IEnumerator CallCheckAPI(int winstreak, PostRankingFlag prf)
@@ -151,10 +152,7 @@ public class Ranking : MonoBehaviour
             {
                 // レスポンスがJSONの場合、デシリアライズしてオブジェクトとして処理
                 LambdaResponse jsonResponse = JsonUtility.FromJson<LambdaResponse>(responseText);
-                // 今までのランキングを格納する辞書を作成
-                //Dictionary<int, Score> scores = GetScore(jsonResponse.body);
-                //prf.Flag = CompareScore(winstreak, scores);
-                
+                prf.Flag = CompareScore(winstreak, jsonResponse);
             }
             catch (System.Exception ex)
             {
@@ -163,113 +161,28 @@ public class Ranking : MonoBehaviour
         }
     }
 
-    string Conversion (string currentRanking)
-    {
-        //string[] parts = currentRanking.Split(',');
-        //StringBuilder sb = new StringBuilder();
-        //for (int i = 0; i < parts.Length; i += 3)
-        //{
-        //    // 安全確認（要素数が3の倍数でない場合にも対応）
-        //    if (i + 2 < parts.Length)
-        //    {
-        //        sb.AppendLine($"{parts[i]} {parts[i + 1]} {parts[i + 2]}");
-        //    }
-        //}
-        //string result = sb.ToString();
-        //return result;
-        return "";
-    }
-    Dictionary<int, Score> GetScore(string ranking)
-    {
-        var pattern = @"(\d+)位,(\d+)連勝,([^,]+)";
-
-        // 正規表現で全ての一致を検索
-        MatchCollection matches = Regex.Matches(ranking, pattern);
-        Dictionary<int, Score> scores = new Dictionary<int, Score>();
-
-        // 各マッチから連勝数と名前を取り出して辞書に格納
-        foreach (Match match in matches)
-        {
-            int rank = int.Parse(match.Groups[1].Value);        // 順位
-            int winStreak = int.Parse(match.Groups[2].Value);   // 連勝数
-            string name = match.Groups[3].Value;                // 名前
-
-            scores[rank] = new Score(rank, winStreak, name);
-        }
-        return scores;
-        
-    }
-
     // 2を返したらランキング更新可能
     // 1を返したらランキング更新不可
-    int CompareScore(int winStreak, Dictionary<int, Score> scores)
+    int CompareScore(int winStreak, LambdaResponse jsonResponse)
     {
         // いずれかのスコアより高ければ更新可能
-        int scoreCount = 0;
-        foreach (var score in scores)
+        foreach (var body in jsonResponse.body)
         {
-            scoreCount++;
-            if(score.Value.WinStreak < winStreak)
+            if(body.streak < winStreak)
             {
                 return 2;
             }
         }
 
         //ランキングが9件未満なら追加できる
-        if (scoreCount < 9)
+        if (jsonResponse.body.Length < 9)
         {
             return 2;
         }
+        // どちらかの条件を満たさなければランキング更新不可
         return 1;
     }
 
-    int CalcScore(int winStreak, Dictionary<int, Score> scores)
-    {
-        // 自分より高いスコアの数を数える
-        int scoreCount = 1;
-        foreach (var score in scores)
-        {
-            if (score.Value.WinStreak > winStreak)
-            {
-                scoreCount++;
-            }
-        }
-        // 自分の順位を返す
-        return scoreCount;
-    }
-
-    string MakeRankingText(int num, int winStreak, string name, Dictionary<int, Score> scores)
-    {
-        string rankingText = "";
-        foreach (var score in scores)
-        {
-            // 既存のランキングを更新
-            if (score.Value.Rank < num)
-            {
-                // Getした値をそのまま
-                rankingText += $"{score.Value.Rank}位,{score.Value.WinStreak}連勝,{score.Value.Name},";
-            }
-            else if (score.Value.Rank == num)
-            {
-                // 新しくランキングに追加する値
-                rankingText += $"{num}位,{winStreak}連勝,{name},";
-                //既存の値はランキングに+1する
-                rankingText += $"{score.Value.Rank + 1}位,{score.Value.WinStreak}連勝,{score.Value.Name},";
-            }
-            else
-            {
-                // 今の順位に+1した順位にする
-                rankingText += $"{score.Value.Rank + 1}位,{score.Value.WinStreak}連勝,{score.Value.Name},";
-            }
-
-        }
-        // 最下位に追加したい場合の処理
-        if (num > scores.Count)
-        {
-            rankingText += $"{num}位,{winStreak}連勝,{name},";
-        }
-        return rankingText;
-    }
 
     public class Score
     {
