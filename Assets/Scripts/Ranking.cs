@@ -79,54 +79,42 @@ public class Ranking : MonoBehaviour
         yield return getRequest.SendWebRequest();
         Debug.Log("Rankngを取得した結果: " + getRequest.result);
 
-        // エラーハンドリング
+        // ランキングが取得できなかったとき
         if (getRequest.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("API call failed: " + getRequest.error);
         }
+        // ランキングが取得できた時は更新する
         else
         {
-            string responseText = getRequest.downloadHandler.text;
+            jsonPayload = "{\"name\": \"" + userName +"\",\"streak\": \""+ winStreak +"\"}";
+            Debug.Log("登録する文字列：" + jsonPayload);
 
-            // JSONレスポンスをデシアライズ
-            try
+
+            // POSTリクエストの送信
+            UnityWebRequest postRequest = new UnityWebRequest(postUrl, "POST");
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonPayload);
+            postRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            postRequest.downloadHandler = new DownloadHandlerBuffer();
+            postRequest.SetRequestHeader("Content-Type", "application/json");
+
+            // レスポンスを待機
+            yield return postRequest.SendWebRequest();
+
+            // エラーハンドリング
+            if (postRequest.result != UnityWebRequest.Result.Success)
             {
-                // レスポンスがJSONの場合、デシリアライズしてオブジェクトとして処理
-                LambdaResponse jsonResponse = JsonUtility.FromJson<LambdaResponse>(responseText);
-
+                Debug.LogError("API call failed: " + postRequest.error);
             }
-            catch (System.Exception ex)
+            else
             {
-                Debug.LogError("Error parsing JSON response: " + ex.Message);
+                // レスポンスの内容を表示
+                Debug.Log("API Response: " + postRequest.downloadHandler.text);
             }
+            // シーンを再読み込み
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
         }
-        jsonPayload = "{\"name\": \"" + userName +"\",\"streak\": \""+ winStreak +"\"}";
-        Debug.Log("登録する文字列：" + jsonPayload);
-
-
-        // POSTリクエストの送信
-        UnityWebRequest request = new UnityWebRequest(postUrl, "POST");
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonPayload);
-        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-        request.downloadHandler = new DownloadHandlerBuffer();
-        request.SetRequestHeader("Content-Type", "application/json");
-
-        // レスポンスを待機
-        yield return request.SendWebRequest();
-
-        // エラーハンドリング
-        if (request.result != UnityWebRequest.Result.Success)
-        {
-            Debug.LogError("API call failed: " + request.error);
-        }
-        else
-        {
-            // レスポンスの内容を表示
-            Debug.Log("API Response: " + request.downloadHandler.text);
-        }
-        // シーンを再読み込み
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
     }
 
     IEnumerator CallCheckAPI(int winstreak, PostRankingFlag prf)

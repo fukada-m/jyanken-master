@@ -30,7 +30,7 @@ public class CheckRankingButton : MonoBehaviour
         // フラグがオンの時はランキングを更新可能
         if (postRankingFlag.Flag ==2)
         {
-            messageNotify.SetTextNotify("おめでとう!! ランキング投稿可能");
+            messageNotify.SetTextNotify("おめでとう!! ランキング投稿可能\n名前はローマ字で9文字まで");
             postRankingButton.SetActive(true);
             inputNameField.SetActive(true);
             postRankingFlag.Flag = 0;
