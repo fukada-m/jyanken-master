@@ -15,8 +15,8 @@ public class PostRankingButton : MonoBehaviour
     IObserver messageText;
     INotify messageNotify;
     public IResult Result { get; set; }
+    public bool Flag { get; set;}
     string userName;
-    bool flag;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,12 +24,12 @@ public class PostRankingButton : MonoBehaviour
         messageText = GameObject.Find("MessageText").GetComponent<ObserverText>();
         messageNotify = new Notify();
         messageNotify.AddObserver(messageText);
-        flag = true;
+        Flag = true;
     }
 
     public void OnClickButton()
     {
-        if (flag)
+        if (Flag)
         {
             userName = inputField.text;
             Debug.Log("userName:" + userName);
@@ -40,9 +40,9 @@ public class PostRankingButton : MonoBehaviour
             }
             else if (userName.Length <= 10)
             {
-                ranking.PostRanking(Result.WinCount, userName);
+                ranking.PostRanking(Result.WinCount, userName, this);
                 messageNotify.SetTextNotify("ランキング登録中!!\n完了したらトップに移動します");
-                flag = false;
+                Flag = false;
             }
             else if (userName.Length > 11)
             {
@@ -50,6 +50,11 @@ public class PostRankingButton : MonoBehaviour
             }
             
         }
+    }
+
+    public void DispPushAgain()
+    {
+        messageNotify.SetTextNotify("登録に失敗しました。\n再度送信ボタンを押してください。");
     }
 }
 
